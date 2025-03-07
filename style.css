@@ -435,3 +435,21 @@ nav .nav-links li a.ttl::after {
     width: 100%;
     text-align: center;
 }
+
+@media screen and (max-width: 768px) {
+    nav {
+        display: none;
+    }
+
+    .profile-card {
+        margin-top: 30px;
+        max-width: 90%;
+    }
+
+    .skills,
+    .experience,
+    .application-grid {
+        margin: 10px 0;
+        padding: 10px 10px;
+    }
+}
