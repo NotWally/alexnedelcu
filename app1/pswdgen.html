@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+        <script
+            src="https://kit.fontawesome.com/2953becb25.js"
+            crossorigin="anonymous"
+        ></script>
+        <link rel="icon" href="./asterisk.png" type="image/x-icon" />
+        <title>Password Generator</title>
+    </head>
+    <body>
+        <h3 class="title">P@ssw*rd Gen3rat0r</h3>
+        <div class="container">
+            <div class="password-container">
+                <h2 class="password truncated" id="password">Your Password</h2>
+                <button
+                    class="copy-button"
+                    onclick="copyPassword()"
+                    aria-label="Copy Password"
+                >
+                    <i class="fa-solid fa-copy"></i>
+                </button>
+            </div>
+            <p class="notice" id="notice"></p>
+
+            <div class="settings-container">
+                <label for="length">
+                    Password Length: <span id="lengthValue">10</span>
+                </label>
+                <input
+                    type="range"
+                    id="length"
+                    min="4"
+                    max="50"
+                    value="10"
+                    oninput="updateLengthValue(this.value); generatePassword()"
+                />
+
+                <label>
+                    <input
+                        type="checkbox"
+                        id="uppercase"
+                        checked
+                        onchange="generatePassword()"
+                    />
+                    Include Uppercase Letters
+                </label>
+                <label>
+                    <input
+                        type="checkbox"
+                        id="lowercase"
+                        checked
+                        onchange="generatePassword()"
+                    />
+                    Include Lowercase Letters
+                </label>
+                <label>
+                    <input
+                        type="checkbox"
+                        id="number"
+                        checked
+                        onchange="generatePassword()"
+                    />
+                    Include Numbers
+                </label>
+                <label>
+                    <input
+                        type="checkbox"
+                        id="symbol"
+                        checked
+                        onchange="generatePassword()"
+                    />
+                    Include Symbols
+                </label>
+            </div>
+        </div>
+        <div class="info">
+            <div class="card">
+                <h3>Whats the point?</h3>
+                <p>
+                    This is a simple password generator that allows you to
+                    create strong passwords. You can customize the length of the
+                    password and choose which characters to include. The
+                    password is generated randomly each time you change a
+                    setting.
+                </p>
+            </div>
+            <div class="card">
+                <h3>How to use?</h3>
+                <p>
+                    Simply adjust the settings to your liking and the password
+                    will be generated automatically. You can copy the password
+                    to your clipboard by clicking the copy button.
+                </p>
+            </div>
+            <div class="card">
+                <h3>Is it secure?</h3>
+                <p>
+                    Yes, the password is generated locally in your browser and
+                    is not sent to any server. The password is not stored
+                    anywhere and is generated randomly each time you change a
+                    setting.
+                </p>
+            </div>
+        </div>
+
+        <script>
+            let capitals = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+            let lowers = "abcdefghijklmnopqrstuvwxyz".split("");
+            let numbers = "0123456789".split("");
+            let symbols = "!@#$%^&*()-_+=|\/><.,:;[]{}".split("");
+            let password = "";
+
+            function updateLengthValue(value) {
+                document.getElementById("lengthValue").textContent = value;
+                generatePassword();
+                updateStrengthIndicator();
+            }
+
+            function generatePassword() {
+                const length = document.getElementById("length").value;
+                const uppercase = document.getElementById("uppercase").checked;
+                const lowercase = document.getElementById("lowercase").checked;
+                const number = document.getElementById("number").checked;
+                const symbol = document.getElementById("symbol").checked;
+
+                if (!uppercase && !lowercase && !number && !symbol) {
+                    alert("Please select at least one option");
+                    return;
+                }
+
+                password = "";
+                let availableCharacters = [];
+                if (uppercase)
+                    availableCharacters = availableCharacters.concat(capitals);
+                if (lowercase)
+                    availableCharacters = availableCharacters.concat(lowers);
+                if (number)
+                    availableCharacters = availableCharacters.concat(numbers);
+                if (symbol)
+                    availableCharacters = availableCharacters.concat(symbols);
+
+                for (let i = 0; i < length; i++) {
+                    const randomIndex = Math.floor(
+                        Math.random() * availableCharacters.length
+                    );
+                    password += availableCharacters[randomIndex];
+                }
+
+                const passwordElement = document.getElementById("password");
+                const noticeElement = document.getElementById("notice");
+
+                if (password.length > 29) {
+                    passwordElement.innerText = password.slice(0, 29) + "...";
+                    passwordElement.title = password;
+                    noticeElement.innerText = `Your password is ${length} characters long! The full password will be copied despite being truncated.`;
+                    noticeElement.classList.add("visible");
+                } else {
+                    passwordElement.innerText = password;
+                    passwordElement.title = "";
+                    noticeElement.classList.add("hidden");
+                    noticeElement.classList.remove("visible");
+                }
+            }
+
+            function copyPassword() {
+                navigator.clipboard
+                    .writeText(password)
+                    .then(() => {
+                        const noticeElement = document.getElementById("notice");
+                        noticeElement.innerText =
+                            "Password copied to clipboard!";
+                        noticeElement.classList.add("visible");
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    })
+                    .catch((err) => {
+                        console.error("Failed to copy password: ", err);
+                    });
+            }
+
+            window.onload = generatePassword;
+
+            // Automatically update password on any setting change
+            const settings = document.querySelectorAll(
+                "#length, #uppercase, #lowercase, #number, #symbol"
+            );
+            settings.forEach((setting) => {
+                setting.addEventListener("input", () => {
+                    generatePassword();
+                });
+            });
+        </script>
+    </body>
+</html>
