@@ -30,25 +30,18 @@ nav {
 
 .nav-links {
     display: flex;
+    justify-content: space-between; /* Pushes items to both sides */
     align-items: center;
-    gap: 40px;
+    width: 100%;
+    max-width: 800px; /* Keeps the layout clean */
     list-style: none;
-    padding: 0;
+    padding: 0 20px;
     margin: 0;
 }
 
 .nav-links li {
     transition: all 0.25s ease;
     font-weight: 200;
-}
-
-.nav-links li:first-child {
-    font-weight: bold;
-    margin-right: 80px;
-}
-
-.nav-links li:last-child {
-    margin-left: 80px;
 }
 
 .nav-links li a {
@@ -59,6 +52,15 @@ nav {
 
 nav .nav-links li a.ttl {
     color: #56ff72;
+}
+
+.nav-links button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
 }
 
 .nav-links button:hover {
@@ -72,6 +74,15 @@ nav .nav-links li a.ttl {
 
 .nav-links li:hover {
     transform: translateY(-2px);
+}
+
+/* Positioning items */
+.left {
+    margin-right: auto;
+}
+
+.right {
+    margin-left: auto;
 }
 
 button {
@@ -434,6 +445,48 @@ nav .nav-links li a.ttl::after {
     color: rgba(255, 255, 255, 0.85);
     width: 100%;
     text-align: center;
+}
+
+#copyEmail {
+    cursor: pointer;
+}
+
+.custom-swal-popup {
+    font-family: "Geologica", sans-serif;
+    background: #141414; /* Dark mode */
+    color: #ffffff;
+    border-radius: 10px;
+    border: 2px solid #6b6b6b;
+    width: 400px;
+}
+
+.custom-swal-title {
+    color: #56ff72; /* Green title */
+    font-weight: bold;
+}
+
+.custom-swal-button {
+    background: #56ff72 !important;
+    color: #141414 !important;
+    border-radius: 5px !important;
+    transition: all 0.3s ease;
+    font-family: "Geologica", sans-serif;
+}
+
+.custom-swal-button:hover {
+    transform: translate(0, -2px);
+    background: #42cc5e !important;
+}
+
+.swal2-container::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px); /* Blur effect */
+    background: rgba(0, 0, 0, 0.3); /* Semi-transparent */
 }
 
 @media screen and (max-width: 768px) {

@@ -18,19 +18,16 @@
             rel="stylesheet"
             href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css"
         />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="app.js"></script>
         <title>Alex Nedelcu</title>
     </head>
     <body>
         <nav>
             <ul class="nav-links">
-                <li><a href="#" class="ttl">./Alex Nedelcu</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Portfolio</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-                <li>
-                    <button>
+                <li class="left"><a href="#" class="ttl">./Alex Nedelcu</a></li>
+                <li class="right">
+                    <button id="language-btn">
                         <i class="fa-solid fa-earth-americas"></i> Language
                     </button>
                 </li>
@@ -54,13 +51,18 @@
                     finish.
                 </p>
                 <div class="social-icons">
-                    <a href="#" class="icon"
+                    <a
+                        id="copyEmail"
+                        data-email="alex06nedelcu@gmail.com"
+                        class="icon"
                         ><i class="fa-solid fa-envelope"></i
                     ></a>
-                    <a href="#" class="icon"
+                    <a href="https://github.com/NotWally" class="icon"
                         ><i class="fa-brands fa-github"></i
                     ></a>
-                    <a href="#" class="icon"
+                    <a
+                        href="https://www.instagram.com/wallyalex06/"
+                        class="icon"
                         ><i class="fa-brands fa-instagram"></i
                     ></a>
                 </div>
@@ -130,7 +132,7 @@
                     </div>
                 </div>
             </section>
-            <section class="experience">
+            <section class="experience" id="experience">
                 <h2>Experience</h2>
                 <div class="experience-grid">
                     <div class="experience-card">
@@ -209,6 +211,8 @@
                             <h3 class="app-title">API Authentication System</h3>
                             <p class="app-technologies">
                                 <i class="fa-brands fa-node-js"></i>
+                                <i class="fa-brands fa-html5"></i>
+                                <i class="fa-brands fa-css3-alt"></i>
                                 <i class="fa-brands fa-js"></i>
                                 <i class="fa-brands fa-react"></i>
                                 <i class="fa-solid fa-database"></i>
@@ -223,6 +227,34 @@
                                 it ensures seamless user authentication and
                                 security. Features include email verification,
                                 Google login, and user account management.
+                            </p>
+                        </div>
+                    </a>
+
+                    <a
+                        href="./app2/index.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <div class="app-card">
+                            <h3 class="app-title">Tic-Tac-Toe Game</h3>
+                            <p class="app-technologies">
+                                <i class="fa-brands fa-html5"></i
+                                ><i class="fa-brands fa-css3-alt"></i
+                                ><i class="fa-brands fa-js"></i>
+                            </p>
+                            <p class="app-description">
+                                A fun and interactive Tic-Tac-Toe game built
+                                with
+                                <span class="highlight">HTML</span>,
+                                <span class="highlight">CSS</span>, and
+                                <span class="highlight">JavaScript</span>. This
+                                game features a responsive design, local score
+                                tracking, and a smooth user experience.
+                                Implemented with a dynamic board, turn-based
+                                gameplay, and victory detection logic. Includes
+                                a light/dark theme switch and stylish alerts
+                                using SweetAlert.
                             </p>
                         </div>
                     </a>
