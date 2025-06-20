@@ -1,265 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="style.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-            rel="stylesheet"
-        />
-        <script
-            src="https://kit.fontawesome.com/2953becb25.js"
-            crossorigin="anonymous"
-        ></script>
-        <link
-            rel="stylesheet"
-            href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css"
-        />
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="app.js"></script>
-        <title>Alex Nedelcu</title>
-    </head>
-    <body>
-        <nav>
-            <ul class="nav-links">
-                <li class="left"><a href="#" class="ttl">./Alex Nedelcu</a></li>
-                <li class="right">
-                    <button id="language-btn">
-                        <i class="fa-solid fa-earth-americas"></i> Language
-                    </button>
-                </li>
-            </ul>
-        </nav>
-        <div class="nav-fade"></div>
-        <div class="container">
-            <section class="profile-card">
-                <div class="profile-header">
-                    <h1>Alex Nedelcu</h1>
-                    <p class="location">
-                        <i class="fa-solid fa-location-dot"></i> London, England
-                    </p>
-                </div>
-                <p class="description">
-                    I'm a <span class="highlight">full-stack</span> software
-                    engineer who designs and builds applications that are
-                    intuitive to use. I focus on writing clean and maintainable
-                    code, ensuring everything remains efficient under the hood.
-                    My goal is to create systems that run smoothly from start to
-                    finish.
-                </p>
-                <div class="social-icons">
-                    <a
-                        id="copyEmail"
-                        data-email="alex06nedelcu@gmail.com"
-                        class="icon"
-                        ><i class="fa-solid fa-envelope"></i
-                    ></a>
-                    <a href="https://github.com/NotWally" class="icon"
-                        ><i class="fa-brands fa-github"></i
-                    ></a>
-                    <a
-                        href="https://www.instagram.com/wallyalex06/"
-                        class="icon"
-                        ><i class="fa-brands fa-instagram"></i
-                    ></a>
-                </div>
-            </section>
-            <section class="skills">
-                <h2>Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill">
-                        <i class="fa-brands fa-html5"></i> HTML
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-css3-alt"></i> CSS
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-js"></i> JavaScript
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-java"></i> Java
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-cuttlefish"></i> C#
-                    </div>
-                    <div class="skill">
-                        <i class="fa-solid fa-code"></i> C++
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-react"></i> React
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-react"></i> React Native
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-python"></i> Python
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-node-js"></i> Node.js
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-js"></i> TypeScript
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-react"></i> Next.js
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-bootstrap"></i> Tailwind CSS
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-docker"></i> Docker
-                    </div>
-                    <div class="skill">
-                        <i class="fa-solid fa-database"></i> SQL
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-git-alt"></i> Git
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-linux"></i> Linux
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-aws"></i> AWS
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-node-js"></i> Express.js
-                    </div>
-                    <div class="skill">
-                        <i class="fa-brands fa-flutter"></i> Flutter
-                    </div>
-                </div>
-            </section>
-            <section class="experience" id="experience">
-                <h2>Experience</h2>
-                <div class="experience-grid">
-                    <div class="experience-card">
-                        <div class="experience-header">
-                            <h3>Software Developer</h3>
-                            <p class="company">
-                                Visa |
-                                <span class="duration">Work Experience</span>
-                            </p>
-                        </div>
-                        <p class="experience-description">
-                            Built secure tokenization solutions using
-                            <span class="highlight">Java</span>,
-                            <span class="highlight">Spring Boot</span>, and
-                            <span class="highlight">microservices</span>.
-                            Ensured security compliance, optimized performance,
-                            and deployed on <span class="highlight">AWS</span>,
-                            enhancing payment security at Visa.
-                        </p>
-                    </div>
-                    <div class="experience-card">
-                        <div class="experience-header">
-                            <h3>Help Desk Analyst</h3>
-                            <p class="company">
-                                RenaissanceRe |
-                                <span class="duration">Work Experience</span>
-                            </p>
-                        </div>
-                        <p class="experience-description">
-                            Delivered
-                            <span class="highlight">proactive </span>technical
-                            support, troubleshot IT issues, and
-                            <span class="highlight"
-                                >streamlined user management</span
-                            >, driving
-                            <span class="highlight">operational efficiency</span
-                            >.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <section class="application-grid">
-                <h2>Applications</h2>
-                <p class="notice">click on each card to go to the app!</p>
-                <div class="app-grid">
-                    <a
-                        href="./app1/pswdgen.html"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <div class="app-card">
-                            <h3 class="app-title">P@ssw*rd Gen3rat0r</h3>
-                            <p class="app-technologies">
-                                <i class="fa-brands fa-html5"></i
-                                ><i class="fa-brands fa-css3-alt"></i
-                                ><i class="fa-brands fa-js"></i>
-                            </p>
-                            <p class="app-description">
-                                The P@ssw*rd Gen3rat0r is a sleek and powerful
-                                web application designed to help users create
-                                strong and secure passwords effortlessly. Built
-                                with a focus on simplicity and security, this
-                                app generates passwords locally within the
-                                user's browser, ensuring that sensitive data
-                                never leaves their device.
-                            </p>
-                        </div>
-                    </a>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Geologica:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://kit.fontawesome.com/2953becb25.js"
+			crossorigin="anonymous"
+		></script>
+		<link
+			rel="stylesheet"
+			href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css"
+		/>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="app.js"></script>
+		<title>Alex Nedelcu</title>
+	</head>
+	<body>
+		<nav>
+			<ul class="nav-links">
+				<li class="left"><a href="#" class="ttl">./Alex Nedelcu</a></li>
+				<li class="right">
+					<button id="language-btn">
+						<i class="fa-solid fa-earth-americas"></i> Language
+					</button>
+				</li>
+			</ul>
+		</nav>
+		<div class="nav-fade"></div>
+		<div class="container">
+			<section class="profile-card">
+				<div class="profile-header">
+					<h1>Alex Nedelcu</h1>
+					<p class="location">
+						<i class="fa-solid fa-location-dot"></i> London, England
+					</p>
+				</div>
+				<p class="description">
+					I'm a <span class="highlight">full-stack</span> software
+					engineer who designs and builds applications that are
+					intuitive to use. I focus on writing clean and maintainable
+					code, ensuring everything remains efficient under the hood.
+					My goal is to create systems that run smoothly from start to
+					finish.
+				</p>
+				<div class="social-icons">
+					<a
+						id="copyEmail"
+						data-email="alex06nedelcu@gmail.com"
+						class="icon"
+						><i class="fa-solid fa-envelope"></i
+					></a>
+					<a href="https://github.com/NotWally" class="icon"
+						><i class="fa-brands fa-github"></i
+					></a>
+					<a
+						href="https://www.instagram.com/wallyalex06/"
+						class="icon"
+						><i class="fa-brands fa-instagram"></i
+					></a>
+				</div>
+			</section>
+			<section class="skills">
+				<h2>Skills</h2>
+				<div class="skills-grid">
+					<div class="skill">
+						<i class="fa-brands fa-html5"></i> HTML
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-css3-alt"></i> CSS
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-js"></i> JavaScript
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-java"></i> Java
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-cuttlefish"></i> C#
+					</div>
+					<div class="skill">
+						<i class="fa-solid fa-code"></i> C++
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-react"></i> React
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-react"></i> React Native
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-python"></i> Python
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-node-js"></i> Node.js
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-js"></i> TypeScript
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-react"></i> Next.js
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-bootstrap"></i> Tailwind CSS
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-docker"></i> Docker
+					</div>
+					<div class="skill">
+						<i class="fa-solid fa-database"></i> SQL
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-git-alt"></i> Git
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-linux"></i> Linux
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-aws"></i> AWS
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-node-js"></i> Express.js
+					</div>
+					<div class="skill">
+						<i class="fa-brands fa-flutter"></i> Flutter
+					</div>
+				</div>
+			</section>
+			<section class="experience" id="experience">
+				<h2>Experience</h2>
+				<div class="experience-grid">
+					<div class="experience-card">
+						<div class="experience-header">
+							<h3>Software Developer</h3>
+							<p class="company">
+								Visa |
+								<span class="duration">Work Experience</span>
+							</p>
+						</div>
+						<p class="experience-description">
+							Built secure tokenization solutions using
+							<span class="highlight">Java</span>,
+							<span class="highlight">Spring Boot</span>, and
+							<span class="highlight">microservices</span>.
+							Ensured security compliance, optimized performance,
+							and deployed on <span class="highlight">AWS</span>,
+							enhancing payment security at Visa.
+						</p>
+					</div>
+					<div class="experience-card">
+						<div class="experience-header">
+							<h3>Help Desk Analyst</h3>
+							<p class="company">
+								RenaissanceRe |
+								<span class="duration">Work Experience</span>
+							</p>
+						</div>
+						<p class="experience-description">
+							Delivered
+							<span class="highlight">proactive </span>technical
+							support, troubleshot IT issues, and
+							<span class="highlight"
+								>streamlined user management</span
+							>, driving
+							<span class="highlight">operational efficiency</span
+							>.
+						</p>
+					</div>
+				</div>
+			</section>
+			<section class="application-grid">
+				<h2>Applications</h2>
+				<p class="notice">click on each card to go to the app!</p>
+				<div class="app-grid">
+					<a
+						href="./app1/pswdgen.html"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div class="app-card">
+							<h3 class="app-title">P@ssw*rd Gen3rat0r</h3>
+							<p class="app-technologies">
+								<i class="fa-brands fa-html5"></i
+								><i class="fa-brands fa-css3-alt"></i
+								><i class="fa-brands fa-js"></i>
+							</p>
+							<p class="app-description">
+								The P@ssw*rd Gen3rat0r is a sleek and powerful
+								web application designed to help users create
+								strong and secure passwords effortlessly. Built
+								with a focus on simplicity and security, this
+								app generates passwords locally within the
+								user's browser, ensuring that sensitive data
+								never leaves their device.
+							</p>
+						</div>
+					</a>
 
-                    <a
-                        href="https://github.com/NotWally/BoardRoom"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <div class="app-card">
-                            <h3 class="app-title">API Authentication System</h3>
-                            <p class="app-technologies">
-                                <i class="fa-brands fa-node-js"></i>
-                                <i class="fa-brands fa-html5"></i>
-                                <i class="fa-brands fa-css3-alt"></i>
-                                <i class="fa-brands fa-js"></i>
-                                <i class="fa-brands fa-react"></i>
-                                <i class="fa-solid fa-database"></i>
-                            </p>
-                            <p class="app-description">
-                                This is a secure, fully-featured authentication
-                                system with registration, login, password reset,
-                                and OAuth support. Built with
-                                <span class="highlight">Node.js</span>,
-                                <span class="highlight">Express.js</span>, and a
-                                <span class="highlight">MongoDB</span> backend,
-                                it ensures seamless user authentication and
-                                security. Features include email verification,
-                                Google login, and user account management.
-                            </p>
-                        </div>
-                    </a>
+					<a
+						href="https://github.com/NotWally/BoardRoom"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div class="app-card">
+							<h3 class="app-title">API Authentication System</h3>
+							<p class="app-technologies">
+								<i class="fa-brands fa-node-js"></i>
+								<i class="fa-brands fa-html5"></i>
+								<i class="fa-brands fa-css3-alt"></i>
+								<i class="fa-brands fa-js"></i>
+								<i class="fa-brands fa-react"></i>
+								<i class="fa-solid fa-database"></i>
+							</p>
+							<p class="app-description">
+								This is a secure, fully-featured authentication
+								system with registration, login, password reset,
+								and OAuth support. Built with
+								<span class="highlight">Node.js</span>,
+								<span class="highlight">Express.js</span>, and a
+								<span class="highlight">MongoDB</span> backend,
+								it ensures seamless user authentication and
+								security. Features include email verification,
+								Google login, and user account management.
+							</p>
+						</div>
+					</a>
 
-                    <a
-                        href="./app2/index.html"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <div class="app-card">
-                            <h3 class="app-title">Tic-Tac-Toe Game</h3>
-                            <p class="app-technologies">
-                                <i class="fa-brands fa-html5"></i
-                                ><i class="fa-brands fa-css3-alt"></i
-                                ><i class="fa-brands fa-js"></i>
-                            </p>
-                            <p class="app-description">
-                                A fun and interactive Tic-Tac-Toe game built
-                                with
-                                <span class="highlight">HTML</span>,
-                                <span class="highlight">CSS</span>, and
-                                <span class="highlight">JavaScript</span>. This
-                                game features a responsive design, local score
-                                tracking, and a smooth user experience.
-                                Implemented with a dynamic board, turn-based
-                                gameplay, and victory detection logic. Includes
-                                a light/dark theme switch and stylish alerts
-                                using SweetAlert.
-                            </p>
-                        </div>
-                    </a>
-                </div>
-            </section>
-        </div>
-    </body>
+					<a
+						href="./app2/index.html"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div class="app-card">
+							<h3 class="app-title">Tic-Tac-Toe Game</h3>
+							<p class="app-technologies">
+								<i class="fa-brands fa-html5"></i
+								><i class="fa-brands fa-css3-alt"></i
+								><i class="fa-brands fa-js"></i>
+							</p>
+							<p class="app-description">
+								A fun and interactive Tic-Tac-Toe game built
+								with
+								<span class="highlight">HTML</span>,
+								<span class="highlight">CSS</span>, and
+								<span class="highlight">JavaScript</span>. This
+								game features a responsive design, local score
+								tracking, and a smooth user experience.
+								Implemented with a dynamic board, turn-based
+								gameplay, and victory detection logic. Includes
+								a light/dark theme switch and stylish alerts
+								using SweetAlert.
+							</p>
+						</div>
+					</a>
+
+					<a
+						href="./app3/index.html"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<div class="app-card">
+							<h3 class="app-title">QR & Barcode Generator</h3>
+							<p class="app-technologies">
+								<i class="fa-brands fa-html5"></i>
+								<i class="fa-brands fa-css3-alt"></i>
+								<i class="fa-brands fa-js"></i>
+							</p>
+							<p class="app-description">
+								An intelligent QR and barcode generator that
+								adapts to the input type, including plain text,
+								URLs, email addresses, and Wi-Fi credentials.
+								Users can generate and download QR codes as PNG
+								or barcodes as SVG, all in-browser with no data
+								tracking.
+							</p>
+						</div>
+					</a>
+				</div>
+			</section>
+		</div>
+	</body>
 </html>
