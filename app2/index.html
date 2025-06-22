@@ -1,39 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/442aa02ef4.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="style.css">
-    <title>TCTATE</title>
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script
+			src="https://kit.fontawesome.com/442aa02ef4.js"
+			crossorigin="anonymous"
+		></script>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+		/>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<link rel="stylesheet" href="style.css" />
+		<link
+			rel="shortcut icon"
+			href="tic-tac-toe-icon.png"
+			type="image/x-icon"
+		/>
+		k
+		<title>TCTATE</title>
+	</head>
+	<body>
+		<div class="themeSwitch">
+			<button class="theme light">
+				<i class="fa-regular fa-lightbulb"></i>
+			</button>
+			<button class="theme dark">
+				<i class="fa-solid fa-lightbulb"></i>
+			</button>
+		</div>
 
-    <div class="themeSwitch">
-        <button class="theme light"><i class="fa-regular fa-lightbulb"></i></button>
-        <button class="theme dark"><i class="fa-solid fa-lightbulb"></i></button>
-    </div>
-
-    <div class="container">
-        <h1>TIC TAC TOE</h1>
-        <p id="currentPlayer">Current Player: X</p>
-        <div class="board" id="board">
-            <div class="cell" onclick="makeMove(0)"></div>
-            <div class="cell" onclick="makeMove(1)"></div>
-            <div class="cell" onclick="makeMove(2)"></div>
-            <div class="cell" onclick="makeMove(3)"></div>
-            <div class="cell" onclick="makeMove(4)"></div>
-            <div class="cell" onclick="makeMove(5)"></div>
-            <div class="cell" onclick="makeMove(6)"></div>
-            <div class="cell" onclick="makeMove(7)"></div>
-            <div class="cell" onclick="makeMove(8)"></div>
-        </div>
-        <p><span>P1</span> · <span>P2</span></p>
-        <p><span id="x">0</span> · <span id="o">0</span></p>
-        <button class="reset" onclick="resetScore()">Reset Score</button>
-    </div>
-    <script src="script.js"></script>
-</body>
+		<div class="container">
+			<h1>TIC TAC TOE</h1>
+			<p id="currentPlayer">Current Player: X</p>
+			<div class="board" id="board">
+				<div class="cell" onclick="makeMove(0)"></div>
+				<div class="cell" onclick="makeMove(1)"></div>
+				<div class="cell" onclick="makeMove(2)"></div>
+				<div class="cell" onclick="makeMove(3)"></div>
+				<div class="cell" onclick="makeMove(4)"></div>
+				<div class="cell" onclick="makeMove(5)"></div>
+				<div class="cell" onclick="makeMove(6)"></div>
+				<div class="cell" onclick="makeMove(7)"></div>
+				<div class="cell" onclick="makeMove(8)"></div>
+			</div>
+			<p><span>P1</span> · <span>P2</span></p>
+			<p><span id="x">0</span> · <span id="o">0</span></p>
+			<button class="reset" onclick="resetScore()">Reset Score</button>
+		</div>
+		<script src="script.js"></script>
+	</body>
 </html>

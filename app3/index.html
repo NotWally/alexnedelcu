@@ -1,249 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Intelligent QR & Barcode Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #0e0f11;
-      --card: #1c1f26;
-      --accent: #3c9aff;
-      --text: #f1f1f1;
-      --label-bg: #282c34;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Outfit', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 40px 20px;
-      min-height: 100vh;
-    }
-    .wrapper {
-      background: var(--card);
-      border-radius: 20px;
-      padding: 30px;
-      max-width: 600px;
-      width: 100%;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-    .label {
-      background: var(--label-bg);
-      padding: 8px 12px;
-      border-radius: 6px;
-      display: inline-block;
-      margin-bottom: 10px;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #ccc;
-    }
-    input, select {
-      width: 100%;
-      padding: 14px 16px;
-      margin-bottom: 15px;
-      font-size: 1rem;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-      background: #2c313a;
-      color: white;
-    }
-    .actions {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-    button {
-      background: var(--accent);
-      border: none;
-      padding: 12px 20px;
-      font-size: 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      color: white;
-      font-weight: 600;
-      transition: background 0.2s ease;
-    }
-    button:hover {
-      background: #2f7fd8;
-    }
-    .output {
-      display: none;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-      margin-top: 20px;
-      text-align: center;
-    }
-    canvas, svg {
-      margin-top: 10px;
-      background: white;
-      padding: 10px;
-      border-radius: 10px;
-      max-width: 100%;
-    }
-    .download {
-      margin-top: 10px;
-      background: #00ff9d;
-      color: black;
-    }
-    .wifi-fields {
-      display: none;
-      margin-bottom: 20px;
-    }
-    .wifi-fields input, .wifi-fields select {
-      margin-bottom: 10px;
-    }
-    @media (max-width: 480px) {
-      button {
-        width: 100%;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="wrapper">
-    <h1>QR & Barcode Generator</h1>
-    <div class="label" id="typeLabel">Type: Text</div>
-    <input type="text" id="textInput" placeholder="Enter anything..." />
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Intelligent QR & Barcode Generator</title>
+		<link
+			rel="shortcut icon"
+			href="./4518a674b45cac5d5e0f4de24242f404.png"
+			type="image/x-icon"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			:root {
+				--bg: #0e0f11;
+				--card: #1c1f26;
+				--accent: #3c9aff;
+				--text: #f1f1f1;
+				--label-bg: #282c34;
+			}
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+			body {
+				background: var(--bg);
+				color: var(--text);
+				font-family: "Outfit", sans-serif;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 40px 20px;
+				min-height: 100vh;
+			}
+			.wrapper {
+				background: var(--card);
+				border-radius: 20px;
+				padding: 30px;
+				max-width: 600px;
+				width: 100%;
+				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+			}
+			h1 {
+				text-align: center;
+				margin-bottom: 20px;
+				font-weight: 600;
+			}
+			.label {
+				background: var(--label-bg);
+				padding: 8px 12px;
+				border-radius: 6px;
+				display: inline-block;
+				margin-bottom: 10px;
+				font-size: 0.9rem;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+				color: #ccc;
+			}
+			input,
+			select {
+				width: 100%;
+				padding: 14px 16px;
+				margin-bottom: 15px;
+				font-size: 1rem;
+				border-radius: 10px;
+				border: none;
+				outline: none;
+				background: #2c313a;
+				color: white;
+			}
+			.actions {
+				display: flex;
+				justify-content: center;
+				gap: 10px;
+				flex-wrap: wrap;
+				margin-bottom: 20px;
+			}
+			button {
+				background: var(--accent);
+				border: none;
+				padding: 12px 20px;
+				font-size: 1rem;
+				border-radius: 8px;
+				cursor: pointer;
+				color: white;
+				font-weight: 600;
+				transition: background 0.2s ease;
+			}
+			button:hover {
+				background: #2f7fd8;
+			}
+			.output {
+				display: none;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				text-align: center;
+				margin-top: 20px;
+				text-align: center;
+			}
+			canvas,
+			svg {
+				margin-top: 10px;
+				background: white;
+				padding: 10px;
+				border-radius: 10px;
+				max-width: 100%;
+			}
+			.download {
+				margin-top: 10px;
+				background: #00ff9d;
+				color: black;
+			}
+			.wifi-fields {
+				display: none;
+				margin-bottom: 20px;
+			}
+			.wifi-fields input,
+			.wifi-fields select {
+				margin-bottom: 10px;
+			}
+			@media (max-width: 480px) {
+				button {
+					width: 100%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wrapper">
+			<h1>QR & Barcode Generator</h1>
+			<div class="label" id="typeLabel">Type: Text</div>
+			<input type="text" id="textInput" placeholder="Enter anything..." />
 
-    <div class="wifi-fields" id="wifiFields">
-      <select id="encryption">
-        <option value="WPA">WPA</option>
-        <option value="WEP">WEP</option>
-        <option value="">None</option>
-      </select>
-      <input type="text" id="ssid" placeholder="Network Name (SSID)" />
-      <input type="text" id="wifiPassword" placeholder="Password" />
-    </div>
+			<div class="wifi-fields" id="wifiFields">
+				<select id="encryption">
+					<option value="WPA">WPA</option>
+					<option value="WEP">WEP</option>
+					<option value="">None</option>
+				</select>
+				<input
+					type="text"
+					id="ssid"
+					placeholder="Network Name (SSID)"
+				/>
+				<input type="text" id="wifiPassword" placeholder="Password" />
+			</div>
 
-    <div class="actions">
-      <button onclick="generateQRCode()">Generate QR</button>
-      <button onclick="generateBarcode()">Generate Barcode</button>
-    </div>
+			<div class="actions">
+				<button onclick="generateQRCode()">Generate QR</button>
+				<button onclick="generateBarcode()">Generate Barcode</button>
+			</div>
 
-    <div class="output" id="qrcodeOutput">
-      <div id="qrcode" style="display: flex; justify-content: center;"></div>
-      <button class="download" onclick="downloadQRCode()">Download PNG</button>
-    </div>
-    <div class="output" id="barcodeOutput">
-      <div id="barcodeContainer" style="display: flex; justify-content: center;"></div>
-      <button class="download" onclick="downloadBarcodeSVG()">Download SVG</button>
-    </div>
-  </div>
+			<div class="output" id="qrcodeOutput">
+				<div
+					id="qrcode"
+					style="display: flex; justify-content: center"
+				></div>
+				<button class="download" onclick="downloadQRCode()">
+					Download PNG
+				</button>
+			</div>
+			<div class="output" id="barcodeOutput">
+				<div
+					id="barcodeContainer"
+					style="display: flex; justify-content: center"
+				></div>
+				<button class="download" onclick="downloadBarcodeSVG()">
+					Download SVG
+				</button>
+			</div>
+		</div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
-  <script>
-    const input = document.getElementById("textInput");
-    const label = document.getElementById("typeLabel");
-    const qrContainer = document.getElementById("qrcode");
-    const barcodeContainer = document.getElementById("barcodeContainer");
-    const qrOutput = document.getElementById("qrcodeOutput");
-    const barcodeOutput = document.getElementById("barcodeOutput");
-    const wifiFields = document.getElementById("wifiFields");
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+		<script>
+			const input = document.getElementById("textInput");
+			const label = document.getElementById("typeLabel");
+			const qrContainer = document.getElementById("qrcode");
+			const barcodeContainer =
+				document.getElementById("barcodeContainer");
+			const qrOutput = document.getElementById("qrcodeOutput");
+			const barcodeOutput = document.getElementById("barcodeOutput");
+			const wifiFields = document.getElementById("wifiFields");
 
-    function clearOutputs() {
-      qrContainer.innerHTML = "";
-      barcodeContainer.innerHTML = "";
-      qrOutput.style.display = "none";
-      barcodeOutput.style.display = "none";
-    }
+			function clearOutputs() {
+				qrContainer.innerHTML = "";
+				barcodeContainer.innerHTML = "";
+				qrOutput.style.display = "none";
+				barcodeOutput.style.display = "none";
+			}
 
-    function detectType(text) {
-      if (/^mailto:/i.test(text)) return "Email";
-      if (/^WIFI:/i.test(text)) return "Wi-Fi";
-      if (/^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/.test(text)) return "Email";
-      if (/^https?:\/\//i.test(text)) return "URL";
-      if (/wifi/i.test(text)) return "Wi-Fi";
-      return "Text";
-    }
+			function detectType(text) {
+				if (/^mailto:/i.test(text)) return "Email";
+				if (/^WIFI:/i.test(text)) return "Wi-Fi";
+				if (/^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/.test(text))
+					return "Email";
+				if (/^https?:\/\//i.test(text)) return "URL";
+				if (/wifi/i.test(text)) return "Wi-Fi";
+				return "Text";
+			}
 
-    function formatInput(text) {
-      if (detectType(text) === "Wi-Fi") {
-        const ssid = document.getElementById("ssid").value.trim() || "MySSID";
-        const pass = document.getElementById("wifiPassword").value.trim();
-        const enc = document.getElementById("encryption").value;
-        return `WIFI:T:${enc};S:${ssid};P:${pass};;`;
-      }
-      if (/^mailto:/i.test(text)) return text;
-      if (/^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/.test(text)) return `mailto:${text}`;
-      return text;
-    }
+			function formatInput(text) {
+				if (detectType(text) === "Wi-Fi") {
+					const ssid =
+						document.getElementById("ssid").value.trim() ||
+						"MySSID";
+					const pass = document
+						.getElementById("wifiPassword")
+						.value.trim();
+					const enc = document.getElementById("encryption").value;
+					return `WIFI:T:${enc};S:${ssid};P:${pass};;`;
+				}
+				if (/^mailto:/i.test(text)) return text;
+				if (/^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/.test(text))
+					return `mailto:${text}`;
+				return text;
+			}
 
-    function generateQRCode() {
-      const raw = input.value.trim();
-      if (!raw) return alert("Please enter something.");
-      const type = detectType(raw);
-      label.textContent = "Type: " + type;
-      clearOutputs();
-      new QRCode(qrContainer, { text: formatInput(raw), width: 256, height: 256 });
-      qrOutput.style.display = "block";
-    }
+			function generateQRCode() {
+				const raw = input.value.trim();
+				if (!raw) return alert("Please enter something.");
+				const type = detectType(raw);
+				label.textContent = "Type: " + type;
+				clearOutputs();
+				new QRCode(qrContainer, {
+					text: formatInput(raw),
+					width: 256,
+					height: 256,
+				});
+				qrOutput.style.display = "block";
+			}
 
-    function generateBarcode() {
-      const raw = input.value.trim();
-      if (!raw) return alert("Please enter something.");
-      const type = detectType(raw);
-      label.textContent = "Type: " + type;
-      clearOutputs();
-      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-      barcodeContainer.appendChild(svg);
-      JsBarcode(svg, formatInput(raw), {
-        format: "CODE128",
-        lineColor: "#000",
-        width: 2,
-        height: 100,
-        displayValue: true
-      });
-      barcodeOutput.style.display = "block";
-    }
+			function generateBarcode() {
+				const raw = input.value.trim();
+				if (!raw) return alert("Please enter something.");
+				const type = detectType(raw);
+				label.textContent = "Type: " + type;
+				clearOutputs();
+				const svg = document.createElementNS(
+					"http://www.w3.org/2000/svg",
+					"svg"
+				);
+				barcodeContainer.appendChild(svg);
+				JsBarcode(svg, formatInput(raw), {
+					format: "CODE128",
+					lineColor: "#000",
+					width: 2,
+					height: 100,
+					displayValue: true,
+				});
+				barcodeOutput.style.display = "block";
+			}
 
-    function downloadQRCode() {
-      const canvas = document.querySelector("#qrcode canvas");
-      if (!canvas) return;
-      const link = document.createElement("a");
-      link.href = canvas.toDataURL("image/png");
-      link.download = "qrcode.png";
-      link.click();
-    }
+			function downloadQRCode() {
+				const canvas = document.querySelector("#qrcode canvas");
+				if (!canvas) return;
+				const link = document.createElement("a");
+				link.href = canvas.toDataURL("image/png");
+				link.download = "qrcode.png";
+				link.click();
+			}
 
-    function downloadBarcodeSVG() {
-      const svg = document.querySelector("#barcodeContainer svg");
-      if (!svg) return;
-      const data = new XMLSerializer().serializeToString(svg);
-      const blob = new Blob([data], { type: 'image/svg+xml' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "barcode.svg";
-      link.click();
-    }
+			function downloadBarcodeSVG() {
+				const svg = document.querySelector("#barcodeContainer svg");
+				if (!svg) return;
+				const data = new XMLSerializer().serializeToString(svg);
+				const blob = new Blob([data], { type: "image/svg+xml" });
+				const url = URL.createObjectURL(blob);
+				const link = document.createElement("a");
+				link.href = url;
+				link.download = "barcode.svg";
+				link.click();
+			}
 
-    input.addEventListener("input", () => {
-      const text = input.value.trim();
-      const type = detectType(text);
-      label.textContent = "Type: " + type;
-      wifiFields.style.display = type === "Wi-Fi" ? "block" : "none";
-    });
-  </script>
-</body>
+			input.addEventListener("input", () => {
+				const text = input.value.trim();
+				const type = detectType(text);
+				label.textContent = "Type: " + type;
+				wifiFields.style.display = type === "Wi-Fi" ? "block" : "none";
+			});
+		</script>
+	</body>
 </html>
