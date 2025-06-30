@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Budget Tracker</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+		<!-- Font Awesome -->
+		<script
+			src="https://kit.fontawesome.com/2953becb25.js"
+			crossorigin="anonymous"
+		></script>
+	</head>
+	<body class="bg-white text-gray-800 font-sans max-w-md mx-auto p-4">
+		<header class="text-center mb-6">
+			<h1 class="text-2xl font-bold">Budget Tracker</h1>
+		</header>
+
+		<!-- Tab Bar -->
+		<div
+			id="tabBar"
+			class="grid grid-cols-4 gap-1 mb-4 text-xs font-medium rounded-lg overflow-hidden bg-gray-100"
+		>
+			<button
+				class="tab-btn flex flex-col items-center justify-center py-2 text-center text-gray-600"
+				data-tab="subscriptions"
+			>
+				<i class="fas fa-repeat text-lg mb-1"></i>
+				<span>Subscriptions</span>
+			</button>
+			<button
+				class="tab-btn flex flex-col items-center justify-center py-2 text-center text-gray-600"
+				data-tab="transactions"
+			>
+				<i class="fas fa-credit-card text-lg mb-1"></i>
+				<span>Transactions</span>
+			</button>
+			<button
+				class="tab-btn flex flex-col items-center justify-center py-2 text-center text-gray-600"
+				data-tab="overview"
+			>
+				<i class="fas fa-chart-line text-lg mb-1"></i>
+				<span>Overview</span>
+			</button>
+			<button
+				class="tab-btn flex flex-col items-center justify-center py-2 text-center text-gray-600"
+				data-tab="account"
+			>
+				<i class="fas fa-user-cog text-lg mb-1"></i>
+				<span>Account</span>
+			</button>
+		</div>
+
+		<!-- Subscriptions Tab -->
+		<section id="subscriptions" class="tab-section">
+			<div class="flex justify-between items-center mb-2">
+				<h2 class="text-lg font-semibold">Your Subscriptions</h2>
+				<button id="toggleSubForm" class="text-blue-600">+ Add</button>
+			</div>
+			<form id="subForm" class="hidden space-y-2 mb-4">
+				<input
+					class="w-full p-2 border rounded"
+					id="subName"
+					placeholder="Subscription Name"
+					required
+				/>
+				<input
+					type="number"
+					step="0.01"
+					min="0"
+					class="w-full p-2 border rounded"
+					id="subPrice"
+					placeholder="Monthly Price"
+					required
+				/>
+				<input
+					type="number"
+					min="1"
+					max="31"
+					class="w-full p-2 border rounded"
+					id="subDay"
+					placeholder="Day of Month (1–31)"
+					required
+				/>
+				<button
+					type="submit"
+					class="w-full bg-blue-600 text-white p-2 rounded"
+				>
+					Add Subscription
+				</button>
+			</form>
+			<ul id="subList" class="space-y-2 mb-2"></ul>
+			<div class="text-right font-medium">
+				Total: <span id="subTotal">0</span>
+			</div>
+		</section>
+
+		<!-- Transactions Tab -->
+		<section id="transactions" class="tab-section hidden">
+			<div class="flex justify-between items-center mb-2">
+				<h2 class="text-lg font-semibold">Transactions</h2>
+				<button id="togglePayForm" class="text-blue-600">+ Add</button>
+			</div>
+			<form id="payForm" class="hidden space-y-2 mb-4">
+				<input
+					class="w-full p-2 border rounded"
+					id="payName"
+					placeholder="Transaction Name"
+					required
+				/>
+				<input
+					type="number"
+					step="0.01"
+					min="0"
+					class="w-full p-2 border rounded"
+					id="payPrice"
+					placeholder="Amount"
+					required
+				/>
+				<input
+					type="date"
+					class="w-full p-2 border rounded"
+					id="payDate"
+					required
+				/>
+				<select class="w-full p-2 border rounded" id="payCategory">
+					<option>Food</option>
+					<option>Health</option>
+					<option>Entertainment</option>
+					<option>Utilities</option>
+					<option>Other</option>
+				</select>
+				<button
+					type="submit"
+					class="w-full bg-blue-600 text-white p-2 rounded"
+				>
+					Add Transaction
+				</button>
+			</form>
+			<ul id="payList" class="space-y-2 mb-2"></ul>
+			<div class="text-right font-medium">
+				Pending: <span id="payTotal">0</span>
+			</div>
+		</section>
+
+		<!-- Overview Tab -->
+		<section id="overview" class="tab-section hidden">
+			<h2 class="text-lg font-semibold mb-3">Spending Overview</h2>
+			<div class="mb-4">
+				<p class="text-sm text-gray-600">
+					Average Monthly Spend:
+					<span id="avgSpend" class="font-medium">0</span>
+				</p>
+			</div>
+			<ul id="historyList" class="space-y-2 text-sm text-gray-700"></ul>
+			<div class="mt-4 flex gap-2">
+				<button
+					id="exportCSV"
+					class="flex-1 bg-gray-200 py-2 rounded text-sm"
+				>
+					Export CSV
+				</button>
+				<button
+					id="exportPDF"
+					class="flex-1 bg-gray-200 py-2 rounded text-sm"
+				>
+					Export PDF
+				</button>
+			</div>
+		</section>
+
+		<!-- Account Tab -->
+		<section id="account" class="tab-section hidden">
+			<h2 class="text-lg font-semibold mb-3">Account Settings</h2>
+			<div class="space-y-4">
+				<label class="block text-sm font-medium text-gray-700"
+					>Preferred Currency</label
+				>
+				<select id="currencySelector" class="w-full p-2 border rounded">
+					<option value="USD">USD ($)</option>
+					<option value="EUR">EUR (€)</option>
+					<option value="GBP">GBP (£)</option>
+					<option value="INR">INR (₹)</option>
+					<option value="JPY">JPY (¥)</option>
+					<option value="CAD">CAD ($)</option>
+				</select>
+			</div>
+		</section>
+
+		<script>
+			// Currency
+			let currencyCode = localStorage.getItem("currency") || "USD";
+			let currency = new Intl.NumberFormat("en-US", {
+				style: "currency",
+				currency: currencyCode,
+			});
+			function updateCurrencyFormatter() {
+				currency = new Intl.NumberFormat("en-US", {
+					style: "currency",
+					currency: currencyCode,
+				});
+			}
+
+			// Storage
+			let subscriptions = JSON.parse(
+				localStorage.getItem("subscriptions") || "[]"
+			);
+			let payments = JSON.parse(localStorage.getItem("payments") || "[]");
+			let editingSubIndex = null;
+
+			// Tabs
+			const tabs = document.querySelectorAll(".tab-btn");
+			const sections = document.querySelectorAll(".tab-section");
+			function activateTab(tabName) {
+				tabs.forEach((btn) => {
+					const isActive = btn.dataset.tab === tabName;
+					btn.classList.toggle("bg-white", isActive);
+					btn.classList.toggle("text-blue-600", isActive);
+					btn.classList.toggle("font-semibold", isActive);
+					btn.classList.toggle("shadow-inner", isActive);
+					btn.classList.toggle("text-gray-600", !isActive);
+				});
+
+				sections.forEach((section) => {
+					section.classList.toggle("hidden", section.id !== tabName);
+				});
+
+				if (tabName === "overview") renderOverview(); // ✅ optional but reinforces freshness
+			}
+
+			tabs.forEach((btn) =>
+				btn.addEventListener("click", () =>
+					activateTab(btn.dataset.tab)
+				)
+			);
+			activateTab("subscriptions");
+
+			// Subscriptions
+			document.getElementById("toggleSubForm").onclick = () =>
+				document.getElementById("subForm").classList.toggle("hidden");
+
+			document.getElementById("subForm").onsubmit = (e) => {
+				e.preventDefault();
+				const sub = {
+					name: subName.value,
+					price: parseFloat(subPrice.value),
+					day: parseInt(subDay.value),
+				};
+				if (editingSubIndex !== null) {
+					subscriptions[editingSubIndex] = sub;
+					editingSubIndex = null;
+				} else {
+					subscriptions.push(sub);
+				}
+				localStorage.setItem(
+					"subscriptions",
+					JSON.stringify(subscriptions)
+				);
+				e.target.reset();
+				document.getElementById("subForm").classList.add("hidden");
+				renderSubscriptions();
+			};
+
+			function editSubscription(index) {
+				const s = subscriptions[index];
+				subName.value = s.name;
+				subPrice.value = s.price;
+				subDay.value = s.day;
+				editingSubIndex = index;
+				document.getElementById("subForm").classList.remove("hidden");
+			}
+
+			function deleteSubscription(i) {
+				subscriptions.splice(i, 1);
+				localStorage.setItem(
+					"subscriptions",
+					JSON.stringify(subscriptions)
+				);
+				renderSubscriptions();
+			}
+
+			function renderSubscriptions() {
+				const list = document.getElementById("subList");
+				list.innerHTML = "";
+				let total = 0;
+
+				subscriptions.forEach((s, i) => {
+					total += s.price;
+					list.innerHTML += `
+      <li class="p-2 bg-gray-100 rounded flex justify-between items-center">
+        <div>
+          <strong>${s.name}</strong><br>
+          <span class="text-gray-500 text-sm">
+            ${currency.format(s.price)} — renews on day ${s.day}
+          </span>
+        </div>
+        <div class="space-x-2 text-sm">
+          <button onclick="editSubscription(${i})" class="text-blue-500">Edit</button>
+          <button onclick="deleteSubscription(${i})" class="text-red-500">Delete</button>
+        </div>
+      </li>`;
+				});
+
+				document.getElementById("subTotal").textContent =
+					currency.format(total);
+				renderOverview(); // ✅ ensures Overview is always up to date
+			}
+
+			// Payments
+			document.getElementById("togglePayForm").onclick = () =>
+				document.getElementById("payForm").classList.toggle("hidden");
+
+			document.getElementById("payForm").onsubmit = (e) => {
+				e.preventDefault();
+				payments.push({
+					name: payName.value,
+					price: parseFloat(payPrice.value),
+					date: payDate.value,
+					category: payCategory.value,
+					completed: false,
+				});
+				localStorage.setItem("payments", JSON.stringify(payments));
+				e.target.reset();
+				document.getElementById("payForm").classList.add("hidden");
+				renderPayments();
+			};
+
+			function renderPayments() {
+				const list = document.getElementById("payList");
+				list.innerHTML = "";
+				let total = 0;
+				payments.forEach((p, i) => {
+					if (!p.completed) total += p.price;
+					if (p.completed) return;
+					list.innerHTML += `
+        <li class="p-2 bg-gray-100 rounded flex justify-between items-center">
+          <div>
+            <strong>${p.name}</strong><br>
+            <span class="text-gray-500 text-sm">${currency.format(p.price)} - ${
+						p.date
+					} - ${p.category}</span>
+          </div>
+          <div class="text-sm space-x-2">
+            <button onclick="markAsPaid(${i})" class="text-green-600">Paid</button>
+            <button onclick="deletePayment(${i})" class="text-red-500">🗑</button>
+          </div>
+        </li>`;
+				});
+				document.getElementById("payTotal").textContent =
+					currency.format(total);
+				renderOverview();
+			}
+
+			function deletePayment(i) {
+				payments.splice(i, 1);
+				localStorage.setItem("payments", JSON.stringify(payments));
+				renderPayments();
+			}
+
+			function markAsPaid(i) {
+				payments[i].completed = true;
+				localStorage.setItem("payments", JSON.stringify(payments));
+				renderPayments();
+			}
+
+			// Overview
+			function renderOverview() {
+				const list = document.getElementById("historyList");
+				const monthlyTotals = {};
+				list.innerHTML = "";
+				payments.forEach((p) => {
+					if (!p.completed) return;
+					const month = p.date.slice(0, 7);
+					if (!monthlyTotals[month]) monthlyTotals[month] = 0;
+					monthlyTotals[month] += p.price;
+
+					list.innerHTML += `<li>${p.date} — ${p.name} (${
+						p.category
+					}): ${currency.format(p.price)}</li>`;
+				});
+				const months = Object.keys(monthlyTotals);
+				const avg = months.length
+					? months.reduce((sum, m) => sum + monthlyTotals[m], 0) /
+					  months.length
+					: 0;
+				document.getElementById("avgSpend").textContent =
+					currency.format(avg);
+			}
+
+			// Export
+			document.getElementById("exportCSV").onclick = () => {
+				const rows = [
+					["Name", "Price", "Date", "Category", "Completed"],
+				];
+				payments.forEach((p) =>
+					rows.push([
+						p.name,
+						p.price,
+						p.date,
+						p.category,
+						p.completed,
+					])
+				);
+				const csv = rows.map((r) => r.join(",")).join("\n");
+				const blob = new Blob([csv], { type: "text/csv" });
+				const a = document.createElement("a");
+				a.href = URL.createObjectURL(blob);
+				a.download = "transactions.csv";
+				a.click();
+			};
+
+			document.getElementById("exportPDF").onclick = () => {
+				const { jsPDF } = window.jspdf;
+				const doc = new jsPDF();
+				doc.text("Transaction History", 10, 10);
+				payments.forEach((p, i) => {
+					doc.text(
+						`${i + 1}. ${p.name} - ${currency.format(p.price)} - ${
+							p.date
+						} - ${p.category} - ${p.completed ? "✔" : "❌"}`,
+						10,
+						20 + i * 7
+					);
+				});
+				doc.save("transactions.pdf");
+			};
+
+			// Currency selector
+			const currencySelector =
+				document.getElementById("currencySelector");
+			if (currencySelector) {
+				currencySelector.value = currencyCode;
+				currencySelector.onchange = () => {
+					currencyCode = currencySelector.value;
+					localStorage.setItem("currency", currencyCode);
+					updateCurrencyFormatter();
+					renderSubscriptions();
+					renderPayments();
+				};
+			}
+
+			// Init
+			updateCurrencyFormatter();
+			renderSubscriptions();
+			renderPayments();
+		</script>
+	</body>
+</html>
