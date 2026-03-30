@@ -1,0 +1,962 @@
+[
+  {
+    "title": "Us",
+    "year": "2019",
+    "genres": ["Horror", "Thriller", "Mystery"],
+    "description": "A family’s seaside holiday turns terrifying when sinister doubles appear outside their home.",
+    "rtRating": "93%",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/0/00/Us_%282019%29_theatrical_poster.png",
+    "runtime": "1h 56m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Escape Room",
+    "year": "2019",
+    "genres": ["Horror", "Thriller", "Mystery"],
+    "description": "Six strangers are thrown into a deadly series of escape rooms where every puzzle can kill.",
+    "rtRating": "51%",
+    "poster": "https://pics.filmaffinity.com/escape_room-323025347-large.jpg",
+    "runtime": "1h 39m",
+    "certificate": "PG-13",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Run Rabbit Run",
+    "year": "2023",
+    "genres": ["Horror", "Thriller", "Mystery"],
+    "description": "A doctor begins to fear that her daughter may be connected to the spirit of her dead sister.",
+    "rtRating": "38%",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/6/6b/Run_Rabbit_Run_%28film%29.png",
+    "runtime": "1h 40m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Bad Boys",
+    "year": "1995",
+    "genres": ["Action", "Comedy", "Crime"],
+    "description": "Two Miami detectives race to recover stolen heroin while protecting a key witness.",
+    "rtRating": "43%",
+    "poster": "https://pics.filmaffinity.com/bad_boys-129541367-large.jpg",
+    "runtime": "1h 59m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Bad Boys II",
+    "year": "2003",
+    "genres": ["Action", "Comedy", "Crime"],
+    "description": "Mike and Marcus take on a ruthless drug cartel in a louder, bigger sequel.",
+    "rtRating": "24%",
+    "poster": "https://pics.filmaffinity.com/bad_boys_ii-516511431-large.jpg",
+    "runtime": "2h 27m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Bad Boys for Life",
+    "year": "2020",
+    "genres": ["Action", "Comedy", "Crime"],
+    "description": "The Bad Boys return for one last mission when a ghost from Mike’s past resurfaces.",
+    "rtRating": "76%",
+    "poster": "https://pics.filmaffinity.com/bad_boys_for_life-343590773-large.jpg",
+    "runtime": "2h 4m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Bad Boys: Ride or Die",
+    "year": "2024",
+    "genres": ["Action", "Comedy", "Crime"],
+    "description": "The duo go on the run after their late captain is accused of corruption.",
+    "rtRating": "64%",
+    "poster": "https://pics.filmaffinity.com/bad_boys_ride_or_die-651037313-large.jpg",
+    "runtime": "1h 55m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Zombieland",
+    "year": "2009",
+    "genres": ["Comedy", "Horror", "Action"],
+    "description": "A cautious student and a fearless zombie killer team up in a hilarious apocalypse road trip.",
+    "rtRating": "89%",
+    "poster": "https://pics.filmaffinity.com/zombieland-565000159-large.jpg",
+    "runtime": "1h 28m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Babysitter",
+    "year": "2017",
+    "genres": ["Comedy", "Horror"],
+    "description": "A boy discovers his dream babysitter is part of a murderous cult.",
+    "rtRating": "72%",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/2/29/The_Babysitter_%282017_film%29.png",
+    "runtime": "1h 25m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Conjuring",
+    "year": "2013",
+    "genres": ["Horror", "Mystery", "Thriller"],
+    "description": "Paranormal investigators Ed and Lorraine Warren help a family tormented by a dark force.",
+    "rtRating": "86%",
+    "poster": "https://pics.filmaffinity.com/the_conjuring_the_warren_files-153245956-large.jpg",
+    "runtime": "1h 52m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Conjuring 2",
+    "year": "2016",
+    "genres": ["Horror", "Mystery", "Thriller"],
+    "description": "The Warrens travel to England to confront the haunting behind the Enfield case.",
+    "rtRating": "80%",
+    "poster": "https://pics.filmaffinity.com/the_conjuring_2_the_enfield_poltergeist-489921396-large.jpg",
+    "runtime": "2h 14m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Conjuring: The Devil Made Me Do It",
+    "year": "2021",
+    "genres": ["Horror", "Mystery", "Thriller"],
+    "description": "The Warrens investigate a murder case tied to demonic possession.",
+    "rtRating": "56%",
+    "poster": "https://pics.filmaffinity.com/the_conjuring_the_devil_made_me_do_it-118623652-large.jpg",
+    "runtime": "1h 52m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Grave of the Fireflies",
+    "year": "1988",
+    "genres": ["Animation", "Drama", "War"],
+    "description": "Two siblings struggle to survive in Japan during the final months of World War II.",
+    "rtRating": "100%",
+    "poster": "https://pics.filmaffinity.com/hotaru_no_haka_aka_grave_of_the_fireflies_aka-128332096-large.jpg",
+    "runtime": "1h 29m",
+    "certificate": "Not Rated",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Kiki's Delivery Service",
+    "year": "1989",
+    "genres": ["Animation", "Family", "Fantasy"],
+    "description": "A young witch starts an air-mail service while learning how to live on her own.",
+    "rtRating": "98%",
+    "poster": "https://pics.filmaffinity.com/majo_no_takkyubin-158499881-large.jpg",
+    "runtime": "1h 43m",
+    "certificate": "G",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Only Yesterday",
+    "year": "1991",
+    "genres": ["Animation", "Drama", "Romance"],
+    "description": "A Tokyo woman reflects on her childhood while visiting the countryside.",
+    "rtRating": "100%",
+    "poster": "https://pics.filmaffinity.com/omohide_poro_poro-895249363-large.jpg",
+    "runtime": "1h 59m",
+    "certificate": "PG",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Tale of the Princess Kaguya",
+    "year": "2013",
+    "genres": ["Animation", "Drama", "Fantasy"],
+    "description": "A tiny princess found in a bamboo stalk grows into a woman haunted by destiny.",
+    "rtRating": "100%",
+    "poster": "https://pics.filmaffinity.com/kaguya_hime_no_monogatari-384141472-large.jpg",
+    "runtime": "2h 17m",
+    "certificate": "PG",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Boy and the Heron",
+    "year": "2023",
+    "genres": ["Animation", "Adventure", "Fantasy"],
+    "description": "A grieving boy enters a strange world with a talking heron and searches for his missing stepmother.",
+    "rtRating": "97%",
+    "poster": "https://pics.filmaffinity.com/kimitachi_wa_do_ikiru_ka-917153869-large.jpg",
+    "runtime": "2h 4m",
+    "certificate": "PG-13",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Robert",
+    "year": "2015",
+    "genres": ["Horror", "Thriller"],
+    "description": "A family is haunted after bringing home a sinister doll with a deadly past.",
+    "rtRating": "",
+    "poster": "https://pics.filmaffinity.com/robert_the_doll-154035567-large.jpg",
+    "runtime": "1h 30m",
+    "certificate": "Not Rated",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Louis Theroux: Inside the Manosphere",
+    "year": "2024",
+    "genres": ["Documentary"],
+    "description": "Louis Theroux examines online misogyny, influencers, and the modern manosphere.",
+    "rtRating": "",
+    "poster": "https://pics.filmaffinity.com/louis_theroux_inside_the_manosphere-444856860-large.jpg",
+    "runtime": "1h 15m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Get Out",
+    "year": "2017",
+    "genres": ["Horror", "Mystery", "Thriller"],
+    "description": "A young man uncovers a horrifying secret while visiting his girlfriend’s family estate.",
+    "rtRating": "98%",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/a/a3/Get_Out_poster.png",
+    "runtime": "1h 44m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Pitch Perfect",
+    "year": "2012",
+    "genres": ["Comedy", "Music", "Romance"],
+    "description": "A rebellious freshman joins an all-girls a cappella group aiming for a comeback.",
+    "rtRating": "81%",
+    "poster": "https://pics.filmaffinity.com/pitch_perfect-419842614-large.jpg",
+    "runtime": "1h 52m",
+    "certificate": "PG-13",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Pitch Perfect 2",
+    "year": "2015",
+    "genres": ["Comedy", "Music"],
+    "description": "The Bellas try to redeem themselves at an international a cappella competition.",
+    "rtRating": "66%",
+    "poster": "https://pics.filmaffinity.com/pitch_perfect_2-366824063-large.jpg",
+    "runtime": "1h 55m",
+    "certificate": "PG-13",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Platform",
+    "year": "2019",
+    "genres": ["Horror", "Sci-Fi", "Thriller"],
+    "description": "Prisoners in a vertical jail fight to survive as food descends floor by floor.",
+    "rtRating": "79%",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/5/54/The_Platform_poster.jpg",
+    "runtime": "1h 34m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Platform 2",
+    "year": "2024",
+    "genres": ["Horror", "Sci-Fi", "Thriller"],
+    "description": "A new set of inmates enters the pit, where strict rules and survival instincts collide.",
+    "rtRating": "",
+    "poster": "https://pics.filmaffinity.com/el_hoyo_2-950031332-large.jpg",
+    "runtime": "1h 40m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Heretic",
+    "year": "2024",
+    "genres": ["Horror", "Thriller"],
+    "description": "Two young missionaries knock on the wrong door and find themselves trapped in a chilling test of faith.",
+    "rtRating": "91%",
+    "poster": "https://pics.filmaffinity.com/heretic-158529513-large.jpg",
+    "runtime": "1h 51m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Apostle",
+    "year": "2018",
+    "genres": ["Horror", "Thriller", "Mystery"],
+    "description": "A man infiltrates an isolated cult to rescue his kidnapped sister.",
+    "rtRating": "79%",
+    "poster": "https://pics.filmaffinity.com/apostle-240792442-large.jpg",
+    "runtime": "2h 10m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "What Happened to Monday",
+    "year": "2017",
+    "genres": ["Sci-Fi", "Thriller", "Action"],
+    "description": "Seven identical sisters hide in a dystopian world where families may only have one child.",
+    "rtRating": "59%",
+    "poster": "https://pics.filmaffinity.com/seven_sisters_aka_what_happened_to_monday-816656726-large.jpg",
+    "runtime": "2h 3m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Bright",
+    "year": "2017",
+    "genres": ["Action", "Fantasy", "Crime"],
+    "description": "A human cop and his orc partner become targets while protecting a powerful magical wand.",
+    "rtRating": "27%",
+    "poster": "https://pics.filmaffinity.com/bright-955019248-large.jpg",
+    "runtime": "1h 57m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Love and Monsters",
+    "year": "2020",
+    "genres": ["Adventure", "Comedy", "Romance"],
+    "description": "A young man crosses a monster-filled world to reunite with the girl he loves.",
+    "rtRating": "93%",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/1a/LoveAndMonstersPoster.jpeg/250px-LoveAndMonstersPoster.jpeg",
+    "runtime": "1h 49m",
+    "certificate": "PG-13",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Spectral",
+    "year": "2016",
+    "genres": ["Action", "Sci-Fi", "Thriller"],
+    "description": "Soldiers and scientists battle ghostly entities in a war-torn city.",
+    "rtRating": "80%",
+    "poster": "https://pics.filmaffinity.com/spectral-908982854-large.jpg",
+    "runtime": "1h 47m",
+    "certificate": "TV-14",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Elysium",
+    "year": "2013",
+    "genres": ["Sci-Fi", "Action", "Drama"],
+    "description": "A dying man takes on a mission that could erase the divide between the rich and everyone else.",
+    "rtRating": "64%",
+    "poster": "https://pics.filmaffinity.com/elysium-857520115-large.jpg",
+    "runtime": "1h 49m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Hardcore Henry",
+    "year": "2015",
+    "genres": ["Action", "Sci-Fi", "Thriller"],
+    "description": "A resurrected cyborg fights through Moscow in a first-person action frenzy.",
+    "rtRating": "51%",
+    "poster": "https://pics.filmaffinity.com/hardcore_henry-762862601-large.jpg",
+    "runtime": "1h 36m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Big Stan",
+    "year": "2007",
+    "genres": ["Comedy", "Crime"],
+    "description": "A con man prepares for prison by learning martial arts from a mysterious guru.",
+    "rtRating": "11%",
+    "poster": "https://pics.filmaffinity.com/big_stan-945915466-large.jpg",
+    "runtime": "1h 45m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Little Man",
+    "year": "2006",
+    "genres": ["Comedy", "Crime"],
+    "description": "A tiny jewel thief poses as a baby to recover stolen loot from an unsuspecting couple.",
+    "rtRating": "12%",
+    "poster": "https://pics.filmaffinity.com/little_man-647674660-large.jpg",
+    "runtime": "1h 38m",
+    "certificate": "PG-13",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Maze Runner",
+    "year": "2014",
+    "genres": ["Sci-Fi", "Action", "Adventure"],
+    "description": "A teen wakes in a massive maze with no memory and must help others find a way out.",
+    "rtRating": "65%",
+    "poster": "https://pics.filmaffinity.com/the_maze_runner-377064363-large.jpg",
+    "runtime": "1h 53m",
+    "certificate": "PG-13",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Maze Runner: The Scorch Trials",
+    "year": "2015",
+    "genres": ["Sci-Fi", "Action", "Adventure"],
+    "description": "Thomas and the Gladers escape the maze only to face a devastated wasteland.",
+    "rtRating": "48%",
+    "poster": "https://pics.filmaffinity.com/maze_runner_the_scorch_trials-944377647-large.jpg",
+    "runtime": "2h 12m",
+    "certificate": "PG-13",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Maze Runner: The Death Cure",
+    "year": "2018",
+    "genres": ["Sci-Fi", "Action", "Adventure"],
+    "description": "Thomas leads a final mission to rescue his friends and uncover the truth.",
+    "rtRating": "43%",
+    "poster": "https://pics.filmaffinity.com/maze_runner_the_death_cure-119590517-large.jpg",
+    "runtime": "2h 23m",
+    "certificate": "PG-13",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Divergent",
+    "year": "2014",
+    "genres": ["Sci-Fi", "Action", "Romance"],
+    "description": "A girl discovers she does not fit into society’s assigned faction system.",
+    "rtRating": "41%",
+    "poster": "https://pics.filmaffinity.com/divergent-164628487-large.jpg",
+    "runtime": "2h 19m",
+    "certificate": "PG-13",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Divergent Series: Insurgent",
+    "year": "2015",
+    "genres": ["Sci-Fi", "Action", "Adventure"],
+    "description": "Tris becomes a hunted rebel as the faction system starts to collapse.",
+    "rtRating": "28%",
+    "poster": "https://pics.filmaffinity.com/the_divergent_series_insurgent-483872859-large.jpg",
+    "runtime": "1h 59m",
+    "certificate": "PG-13",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Divergent Series: Allegiant",
+    "year": "2016",
+    "genres": ["Sci-Fi", "Action", "Adventure"],
+    "description": "Tris and Four leave Chicago and uncover unsettling truths beyond the wall.",
+    "rtRating": "11%",
+    "poster": "https://pics.filmaffinity.com/the_divergent_series_allegiant-992001086-large.jpg",
+    "runtime": "2h 0m",
+    "certificate": "PG-13",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Nerve",
+    "year": "2016",
+    "genres": ["Thriller", "Adventure", "Romance"],
+    "description": "Two teens get sucked into a dangerous online dare game that never stops escalating.",
+    "rtRating": "67%",
+    "poster": "https://pics.filmaffinity.com/nerve-310845581-large.jpg",
+    "runtime": "1h 36m",
+    "certificate": "PG-13",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Dictator",
+    "year": "2012",
+    "genres": ["Comedy"],
+    "description": "A vain dictator risks everything to keep democracy from reaching his country.",
+    "rtRating": "56%",
+    "poster": "https://pics.filmaffinity.com/the_dictator-138905408-large.jpg",
+    "runtime": "1h 23m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "It's What's Inside",
+    "year": "2024",
+    "genres": ["Comedy", "Horror", "Mystery"],
+    "description": "A pre-wedding reunion spirals into chaos after a mysterious game swaps everyone’s identities.",
+    "rtRating": "84%",
+    "poster": "https://pics.filmaffinity.com/it_s_what_s_inside-784679476-large.jpg",
+    "runtime": "1h 43m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Cunk on Life",
+    "year": "2024",
+    "genres": ["Comedy", "Documentary"],
+    "description": "Philomena Cunk delivers a deadpan mockumentary tour through the meaning of human life.",
+    "rtRating": "",
+    "poster": "https://pics.filmaffinity.com/cunk_on_life-991755891-large.jpg",
+    "runtime": "1h 11m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Do-Over",
+    "year": "2016",
+    "genres": ["Comedy", "Action"],
+    "description": "Two burned-out friends fake their deaths and start over, only to land in bigger trouble.",
+    "rtRating": "9%",
+    "poster": "https://pics.filmaffinity.com/the_do_over-983689508-large.jpg",
+    "runtime": "1h 48m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Package",
+    "year": "2018",
+    "genres": ["Comedy"],
+    "description": "A camping trip turns into a frantic race after a teenage accident goes horribly wrong.",
+    "rtRating": "34%",
+    "poster": "https://pics.filmaffinity.com/the_package-116697195-large.jpg",
+    "runtime": "1h 34m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Game Over, Man!",
+    "year": "2018",
+    "genres": ["Action", "Comedy"],
+    "description": "Three underachieving friends try to save a celebrity and a hotel from terrorists.",
+    "rtRating": "20%",
+    "poster": "https://pics.filmaffinity.com/game_over_man-789610601-large.jpg",
+    "runtime": "1h 40m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "No One Gets Out Alive",
+    "year": "2021",
+    "genres": ["Horror", "Mystery", "Thriller"],
+    "description": "An immigrant in a rundown boarding house discovers the place is far more sinister than it seems.",
+    "rtRating": "62%",
+    "poster": "https://pics.filmaffinity.com/no_one_gets_out_alive-747133423-large.jpg",
+    "runtime": "1h 27m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Split",
+    "year": "2016",
+    "genres": ["Thriller", "Horror"],
+    "description": "A man with multiple personalities kidnaps three girls as a terrifying new identity emerges.",
+    "rtRating": "79%",
+    "poster": "https://pics.filmaffinity.com/split-172094905-large.jpg",
+    "runtime": "1h 57m",
+    "certificate": "PG-13",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Baby Driver",
+    "year": "2017",
+    "genres": ["Action", "Crime", "Drama"],
+    "description": "A gifted getaway driver tries to leave crime behind after falling in love.",
+    "rtRating": "92%",
+    "poster": "https://pics.filmaffinity.com/baby_driver-399368582-large.jpg",
+    "runtime": "1h 53m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Hit Man",
+    "year": "2024",
+    "genres": ["Comedy", "Crime", "Romance"],
+    "description": "A mild-mannered professor moonlighting in police sting operations as a fake hit man falls for a potential client and gets pulled into dangerous territory.",
+    "rtRating": "",
+    "poster": "https://pics.filmaffinity.com/hit_man-846757571-large.jpg",
+    "runtime": "1h 55m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Spiderhead",
+    "year": "2022",
+    "genres": ["Sci-Fi", "Thriller", "Drama"],
+    "description": "In a high-tech prison, inmates test emotion-altering drugs for a visionary overseer.",
+    "rtRating": "39%",
+    "poster": "https://pics.filmaffinity.com/spiderhead-162179043-large.jpg",
+    "runtime": "1h 47m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Naked Attraction",
+    "year": "2016",
+    "genres": ["Reality", "Documentary"],
+    "description": "A provocative dating series where contestants choose partners based on fully nude reveals.",
+    "rtRating": "",
+    "poster": "https://artworks.thetvdb.com/banners/v4/series/314821/posters/65f65bcfb7543.jpg",
+    "runtime": "45m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "The Open House",
+    "year": "2018",
+    "genres": ["Horror", "Thriller"],
+    "description": "A mother and son move into a mountain house where unsettling events begin to escalate.",
+    "rtRating": "13%",
+    "poster": "https://pics.filmaffinity.com/the_open_house-284460184-large.jpg",
+    "runtime": "1h 34m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Attack the Block",
+    "year": "2011",
+    "genres": ["Action", "Comedy", "Sci-Fi"],
+    "description": "A teenage street gang fights off an alien invasion on a South London estate.",
+    "rtRating": "90%",
+    "poster": "https://pics.filmaffinity.com/attack_the_block-334095613-large.jpg",
+    "runtime": "1h 28m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Slumdog Millionaire",
+    "year": "2008",
+    "genres": ["Drama", "Romance"],
+    "description": "A young man from the Mumbai slums shocks the world on a game show and reveals the story of his life.",
+    "rtRating": "91%",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/9/92/Slumdog_Millionaire_poster.png",
+    "runtime": "2h 0m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Spirited Away",
+    "year": "2001",
+    "genres": ["Animation", "Adventure", "Fantasy"],
+    "description": "A young girl enters a spirit world and must save her parents to return home.",
+    "rtRating": "96%",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Spirited_Away_Japanese_poster.png/250px-Spirited_Away_Japanese_poster.png",
+    "runtime": "2h 5m",
+    "certificate": "PG",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Ponyo",
+    "year": "2008",
+    "genres": ["Animation", "Family", "Fantasy"],
+    "description": "A magical goldfish longs to become human after befriending a little boy.",
+    "rtRating": "91%",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/5/51/Ponyo.png",
+    "runtime": "1h 43m",
+    "certificate": "G",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "Howl's Moving Castle",
+    "year": "2004",
+    "genres": ["Animation", "Adventure", "Fantasy"],
+    "description": "A young woman cursed into old age is taken in by a mysterious wizard.",
+    "rtRating": "87%",
+    "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a0/Howls-moving-castleposter.jpg/250px-Howls-moving-castleposter.jpg",
+    "runtime": "1h 59m",
+    "certificate": "PG",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  },
+  {
+    "title": "test",
+    "year": "2004",
+    "genres": [],
+    "description": "",
+    "rtRating": "69%",
+    "poster": "https://images.ctfassets.net/26961o1141cc/1BTQk1GQqG79cbAbGRQhct/59798dfa4ab56191bbb8de72e0da675d/thetulipcom.jpg?w=3000&h=1646&fm=webp&q=100",
+    "runtime": "0h 0m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "",
+      "disney": "",
+      "other": ["Check local services"]
+    }
+  }
+]
