@@ -9,10 +9,16 @@
     "runtime": "1h 56m",
     "certificate": "R",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Sky Go (included)",
+        "NOW Cinema (included)",
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -25,10 +31,14 @@
     "runtime": "1h 39m",
     "certificate": "PG-13",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -42,9 +52,9 @@
     "certificate": "R",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -57,10 +67,18 @@
     "runtime": "1h 59m",
     "certificate": "R",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Sky Go (included)",
+        "NOW Cinema (included)",
+        "ITVX Premium (included)",
+        "ITVX (free with ads)",
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -73,10 +91,16 @@
     "runtime": "2h 27m",
     "certificate": "R",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Sky Go (included)",
+        "NOW Cinema (included)",
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -89,10 +113,14 @@
     "runtime": "2h 4m",
     "certificate": "R",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -106,9 +134,13 @@
     "certificate": "R",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -122,9 +154,15 @@
     "certificate": "R",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": [
+        "Sky Go (included)",
+        "NOW Cinema (included)",
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -138,9 +176,9 @@
     "certificate": "TV-MA",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -154,9 +192,13 @@
     "certificate": "R",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -170,9 +212,13 @@
     "certificate": "R",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Add-on channel and purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -186,9 +232,13 @@
     "certificate": "R",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Add-on channel and purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -201,10 +251,10 @@
     "runtime": "1h 29m",
     "certificate": "Not Rated",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -217,10 +267,10 @@
     "runtime": "1h 43m",
     "certificate": "G",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -233,10 +283,10 @@
     "runtime": "1h 59m",
     "certificate": "PG",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -249,10 +299,10 @@
     "runtime": "2h 17m",
     "certificate": "PG",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -265,10 +315,10 @@
     "runtime": "2h 4m",
     "certificate": "PG-13",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -281,10 +331,10 @@
     "runtime": "1h 30m",
     "certificate": "Not Rated",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": ["Tubi TV (free with ads)"]
     }
   },
   {
@@ -297,10 +347,10 @@
     "runtime": "1h 15m",
     "certificate": "TV-MA",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -314,9 +364,15 @@
     "certificate": "R",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Sky Go (included)",
+        "NOW Cinema (included)",
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -329,10 +385,14 @@
     "runtime": "1h 52m",
     "certificate": "PG-13",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Included in subscription and purchase",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase)"
+      ]
     }
   },
   {
@@ -345,10 +405,14 @@
     "runtime": "1h 55m",
     "certificate": "PG-13",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Included in subscription and purchase",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase)"
+      ]
     }
   },
   {
@@ -362,9 +426,9 @@
     "certificate": "TV-MA",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -378,9 +442,9 @@
     "certificate": "TV-MA",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -394,9 +458,9 @@
     "certificate": "R",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Included in subscription and purchase",
+      "disney": "Not listed",
+      "other": ["Apple TV Store (purchase)", "Rakuten TV (purchase)"]
     }
   },
   {
@@ -410,9 +474,9 @@
     "certificate": "TV-MA",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -426,9 +490,9 @@
     "certificate": "TV-MA",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -442,9 +506,9 @@
     "certificate": "TV-MA",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -457,10 +521,10 @@
     "runtime": "1h 49m",
     "certificate": "PG-13",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Rakuten TV (purchase)"]
     }
   },
   {
@@ -474,9 +538,9 @@
     "certificate": "TV-14",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -489,10 +553,14 @@
     "runtime": "1h 49m",
     "certificate": "R",
     "availability": {
-      "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Not listed",
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -506,9 +574,12 @@
     "certificate": "R",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -522,9 +593,9 @@
     "certificate": "R",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": ["Apple TV Store (purchase / rental)", "Sky Store (purchase)"]
     }
   },
   {
@@ -538,9 +609,13 @@
     "certificate": "PG-13",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -554,9 +629,13 @@
     "certificate": "PG-13",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Purchase / rental",
+      "disney": "Included in subscription",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -570,9 +649,13 @@
     "certificate": "PG-13",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Purchase / rental",
+      "disney": "Included in subscription",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -586,9 +669,13 @@
     "certificate": "PG-13",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Purchase / rental",
+      "disney": "Included in subscription",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -602,9 +689,14 @@
     "certificate": "PG-13",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Included in subscription and purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "BBC iPlayer (free)",
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -618,9 +710,14 @@
     "certificate": "PG-13",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Included in subscription and purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "BBC iPlayer (free)",
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -634,9 +731,13 @@
     "certificate": "PG-13",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Included in subscription and purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -650,9 +751,13 @@
     "certificate": "PG-13",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -666,9 +771,15 @@
     "certificate": "R",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Add-on channel and purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Paramount Plus (included)",
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)",
+        "JustWatch TV (rental)"
+      ]
     }
   },
   {
@@ -682,9 +793,9 @@
     "certificate": "R",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -698,9 +809,9 @@
     "certificate": "TV-MA",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["BBC iPlayer (free)"]
     }
   },
   {
@@ -714,9 +825,9 @@
     "certificate": "TV-MA",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -730,9 +841,9 @@
     "certificate": "TV-MA",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -746,9 +857,9 @@
     "certificate": "TV-MA",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -762,9 +873,9 @@
     "certificate": "R",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -778,9 +889,13 @@
     "certificate": "PG-13",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Included in subscription and purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -793,10 +908,14 @@
     "runtime": "1h 53m",
     "certificate": "R",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)"
+      ]
     }
   },
   {
@@ -810,9 +929,9 @@
     "certificate": "R",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -826,9 +945,9 @@
     "certificate": "R",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -842,25 +961,25 @@
     "certificate": "TV-MA",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Sky Go (included)", "Channel 4 (free with ads)"]
     }
   },
   {
-    "title": "The Open House",
-    "year": "2018",
-    "genres": ["Horror", "Thriller"],
-    "description": "A mother and son move into a mountain house where unsettling events begin to escalate.",
-    "rtRating": "13%",
-    "poster": "https://pics.filmaffinity.com/the_open_house-284460184-large.jpg",
-    "runtime": "1h 34m",
+    "title": "Open House: The Great Sex Experiment",
+    "year": "2022",
+    "genres": ["Reality", "Documentary", "Romance"],
+    "description": "Committed couples come to a luxury retreat to explore whether opening up their relationships and having sex with other people can strengthen their bond.",
+    "rtRating": "",
+    "poster": "https://cdn.mos.cms.futurecdn.net/y5n56Y9tMyZ9VvdQ4LojuF.jpg",
+    "runtime": "47m",
     "certificate": "TV-MA",
     "availability": {
-      "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Not listed",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Channel 4 / All 4"]
     }
   },
   {
@@ -874,9 +993,14 @@
     "certificate": "R",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Add-on channel and purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)",
+        "BFI Player (rental)"
+      ]
     }
   },
   {
@@ -890,9 +1014,14 @@
     "certificate": "R",
     "availability": {
       "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "amazon": "Purchase / rental",
+      "disney": "Not listed",
+      "other": [
+        "Apple TV Store (purchase / rental)",
+        "Sky Store (purchase / rental)",
+        "Rakuten TV (purchase / rental)",
+        "BFI Player (rental)"
+      ]
     }
   },
   {
@@ -905,10 +1034,10 @@
     "runtime": "2h 5m",
     "certificate": "PG",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -921,10 +1050,10 @@
     "runtime": "1h 43m",
     "certificate": "G",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -937,10 +1066,10 @@
     "runtime": "1h 59m",
     "certificate": "PG",
     "availability": {
-      "netflix": "Not listed",
-      "amazon": "",
-      "disney": "",
-      "other": ["Check local services"]
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
     }
   },
   {
@@ -954,8 +1083,8 @@
     "certificate": "R",
     "availability": {
       "netflix": "Included in subscription",
-      "amazon": "",
-      "disney": "",
+      "amazon": "Not listed",
+      "disney": "Not listed",
       "other": ["Check local services"]
     }
   }
