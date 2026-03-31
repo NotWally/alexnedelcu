@@ -1,14 +1,15 @@
 const CONFIG = {
   PASSWORD: "T&A08!",
-  STORAGE_KEY: "natflix-watched-v4",
+  STORAGE_KEY: "natflix-watched-v5",
+  EASTER_EGG_KEY: "natflix-easter-eggs-v1",
   TOAST_MS: 2200,
+  TOTAL_EASTER_EGGS: 3,
   DEFAULT_POSTER: "https://dummyimage.com/600x900/2b2027/fff4fb&text=Poster",
   HERO_ROTATE_MS: 5500,
   HERO_PREVIEW_COUNT: 3,
   HERO_RECENT_LIMIT: 8,
   HERO_HISTORY_LIMIT: 18,
   SPLASH_MIN_MS: 1350,
-  SECRET_CLICK_COUNT: 3,
   GENRE_ORDER: [
     "Action",
     "Adventure",
@@ -30,20 +31,32 @@ const CONFIG = {
 const appState = {
   movies: [],
   selectedGenre: "All",
+  selectedRuntime: "All",
   searchQuery: "",
+  isSearchFocused: false,
   activeMovieId: null,
   heroActiveId: null,
   heroRecentIds: [],
   heroHistoryIds: [],
-  secretBrandClicks: 0,
+  heroQueue: [],
+  heroQueueKey: "",
+  heroActiveIndex: 0,
   pendingWatchMovieId: null,
-  watchedMap: loadWatchedMap()
+  watchedMap: loadWatchedMap(),
+  easterEggsFound: loadEasterEggMap()
 };
 
 const els = {
   searchInput: document.getElementById("searchInput"),
   genreFilter: document.getElementById("genreFilter"),
+  runtimeFilter: document.getElementById("runtimeFilter"),
+  brandTease: document.getElementById("brandTease"),
   quickFilters: document.getElementById("quickFilters"),
+  searchMode: document.getElementById("searchMode"),
+  searchModeEyebrow: document.getElementById("searchModeEyebrow"),
+  searchModeMessage: document.getElementById("searchModeMessage"),
+  searchModeSubtext: document.getElementById("searchModeSubtext"),
+  searchModeResults: document.getElementById("searchModeResults"),
   rowsContainer: document.getElementById("rowsContainer"),
   resultsSummary: document.getElementById("resultsSummary"),
   resetFiltersBtn: document.getElementById("resetFiltersBtn"),
@@ -54,6 +67,8 @@ const els = {
   closePasswordBtn: document.getElementById("closePasswordBtn"),
   watchForm: document.getElementById("watchForm"),
   watchPassword: document.getElementById("watchPassword"),
+  watchRating: document.getElementById("watchRating"),
+  watchRatingValue: document.getElementById("watchRatingValue"),
   toast: document.getElementById("toast"),
   heroSection: document.getElementById("heroSection"),
   heroEyebrow: document.getElementById("heroEyebrow"),
@@ -66,15 +81,28 @@ const els = {
   heroPosterBadge: document.getElementById("heroPosterBadge"),
   heroDetailsBtn: document.getElementById("heroDetailsBtn"),
   heroRandomBtn: document.getElementById("heroRandomBtn"),
-  heroTashaBtn: document.getElementById("heroTashaBtn"),
   heroPrevBtn: document.getElementById("heroPrevBtn"),
   heroNextBtn: document.getElementById("heroNextBtn"),
   heroMiniList: document.getElementById("heroMiniList"),
   heroMiniLabel: document.getElementById("heroMiniLabel"),
   splashScreen: document.getElementById("splashScreen"),
-  brandLogo: document.getElementById("brandLogo"),
-  brandPill: document.getElementById("brandPill"),
   footerMessage: document.getElementById("footerMessage"),
+  statsSection: document.getElementById("statsSection"),
+  statsTease: document.getElementById("statsTease"),
+  statsWatchTime: document.getElementById("statsWatchTime"),
+  statsWatchTimeMeta: document.getElementById("statsWatchTimeMeta"),
+  statsWatchedCount: document.getElementById("statsWatchedCount"),
+  statsWatchedMeta: document.getElementById("statsWatchedMeta"),
+  statsAverageTime: document.getElementById("statsAverageTime"),
+  statsAverageMeta: document.getElementById("statsAverageMeta"),
+  statsEggsFound: document.getElementById("statsEggsFound"),
+  statsEggMeta: document.getElementById("statsEggMeta"),
+  statsProgressValue: document.getElementById("statsProgressValue"),
+  statsProgressBar: document.getElementById("statsProgressBar"),
+  statsTopGenre: document.getElementById("statsTopGenre"),
+  statsTopGenreMeta: document.getElementById("statsTopGenreMeta"),
+  statsAverageRating: document.getElementById("statsAverageRating"),
+  statsAverageRatingMeta: document.getElementById("statsAverageRatingMeta"),
   heartBurst: document.getElementById("heartBurst"),
   secretNoteModal: document.getElementById("secretNoteModal"),
   closeSecretBtn: document.getElementById("closeSecretBtn"),
@@ -83,29 +111,17 @@ const els = {
 };
 
 let heroRotationTimer = null;
-let brandClickTimer = null;
+let heroRefreshTimer = null;
+let revealObserver = null;
 
 const SECRET_NOTES = [
-  {
-    title: "For you",
-    body: "I made this for you because I wanted our movie nights to feel like their own little world."
-  },
-  {
-    title: "A small truth",
-    body: "No matter what we end up watching, you always make the night better."
-  },
-  {
-    title: "In case you found this",
-    body: "I hid little things in here for you because making you smile felt like a good enough reason."
-  },
-  {
-    title: "One more thing",
-    body: "If this feels cosy or a bit romantic, that is me trying to build something that feels like us."
-  },
-  {
-    title: "Just so you know",
-    body: "Even with all these films, you are still the reason this feels fun."
-  }
+  { title: "For you", body: "I made this for you because I wanted our movie nights to feel like their own little world." },
+  { title: "A small truth", body: "No matter what we end up watching, you always make the night better." },
+  { title: "In case you found this", body: "I hid little things in here for you because making you smile felt like a good enough reason." },
+  { title: "One more thing", body: "If this feels cosy or a bit romantic, that is me trying to build something that feels like us." },
+  { title: "Just so you know", body: "Even with all these films, you are still the reason this feels fun." },
+  { title: "A quiet admission", body: "I wanted this to feel thoughtful without making a big deal out of it." },
+  { title: "Tiny design note", body: "If anything here feels a bit too specific, that is because I absolutely did it on purpose." }
 ];
 
 const SWEET_TOASTS = [
@@ -122,6 +138,57 @@ const SEARCH_EGGS = {
   }
 };
 
+const BRAND_TEASES = [
+  "I had a feeling you’d end up here.",
+  "I still think you’d make the better pick.",
+  "I made this so our indecisive nights feel a bit more fun.",
+  "If this feels a bit too tailored, that was absolutely the idea.",
+  "I was aiming for somewhere between useful and suspiciously thoughtful.",
+  "I wanted this to feel like a little place with your name on it."
+];
+
+const STATS_TEASES = [
+  "I wanted this bit to feel like a tiny archive of our movie nights.",
+  "This is basically me keeping score of our very serious viewing career.",
+  "I liked the idea of this remembering the nights we actually watched something.",
+  "This part is just me being sentimental with better styling.",
+  "It felt right to let the site remember the good nights too.",
+  "I wanted the numbers to feel a little more like memories."
+];
+
+const SEARCH_TEASES = {
+  empty: "Start typing a film title and I’ll try not to make my favourites too obvious.",
+  none: "I don’t think I’ve added that one yet.",
+};
+
+const HERO_TEASES = [
+  "I’m still quietly hoping you’ll pick a good one.",
+  "I made this to feel like our own little cinema.",
+  "This is nicer when you’re the one choosing.",
+  "I like this most when it feels easy for you to use.",
+  "I wanted the front page to feel a bit cinematic, but still ours."
+];
+
+const SEARCH_NOTE_VARIANTS = [
+  { title: "Hi Tasha", body: "If you found this by typing your name, that makes me very happy. I put this here just for you." },
+  { title: "That one was hidden", body: "I liked the idea of you finding at least one thing in here that was only ever meant for you." },
+  { title: "You found it", body: "I wasn’t going to make this obvious. It feels nicer when you stumble into it." }
+];
+
+const FOOTER_SECRET_NOTES = [
+  { title: "One more thing", body: "The footer says I made this for you, but the real part is that I wanted this to make you smile every time you opened it." },
+  { title: "A small extra", body: "I thought it would be nice if even the quietest part of the page still had something waiting for you." },
+  { title: "Down here too", body: "It felt wrong to leave the footer plain when I could hide something small for you in it." }
+];
+
+const T_KEY_NOTES = [
+  { title: "You pressed T", body: "That one really is just for you." },
+  { title: "A tiny shortcut", body: "I left this here because I liked the idea that some parts of the site only reveal themselves if you know where to look." },
+  { title: "That key works", body: "I know this is a bit ridiculous, but I still liked adding one secret little shortcut for you." }
+];
+
+
+
 // duplicate removed
 
 
@@ -135,6 +202,7 @@ async function init() {
   try {
     bindUI();
     await loadMovies();
+    setTeasingCopy();
     populateGenreFilter();
     renderQuickFilters();
     render();
@@ -143,6 +211,9 @@ async function init() {
   } finally {
     await splashDelay;
     hideSplash();
+    document.body.classList.add("app-ready");
+    setupRevealObserver();
+    revealStaticSections();
   }
 }
 
@@ -192,32 +263,237 @@ function closeSecretNote() {
   maybeUnlockBody();
 }
 
-function revealFooterMessage() {
-  if (!els.footerMessage) return;
-  const original = "Made by Alex for Tasha… and a few secrets";
-  els.footerMessage.textContent = "P.S. I still think you make this better.";
-  launchHeartBurst(10);
-  clearTimeout(revealFooterMessage._timer);
-  revealFooterMessage._timer = window.setTimeout(() => {
-    els.footerMessage.textContent = original;
-  }, 3600);
-}
-
 function maybeTriggerSearchEgg(query) {
   const normalized = String(query || "").trim().toLowerCase();
   if (!normalized) return false;
 
-  const egg = SEARCH_EGGS[normalized];
+  const egg = normalized === "tasha" ? getRandomItem(SEARCH_NOTE_VARIANTS) : SEARCH_EGGS[normalized];
   if (!egg) return false;
 
+  unlockEasterEgg("search_tasha");
   openSecretNote(egg);
   launchHeartBurst(12);
   showToast("I left that one there for you.");
   return true;
 }
 
+
+function setTeasingCopy() {
+  if (els.brandTease) {
+    els.brandTease.textContent = getRandomItem(BRAND_TEASES);
+  }
+
+  if (els.statsTease) {
+    els.statsTease.textContent = getRandomItem(STATS_TEASES);
+  }
+}
+
+function loadEasterEggMap() {
+  try {
+    const raw = localStorage.getItem(CONFIG.EASTER_EGG_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch (error) {
+    console.error("Could not read easter eggs.", error);
+    return {};
+  }
+}
+
+function saveEasterEggMap() {
+  try {
+    localStorage.setItem(CONFIG.EASTER_EGG_KEY, JSON.stringify(appState.easterEggsFound));
+  } catch (error) {
+    console.error("Could not save easter eggs.", error);
+  }
+}
+
+function unlockEasterEgg(id) {
+  if (!id || appState.easterEggsFound[id]) return false;
+  appState.easterEggsFound[id] = new Date().toISOString();
+  saveEasterEggMap();
+  renderStats();
+  return true;
+}
+
+function parseRuntimeToMinutes(runtimeText) {
+  const text = String(runtimeText || "").toLowerCase();
+  const hoursMatch = text.match(/(\d+)\s*h/);
+  const minutesMatch = text.match(/(\d+)\s*m/);
+  const hours = hoursMatch ? Number(hoursMatch[1]) : 0;
+  const minutes = minutesMatch ? Number(minutesMatch[1]) : 0;
+  return (hours * 60) + minutes;
+}
+
+function formatMinutes(totalMinutes) {
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  return `${hours}h ${minutes}m`;
+}
+
+function formatAverageWatchTimeFromMovies(watchedMovies) {
+  if (!watchedMovies.length) return "—";
+
+  const averageMinutes = Math.round(
+    watchedMovies.reduce((sum, movie) => {
+      const watchedAt = appState.watchedMap[movie.id]?.watchedAt;
+      if (!watchedAt) return sum;
+
+      const watchedDate = new Date(watchedAt);
+      const runtimeMinutes = parseRuntimeToMinutes(movie.runtime);
+      const estimatedStart = new Date(watchedDate.getTime() - (runtimeMinutes * 60 * 1000));
+
+      return sum + (estimatedStart.getHours() * 60) + estimatedStart.getMinutes();
+    }, 0) / watchedMovies.length
+  );
+
+  const hours24 = ((Math.floor(averageMinutes / 60) % 24) + 24) % 24;
+  const minutes = ((averageMinutes % 60) + 60) % 60;
+  const suffix = hours24 >= 12 ? "pm" : "am";
+  const hours12 = ((hours24 + 11) % 12) + 1;
+  return `${hours12}:${String(minutes).padStart(2, "0")} ${suffix}`;
+}
+
+function renderStats() {
+  if (!els.statsWatchTime) return;
+
+  const watchedMovies = appState.movies.filter((movie) => appState.watchedMap[movie.id]);
+  const watchedCount = watchedMovies.length;
+  const totalRuntimeMinutes = watchedMovies.reduce((sum, movie) => sum + parseRuntimeToMinutes(movie.runtime), 0);
+  const completionPercent = appState.movies.length ? Math.round((watchedCount / appState.movies.length) * 100) : 0;
+  const topGenre = getTopWatchedGenre(watchedMovies);
+  const averageRating = getAverageRating(watchedMovies);
+
+  els.statsWatchTime.textContent = watchedCount ? formatMinutes(totalRuntimeMinutes) : "0h 0m";
+  els.statsWatchedCount.textContent = `${watchedCount} / ${appState.movies.length}`;
+  els.statsAverageTime.textContent = formatAverageWatchTimeFromMovies(watchedMovies);
+  els.statsEggsFound.textContent = `${Object.keys(appState.easterEggsFound || {}).length} / ${CONFIG.TOTAL_EASTER_EGGS}`;
+
+  if (els.statsWatchTimeMeta) {
+    els.statsWatchTimeMeta.textContent = watchedCount
+      ? `${Math.round(totalRuntimeMinutes / Math.max(watchedCount, 1))} mins per pick on average.`
+      : "Built from everything you’ve marked watched.";
+  }
+
+  if (els.statsWatchedMeta) {
+    els.statsWatchedMeta.textContent = watchedCount
+      ? `${completionPercent}% of the list has been watched.`
+      : "A running total of your shared watch list.";
+  }
+
+  if (els.statsAverageMeta) {
+    els.statsAverageMeta.textContent = watchedCount
+      ? "Estimated from when you marked it watched minus runtime."
+      : "This starts filling in once you log a few watches.";
+  }
+
+  if (els.statsEggMeta) {
+    els.statsEggMeta.textContent = Object.keys(appState.easterEggsFound || {}).length < CONFIG.TOTAL_EASTER_EGGS
+      ? "There are still a few little things hiding."
+      : "You found all the hidden bits.";
+  }
+
+  if (els.statsProgressValue) {
+    els.statsProgressValue.textContent = `${completionPercent}%`;
+  }
+
+  if (els.statsProgressBar) {
+    els.statsProgressBar.style.width = `${completionPercent}%`;
+  }
+
+  if (els.statsTopGenre) {
+    els.statsTopGenre.textContent = topGenre.genre;
+  }
+
+  if (els.statsTopGenreMeta) {
+    els.statsTopGenreMeta.textContent = topGenre.count
+      ? `${topGenre.count} watched title${topGenre.count === 1 ? "" : "s"} have landed there so far.`
+      : "Once you start watching, this will figure itself out.";
+  }
+
+  if (els.statsAverageRating) {
+    els.statsAverageRating.textContent = averageRating ? `${averageRating.toFixed(1)} / 10` : "—";
+  }
+
+  if (els.statsAverageRatingMeta) {
+    els.statsAverageRatingMeta.textContent = averageRating
+      ? "A quiet little average of everything you’ve rated."
+      : "Your ratings will start shaping this.";
+  }
+}
+
+
+function setupRevealObserver() {
+  if (revealObserver) return;
+
+  revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealStaticSections();
+}
+
+function revealStaticSections() {
+  if (!revealObserver) return;
+  document.querySelectorAll(".hero, .genre-row, .stats-section").forEach((node) => {
+    revealObserver.observe(node);
+  });
+}
+
+function pulseStatsSection() {
+  if (!els.statsSection) return;
+  els.statsSection.classList.remove("is-pulsing");
+  requestAnimationFrame(() => {
+    els.statsSection.classList.add("is-pulsing");
+  });
+}
+
+function getTopWatchedGenre(watchedMovies) {
+  if (!watchedMovies.length) return { genre: "—", count: 0 };
+  const counts = new Map();
+  watchedMovies.forEach((movie) => {
+    counts.set(movie.primaryGenre, (counts.get(movie.primaryGenre) || 0) + 1);
+  });
+  const [genre, count] = [...counts.entries()].sort((a, b) => b[1] - a[1])[0];
+  return { genre, count };
+}
+
+function getAverageRating(watchedMovies) {
+  const ratings = watchedMovies
+    .map((movie) => Number(appState.watchedMap[movie.id]?.rating))
+    .filter((rating) => Number.isFinite(rating));
+
+  if (!ratings.length) return null;
+  return ratings.reduce((sum, value) => sum + value, 0) / ratings.length;
+}
+
+
+function updateRatingSliderVisual() {
+  if (!els.watchRating) return;
+  const min = Number(els.watchRating.min || 1);
+  const max = Number(els.watchRating.max || 10);
+  const value = Number(els.watchRating.value || 7);
+  const percent = ((value - min) / (max - min)) * 100;
+  els.watchRating.style.background = `linear-gradient(90deg, rgba(255,92,117,0.98) 0%, rgba(244,210,105,0.98) ${percent}%, rgba(255,255,255,0.10) ${percent}%, rgba(255,255,255,0.10) 100%)`;
+  els.watchRatingValue.textContent = `${value}/10`;
+}
+
 function bindUI() {
   let searchDebounce;
+
+  els.searchInput.addEventListener("focus", () => {
+    appState.isSearchFocused = true;
+    render();
+  });
+
+  els.searchInput.addEventListener("blur", () => {
+    window.setTimeout(() => {
+      appState.isSearchFocused = false;
+      render();
+    }, 20);
+  });
 
   els.searchInput.addEventListener("input", () => {
     clearTimeout(searchDebounce);
@@ -227,6 +503,7 @@ function bindUI() {
       if (maybeTriggerSearchEgg(attemptedQuery)) {
         appState.searchQuery = "";
         els.searchInput.value = "";
+        appState.isSearchFocused = false;
         render();
         return;
       }
@@ -242,6 +519,13 @@ function bindUI() {
     render();
   });
 
+  els.runtimeFilter.addEventListener("change", () => {
+    appState.selectedRuntime = els.runtimeFilter.value;
+    render();
+  });
+
+  els.watchRating.addEventListener("input", updateRatingSliderVisual);
+
   els.quickFilters.addEventListener("click", (event) => {
     const button = event.target.closest("[data-genre-chip]");
     if (!button) return;
@@ -254,65 +538,21 @@ function bindUI() {
 
   els.resetFiltersBtn.addEventListener("click", () => {
     appState.searchQuery = "";
+    appState.isSearchFocused = false;
     appState.selectedGenre = "All";
+    appState.selectedRuntime = "All";
     els.searchInput.value = "";
     els.genreFilter.value = "All";
+    els.runtimeFilter.value = "All";
     renderQuickFilters();
     render();
   });
 
-  els.brandLogo.addEventListener("click", () => {
-    appState.secretBrandClicks += 1;
-    clearTimeout(brandClickTimer);
-    brandClickTimer = window.setTimeout(() => {
-      appState.secretBrandClicks = 0;
-    }, 1500);
-
-    if (appState.secretBrandClicks >= CONFIG.SECRET_CLICK_COUNT) {
-      appState.secretBrandClicks = 0;
-      openSecretNote({
-        title: "You found one",
-        body: "I hid this in the logo because I liked the idea of you discovering it by accident."
-      });
-      launchHeartBurst(16);
-      showToast("I left a secret there for you.");
-    }
-  });
-
-  els.brandLogo.addEventListener("dblclick", () => {
-    openSecretNote({
-      title: "For Tasha",
-      body: "I made this site to feel like a little place that belongs to us."
-    });
-    launchHeartBurst(12);
-  });
-
-  els.brandPill.addEventListener("click", () => {
-    openSecretNote({
-      title: "Movie night",
-      body: "I wanted this to feel like our own tiny cinema, except softer and a bit more us."
-    });
+  els.footerMessage.addEventListener("click", () => {
+    unlockEasterEgg("footer");
+    openSecretNote(getRandomItem(FOOTER_SECRET_NOTES));
     launchHeartBurst(10);
   });
-
-  if (els.heroTashaBtn) {
-    els.heroTashaBtn.addEventListener("click", () => {
-      openSecretNote({
-        title: "For Tasha",
-        body: "If I could add one thing to every film on here, it would be the fact that I get to watch them with you."
-      });
-      launchHeartBurst(14);
-    });
-  }
-
-  els.footerMessage.addEventListener("click", () => {
-    openSecretNote({
-      title: "One more thing",
-      body: "The footer says I made this for you, but the real part is that I wanted this to make you smile every time you opened it."
-    });
-  });
-
-  els.footerMessage.addEventListener("dblclick", revealFooterMessage);
 
   if (els.closeSecretBtn) els.closeSecretBtn.addEventListener("click", closeSecretNote);
 
@@ -331,7 +571,7 @@ function bindUI() {
   els.heroMiniList.addEventListener("click", (event) => {
     const button = event.target.closest("[data-hero-pick]");
     if (!button) return;
-    setHeroMovie(button.dataset.heroPick, { announce: true });
+    setHeroById(button.dataset.heroPick, { announce: true });
   });
 
   els.closeDetailsBtn.addEventListener("click", closeDetailsModal);
@@ -385,10 +625,12 @@ function bindUI() {
       return;
     }
 
-    markMovieWatched(appState.pendingWatchMovieId);
+    markMovieWatched(appState.pendingWatchMovieId, Number(els.watchRating.value));
     closePasswordModal();
     closeDetailsModal();
     render();
+    pulseStatsSection();
+    launchHeartBurst(12);
     showToast(getRandomItem(SWEET_TOASTS));
   });
 
@@ -402,11 +644,9 @@ function bindUI() {
     const activeTag = document.activeElement?.tagName || "";
     const typingIntoField = ["INPUT", "TEXTAREA"].includes(activeTag);
 
-    if ((event.altKey && event.key.toLowerCase() === "t") || (!typingIntoField && event.key.toLowerCase() === "t")) {
-      openSecretNote({
-        title: "You pressed T",
-        body: "That one really is just for you."
-      });
+    if (!typingIntoField && event.key.toLowerCase() === "t") {
+      unlockEasterEgg("press_t");
+      openSecretNote(getRandomItem(T_KEY_NOTES));
       launchHeartBurst(10);
     }
   });
@@ -449,6 +689,7 @@ function normalizeMovie(movie) {
     rtRating: movie.rtRating || "N/A",
     poster: movie.poster || CONFIG.DEFAULT_POSTER,
     runtime: movie.runtime || "Runtime not added",
+    runtimeMinutes: parseRuntimeToMinutes(movie.runtime || ""),
     certificate: movie.certificate || "Certificate not added",
     availability: normalizeAvailability(movie.availability)
   };
@@ -504,25 +745,96 @@ function renderQuickFilters() {
   `).join("");
 }
 
+function matchesRuntimeFilter(movie) {
+  const minutes = movie.runtimeMinutes || parseRuntimeToMinutes(movie.runtime);
+
+  switch (appState.selectedRuntime) {
+    case "under60":
+      return minutes < 60;
+    case "under90":
+      return minutes < 90;
+    case "under120":
+      return minutes < 120;
+    case "120plus":
+      return minutes >= 120;
+    default:
+      return true;
+  }
+}
+
 function getFilteredMovies() {
   const query = appState.searchQuery.toLowerCase().trim();
 
   return appState.movies.filter((movie) => {
     const matchesGenre = appState.selectedGenre === "All" || movie.primaryGenre === appState.selectedGenre;
-    const matchesQuery = !query ||
-      movie.title.toLowerCase().includes(query) ||
-      movie.description.toLowerCase().includes(query) ||
-      movie.genres.some((genre) => genre.toLowerCase().includes(query));
+    const matchesRuntime = matchesRuntimeFilter(movie);
+    const matchesQuery = !query || movie.title.toLowerCase().includes(query);
 
-    return matchesGenre && matchesQuery;
+    return matchesGenre && matchesRuntime && matchesQuery;
   });
+}
+
+function isSearchModeActive() {
+  return appState.isSearchFocused || Boolean(appState.searchQuery.trim());
+}
+
+function renderSearchMode(filtered) {
+  const active = isSearchModeActive();
+  document.body.classList.toggle("search-active", active);
+  els.searchMode.classList.toggle("hidden", !active);
+
+  if (!active) {
+    document.body.classList.remove("search-has-results");
+    return;
+  }
+
+  const query = appState.searchQuery.trim();
+
+  if (!query) {
+    document.body.classList.remove("search-has-results");
+    els.searchMode.classList.add("is-empty");
+    els.searchMode.classList.remove("has-results");
+    els.searchModeEyebrow.textContent = "Search";
+    els.searchModeMessage.textContent = "What’s the next watch?";
+    els.searchModeSubtext.textContent = SEARCH_TEASES.empty;
+    els.searchModeResults.innerHTML = "";
+    return;
+  }
+
+  if (!filtered.length) {
+    document.body.classList.remove("search-has-results");
+    els.searchMode.classList.add("is-empty");
+    els.searchMode.classList.remove("has-results");
+    els.searchModeEyebrow.textContent = "Search";
+    els.searchModeMessage.textContent = `No results for “${query}”`;
+    els.searchModeSubtext.textContent = SEARCH_TEASES.none;
+    els.searchModeResults.innerHTML = "";
+    return;
+  }
+
+  document.body.classList.add("search-has-results");
+  els.searchMode.classList.remove("is-empty");
+  els.searchMode.classList.add("has-results");
+  els.searchModeEyebrow.textContent = "";
+  els.searchModeMessage.textContent = "";
+  els.searchModeSubtext.textContent = "";
+  els.searchModeResults.innerHTML = filtered.map((movie, index) => renderMovieCard(movie, index)).join("");
 }
 
 function render() {
   const filtered = getFilteredMovies();
+  renderStats();
+  renderSearchMode(filtered);
+
+  if (isSearchModeActive()) {
+    revealStaticSections();
+    return;
+  }
+
   renderSummary(filtered);
   renderHero(filtered);
   renderRows(filtered);
+  revealStaticSections();
 }
 
 function renderSummary(filtered) {
@@ -534,6 +846,7 @@ function renderSummary(filtered) {
     els.resultsSummary.textContent = `${filtered.length} film${filtered.length === 1 ? "" : "s"} in ${genreText}.`;
   }
 }
+
 
 function getHeroCandidates(filtered) {
   const hasScopedView = Boolean(appState.searchQuery.trim()) || appState.selectedGenre !== "All";
@@ -551,74 +864,58 @@ function shuffleArray(items) {
   return clone;
 }
 
-function getRecentHeroIds(candidates, limit = CONFIG.HERO_RECENT_LIMIT) {
-  const candidateIds = new Set(candidates.map((movie) => movie.id));
-  return appState.heroRecentIds.filter((id) => candidateIds.has(id)).slice(0, limit);
+function buildHeroQueue(candidates) {
+  const candidateIds = candidates.map((movie) => movie.id);
+  const queueKey = candidateIds.join("|");
+  const existing = appState.heroQueue.filter((id) => candidateIds.includes(id));
+  const missing = shuffleArray(candidateIds.filter((id) => !existing.includes(id)));
+  const queue = [...existing, ...missing];
+  const currentId = appState.heroQueue[appState.heroActiveIndex] || appState.heroActiveId;
+  const nextActiveIndex = Math.max(queue.indexOf(currentId), 0);
+
+  appState.heroQueue = queue;
+  appState.heroQueueKey = queueKey;
+  appState.heroActiveIndex = nextActiveIndex;
+  appState.heroActiveId = queue[nextActiveIndex] || null;
 }
 
-function rememberHero(id, { addToHistory = true } = {}) {
-  if (!id) return;
-
-  appState.heroRecentIds = [id, ...appState.heroRecentIds.filter((item) => item !== id)]
-    .slice(0, CONFIG.HERO_RECENT_LIMIT);
-
-  if (!addToHistory) return;
-
-  appState.heroHistoryIds = [...appState.heroHistoryIds, id]
-    .slice(-CONFIG.HERO_HISTORY_LIMIT);
-}
-
-function chooseRandomHero(candidates, { excludeId = null, avoidRecent = true } = {}) {
-  if (!candidates.length) return null;
-
-  let pool = candidates.filter((movie) => movie.id !== excludeId);
-
-  if (!pool.length) {
-    pool = [...candidates];
+function ensureHeroQueue(candidates) {
+  const nextKey = candidates.map((movie) => movie.id).join("|");
+  if (!candidates.length) {
+    appState.heroQueue = [];
+    appState.heroQueueKey = "";
+    appState.heroActiveIndex = 0;
+    appState.heroActiveId = null;
+    return;
   }
 
-  if (avoidRecent && pool.length > 2) {
-    const recent = new Set(
-      getRecentHeroIds(
-        candidates,
-        Math.min(CONFIG.HERO_RECENT_LIMIT, Math.max(1, pool.length - 1))
-      )
-    );
-    const freshPool = pool.filter((movie) => !recent.has(movie.id));
-    if (freshPool.length) {
-      pool = freshPool;
-    }
-  }
-
-  return shuffleArray(pool)[0] || null;
-}
-
-function setHeroMovie(movieId, { restart = true, addToHistory = true, announce = false } = {}) {
-  const movie = appState.movies.find((item) => item.id === movieId);
-  if (!movie) return;
-
-  appState.heroActiveId = movie.id;
-  rememberHero(movie.id, { addToHistory });
-  renderHero(getFilteredMovies(), restart);
-
-  if (announce) {
-    showToast(`Now featuring: ${movie.title}`);
+  if (appState.heroQueueKey !== nextKey) {
+    buildHeroQueue(candidates);
+  } else if (!appState.heroQueue.length) {
+    buildHeroQueue(candidates);
+  } else {
+    appState.heroActiveId = appState.heroQueue[appState.heroActiveIndex] || candidates[0].id;
   }
 }
 
 function getActiveHeroMovie(candidates) {
+  ensureHeroQueue(candidates);
   if (!candidates.length) return null;
+  const activeId = appState.heroQueue[appState.heroActiveIndex] || candidates[0].id;
+  appState.heroActiveId = activeId;
+  return candidates.find((movie) => movie.id === activeId) || candidates[0];
+}
 
-  const existing = candidates.find((movie) => movie.id === appState.heroActiveId);
-  if (existing) {
-    rememberHero(existing.id, { addToHistory: false });
-    return existing;
+function setHeroById(movieId, { restart = true, announce = false } = {}) {
+  const index = appState.heroQueue.indexOf(movieId);
+  if (index === -1) return;
+  appState.heroActiveIndex = index;
+  appState.heroActiveId = movieId;
+  renderHero(getFilteredMovies(), restart, true);
+  if (announce) {
+    const movie = appState.movies.find((item) => item.id === movieId);
+    if (movie) showToast(`Now featuring: ${movie.title}`);
   }
-
-  const picked = chooseRandomHero(candidates, { avoidRecent: true }) || candidates[0];
-  appState.heroActiveId = picked.id;
-  rememberHero(picked.id, { addToHistory: false });
-  return picked;
 }
 
 function restartHeroRotation(candidates) {
@@ -634,44 +931,24 @@ function restartHeroRotation(candidates) {
 
 function shiftHero(direction, restart = true) {
   const candidates = getHeroCandidates(getFilteredMovies());
+  ensureHeroQueue(candidates);
   if (!candidates.length) return;
 
-  if (direction < 0) {
-    const currentId = appState.heroActiveId;
-    const validHistory = appState.heroHistoryIds
-      .filter((id) => id !== currentId)
-      .filter((id) => candidates.some((movie) => movie.id === id));
-
-    const previousId = validHistory.length ? validHistory[validHistory.length - 1] : null;
-
-    if (previousId) {
-      const lastIndex = appState.heroHistoryIds.lastIndexOf(previousId);
-      if (lastIndex >= 0) {
-        appState.heroHistoryIds.splice(lastIndex, 1);
-      }
-      setHeroMovie(previousId, { restart, addToHistory: false });
-      return;
-    }
-  }
-
-  const nextMovie =
-    chooseRandomHero(candidates, { excludeId: appState.heroActiveId, avoidRecent: true }) ||
-    chooseRandomHero(candidates, { excludeId: appState.heroActiveId, avoidRecent: false }) ||
-    candidates[0];
-
-  setHeroMovie(nextMovie.id, { restart, addToHistory: true });
+  const queueLength = appState.heroQueue.length;
+  appState.heroActiveIndex = (appState.heroActiveIndex + direction + queueLength) % queueLength;
+  appState.heroActiveId = appState.heroQueue[appState.heroActiveIndex];
+  renderHero(getFilteredMovies(), restart, true);
 }
 
 function pickRandomHero() {
   const candidates = getHeroCandidates(getFilteredMovies());
+  ensureHeroQueue(candidates);
   if (!candidates.length) return;
 
-  const choice =
-    chooseRandomHero(candidates, { excludeId: appState.heroActiveId, avoidRecent: true }) ||
-    chooseRandomHero(candidates, { excludeId: appState.heroActiveId, avoidRecent: false }) ||
-    candidates[0];
-
-  setHeroMovie(choice.id, { announce: true });
+  const currentId = appState.heroQueue[appState.heroActiveIndex];
+  const alternatives = appState.heroQueue.filter((id) => id !== currentId);
+  const nextId = shuffleArray(alternatives.length ? alternatives : appState.heroQueue)[0];
+  setHeroById(nextId, { announce: true });
 }
 
 function getHeroAvailabilityLabel(availability) {
@@ -683,23 +960,65 @@ function getHeroAvailabilityLabel(availability) {
   return other || "Watch info soon";
 }
 
-function renderHero(filtered, restartRotation = true) {
+function triggerHeroRefresh(applyUpdate) {
+  clearTimeout(heroRefreshTimer);
+  els.heroSection.classList.remove("is-transitioning-in");
+  els.heroSection.classList.add("is-transitioning-out");
+
+  heroRefreshTimer = window.setTimeout(() => {
+    applyUpdate();
+
+    requestAnimationFrame(() => {
+      els.heroSection.classList.remove("is-transitioning-out");
+      els.heroSection.classList.add("is-transitioning-in");
+
+      clearTimeout(heroRefreshTimer);
+      heroRefreshTimer = window.setTimeout(() => {
+        els.heroSection.classList.remove("is-transitioning-in");
+      }, 240);
+    });
+  }, 150);
+}
+
+function applyHeroState(state) {
+  els.heroSection.style.setProperty("--hero-image", state.heroImage);
+  els.heroEyebrow.textContent = state.eyebrow;
+  els.heroTitle.textContent = state.title;
+  els.heroText.textContent = state.text;
+  els.heroPoster.src = state.poster;
+  els.heroPoster.alt = state.posterAlt;
+  els.heroPosterBadge.textContent = state.posterBadge;
+  els.heroMeta.innerHTML = state.metaHtml;
+  els.heroSubline.textContent = state.subline;
+  els.heroMiniLabel.textContent = state.miniLabel;
+  els.heroMiniList.innerHTML = state.miniHtml;
+}
+
+function renderHero(filtered, restartRotation = true, animate = false) {
   const candidates = getHeroCandidates(filtered);
   const featured = getActiveHeroMovie(candidates);
 
   if (!featured) {
     clearInterval(heroRotationTimer);
-    els.heroSection.style.setProperty("--hero-image", "none");
-    els.heroEyebrow.textContent = "Tonight's pick";
-    els.heroTitle.textContent = "Nothing to see here yet.";
-    els.heroText.textContent = "Add a few films to films.json and they’ll appear here.";
-    els.heroMeta.innerHTML = "";
-    els.heroSubline.textContent = "";
-    els.heroMiniLabel.textContent = "Add a few films";
-    els.heroMiniList.innerHTML = `<div class="hero-empty-note">Nothing to choose from yet.</div>`;
-    els.heroPoster.src = CONFIG.DEFAULT_POSTER;
-    els.heroPoster.alt = "No film selected";
-    els.heroPosterBadge.textContent = "Waiting for picks";
+    const emptyState = {
+      heroImage: "none",
+      eyebrow: "Tonight's pick",
+      title: "Nothing to see here yet.",
+      text: "Add a few films to films.json and they’ll appear here.",
+      poster: CONFIG.DEFAULT_POSTER,
+      posterAlt: "No film selected",
+      posterBadge: "Waiting for picks",
+      metaHtml: "",
+      subline: "",
+      miniLabel: "",
+      miniHtml: `<div class="hero-empty-note">Nothing to choose from yet.</div>`
+    };
+
+    if (animate) {
+      triggerHeroRefresh(() => applyHeroState(emptyState));
+    } else {
+      applyHeroState(emptyState);
+    }
     return;
   }
 
@@ -707,41 +1026,38 @@ function renderHero(filtered, restartRotation = true) {
   const unwatchedInView = filtered.filter((movie) => !appState.watchedMap[movie.id]).length;
   const unwatchedOverall = appState.movies.filter((movie) => !appState.watchedMap[movie.id]).length;
   const rewatchMode = candidates.every((movie) => appState.watchedMap[movie.id]);
-  const previewPool = candidates.filter((movie) => movie.id !== featured.id);
-  const recentPreviewIds = new Set(getRecentHeroIds(candidates, Math.ceil(CONFIG.HERO_RECENT_LIMIT / 2)));
-  const fresherPreviewPool = previewPool.filter((movie) => !recentPreviewIds.has(movie.id));
-  const previewSource = fresherPreviewPool.length >= CONFIG.HERO_PREVIEW_COUNT ? fresherPreviewPool : previewPool;
-  const preview = shuffleArray(previewSource).slice(0, CONFIG.HERO_PREVIEW_COUNT);
+  const queue = appState.heroQueue.length ? appState.heroQueue : candidates.map((movie) => movie.id);
 
-  els.heroSection.style.setProperty("--hero-image", `url("${featured.poster}")`);
-  els.heroEyebrow.textContent = rewatchMode ? "Rewatch pick" : "Tonight's pick";
-  els.heroTitle.textContent = featured.title;
-  els.heroText.textContent = featured.description;
-  els.heroPoster.src = featured.poster;
-  els.heroPoster.alt = `${featured.title} poster`;
-  els.heroPosterBadge.textContent = appState.watchedMap[featured.id] ? "Watched" : "Unwatched";
+  const previewIds = [];
+  for (let step = 1; step < queue.length && previewIds.length < CONFIG.HERO_PREVIEW_COUNT; step += 1) {
+    const index = (appState.heroActiveIndex + step) % queue.length;
+    previewIds.push(queue[index]);
+  }
 
-  els.heroMeta.innerHTML = [
-    featured.primaryGenre,
-    featured.runtime,
-    `🍅 ${featured.rtRating}`,
-    getHeroAvailabilityLabel(featured.availability)
-  ].map((value) => `<span class="hero-meta-chip">${escapeHtml(value)}</span>`).join("");
+  const preview = previewIds
+    .map((id) => candidates.find((movie) => movie.id === id))
+    .filter(Boolean);
 
-  const hiddenHeroLine = getRandomItem([
-    "I made this little corner of the internet for you.",
-    "I’m quietly rooting for a very good movie night for us.",
-    "I wanted this to feel like our own small thing."
-  ]);
-
-  els.heroSubline.textContent = scoped
-    ? `${unwatchedInView} unwatched in this view. ${hiddenHeroLine}`
-    : `${unwatchedOverall} still left to watch. ${hiddenHeroLine}`;
-
-  els.heroMiniLabel.textContent = rewatchMode ? "Everything here is watched" : "Tap a card to swap";
-
-  els.heroMiniList.innerHTML = preview.length
-    ? preview.map((movie) => `
+  const nextState = {
+    heroImage: `url("${featured.poster}")`,
+    eyebrow: rewatchMode ? "Rewatch pick" : "Tonight's pick",
+    title: featured.title,
+    text: featured.description,
+    poster: featured.poster,
+    posterAlt: `${featured.title} poster`,
+    posterBadge: appState.watchedMap[featured.id] ? "Watched" : "Unwatched",
+    metaHtml: [
+      featured.primaryGenre,
+      featured.runtime,
+      `🍅 ${featured.rtRating}`,
+      getHeroAvailabilityLabel(featured.availability)
+    ].map((value) => `<span class="hero-meta-chip">${escapeHtml(value)}</span>`).join(""),
+    subline: scoped
+      ? `${unwatchedInView} unwatched in this view. ${getRandomItem(HERO_TEASES)}`
+      : `${unwatchedOverall} still left to watch. ${getRandomItem(HERO_TEASES)}`,
+    miniLabel: "",
+    miniHtml: preview.length
+      ? preview.map((movie) => `
       <button
         type="button"
         class="hero-mini-card"
@@ -755,13 +1071,19 @@ function renderHero(filtered, restartRotation = true) {
         </div>
       </button>
     `).join("")
-    : `<div class="hero-empty-note">This is the only pick in view right now.</div>`;
+      : `<div class="hero-empty-note">This is the only pick in view right now.</div>`
+  };
+
+  if (animate) {
+    triggerHeroRefresh(() => applyHeroState(nextState));
+  } else {
+    applyHeroState(nextState);
+  }
 
   if (restartRotation) {
     restartHeroRotation(candidates);
   }
 }
-
 function renderRows(filtered) {
   const allGenres = getVisibleGenreList();
   const queryActive = Boolean(appState.searchQuery.trim());
@@ -794,7 +1116,7 @@ function renderRows(filtered) {
 
         ${
           genreMovies.length
-            ? `<div class="card-rail">${genreMovies.map(renderMovieCard).join("")}</div>`
+            ? `<div class="card-rail">${genreMovies.map((movie, index) => renderMovieCard(movie, index)).join("")}</div>`
             : `<div class="empty-slot">Nothing to see here yet.</div>`
         }
       </section>
@@ -802,13 +1124,14 @@ function renderRows(filtered) {
   }).join("");
 }
 
-function renderMovieCard(movie) {
+function renderMovieCard(movie, index = 0) {
   const watched = appState.watchedMap[movie.id];
 
   return `
     <button
       class="movie-card ${watched ? "disabled" : ""}"
       type="button"
+      style="--enter-delay:${Math.min(index, 10) * 34}ms"
       data-movie-id="${escapeHtml(movie.id)}"
       aria-label="${escapeHtml(movie.title)}"
     >
@@ -828,7 +1151,7 @@ function renderMovieCard(movie) {
           </div>
         </div>
 
-        ${watched ? renderWatchedOverlay(watched.watchedAt) : ""}
+        ${watched ? renderWatchedOverlay(watched.watchedAt, watched.rating) : ""}
       </div>
     </button>
   `;
@@ -842,11 +1165,12 @@ function shortAvailability(availability) {
   return "Streaming varies";
 }
 
-function renderWatchedOverlay(isoDate) {
+function renderWatchedOverlay(isoDate, rating = null) {
   return `
     <div class="watched-overlay">
       <div class="watched-overlay-inner">
         <span class="watched-label">WATCHED</span>
+        ${rating ? `<span class="watched-time">Rated ${escapeHtml(rating)}/10</span>` : ""}
         <span class="watched-time">${escapeHtml(formatWatchedDate(isoDate))}</span>
       </div>
     </div>
@@ -908,9 +1232,10 @@ function openDetailsModal(movieId) {
             watched
               ? `
                 <span class="meta-pill">Watched on ${escapeHtml(formatWatchedDate(watched.watchedAt))}</span>
+                <span class="meta-pill user-rating-pill">Your rating: ${escapeHtml(watched.rating || "7")}/10</span>
                 <button type="button" class="secondary-btn" data-action="mark-unwatched" data-movie-id="${escapeHtml(movie.id)}">Mark as unwatched</button>
               `
-              : `<button type="button" class="watch-btn" data-action="mark-watched" data-movie-id="${escapeHtml(movie.id)}">Watched</button>`
+              : `<button type="button" class="watch-btn" data-action="mark-watched" data-movie-id="${escapeHtml(movie.id)}">Watched + rate</button>`
           }
         </div>
       </div>
@@ -979,7 +1304,10 @@ function closeDetailsModal() {
 }
 
 function openPasswordModal() {
+  const existingRating = appState.watchedMap[appState.pendingWatchMovieId]?.rating;
   els.watchPassword.value = "";
+  els.watchRating.value = String(existingRating || 7);
+  updateRatingSliderVisual();
   els.passwordModal.classList.remove("hidden");
   els.passwordModal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
@@ -1001,9 +1329,10 @@ function maybeUnlockBody() {
   }
 }
 
-function markMovieWatched(movieId) {
+function markMovieWatched(movieId, rating = 7) {
   appState.watchedMap[movieId] = {
-    watchedAt: new Date().toISOString()
+    watchedAt: new Date().toISOString(),
+    rating: Number(rating)
   };
   saveWatchedMap();
 }
@@ -1032,9 +1361,16 @@ function saveWatchedMap() {
 }
 
 function handleStorageSync(event) {
-  if (event.key !== CONFIG.STORAGE_KEY) return;
-  appState.watchedMap = loadWatchedMap();
-  render();
+  if (event.key === CONFIG.STORAGE_KEY) {
+    appState.watchedMap = loadWatchedMap();
+    render();
+    return;
+  }
+
+  if (event.key === CONFIG.EASTER_EGG_KEY) {
+    appState.easterEggsFound = loadEasterEggMap();
+    renderStats();
+  }
 }
 
 function handleCardTilt(event) {
