@@ -586,7 +586,7 @@ select {
   box-shadow: 0 18px 40px rgba(0,0,0,0.18);
   transform-style: preserve-3d;
   transform: perspective(1200px) rotateX(var(--rx)) rotateY(var(--ry));
-  transition: transform 110ms linear, filter 160ms ease, opacity 160ms ease;
+  transition: transform 120ms ease-out, filter 160ms ease, opacity 160ms ease;
   isolation: isolate;
   will-change: transform;
   backface-visibility: hidden;
@@ -1122,7 +1122,7 @@ body.splash-active {
     linear-gradient(180deg, #0a0609 0%, #10090f 100%);
   opacity: 1;
   visibility: visible;
-  transition: opacity 560ms ease, visibility 560ms ease;
+  transition: opacity 720ms ease, visibility 720ms ease;
 }
 
 .splash-screen.is-hidden {
@@ -2159,15 +2159,16 @@ html {
 .card-rail .movie-card,
 .search-mode-results .movie-card {
   opacity: 0;
-  transform: translateY(10px);
   animation: cardStaggerIn 360ms ease forwards;
   animation-delay: var(--enter-delay, 0ms);
 }
 
 @keyframes cardStaggerIn {
+  from {
+    opacity: 0;
+  }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -2372,18 +2373,8 @@ html {
 }
 
 
-/* v38 splash fix */
-body:not(.app-ready) .page-shell,
-body:not(.app-ready) .bg-orb {
-  opacity: 0;
-}
-
+/* v39 splash fix */
 .page-shell,
 .bg-orb {
-  transition: opacity 260ms ease;
-}
-
-body.app-ready .page-shell,
-body.app-ready .bg-orb {
   opacity: 1;
 }

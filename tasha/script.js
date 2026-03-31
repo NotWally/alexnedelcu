@@ -196,8 +196,10 @@ document.addEventListener("DOMContentLoaded", init);
 window.addEventListener("storage", handleStorageSync);
 
 async function init() {
-  const splashDelay = wait(CONFIG.SPLASH_MIN_MS);
   document.body.classList.add("splash-active");
+  window.setTimeout(() => {
+    hideSplash();
+  }, CONFIG.SPLASH_MIN_MS);
 
   try {
     bindUI();
@@ -206,21 +208,13 @@ async function init() {
     populateGenreFilter();
     renderQuickFilters();
     render();
-  } catch (error) {
-    console.error("NATFLIX init failed:", error);
-  } finally {
-    await splashDelay;
     document.body.classList.add("app-ready");
     setupRevealObserver();
     revealStaticSections();
-    requestAnimationFrame(() => {
-      hideSplash();
-    });
+  } catch (error) {
+    console.error("NATFLIX init failed:", error);
+    document.body.classList.add("app-ready");
   }
-}
-
-function wait(ms) {
-  return new Promise((resolve) => window.setTimeout(resolve, ms));
 }
 
 function hideSplash() {

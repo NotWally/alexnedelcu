@@ -99,3 +99,9 @@
 - Removed the global body fade that was suppressing the splash
 - The splash now displays independently from the page content
 - The page fades in underneath first, then the splash fades away cleanly
+
+
+## v39 fixes
+- Splash is now independent from app initialization, so it displays and fades reliably on live hosting too
+- Restored pitch/yaw hover by removing transform-based entrance animation from movie cards
+- Smoothed the splash fade and card tilt transitions
