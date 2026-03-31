@@ -93,3 +93,9 @@
 - Expanded the stats section with progress, most-watched genre, and average rating
 - Added page fade-in, staggered card entrances, smoother button feedback, better focus states, modal motion, slider polish, section reveal animations, and watched-confirmation feedback
 - Added more hidden notes and teasing messages across the site
+
+
+## v38 splash fix
+- Removed the global body fade that was suppressing the splash
+- The splash now displays independently from the page content
+- The page fades in underneath first, then the splash fades away cleanly

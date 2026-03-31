@@ -1,366 +1,231 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NATFLIX</title>
-    <meta name="theme-color" content="#170f16" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div id="splashScreen" class="splash-screen" aria-hidden="true">
-      <div class="splash-logo-wrap">
-        <span class="splash-logo-shadow">NATFLIX</span>
-        <span class="splash-logo">NATFLIX</span>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NATFLIX</title>
+  <meta name="theme-color" content="#170f16" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="splashScreen" class="splash-screen" aria-hidden="true">
+    <div class="splash-logo-wrap">
+      <span class="splash-logo-shadow">NATFLIX</span>
+      <span class="splash-logo">NATFLIX</span>
     </div>
+  </div>
 
-    <div class="bg-orb orb-one"></div>
-    <div class="bg-orb orb-two"></div>
-    <div class="bg-orb orb-three"></div>
+  <div class="bg-orb orb-one"></div>
+  <div class="bg-orb orb-two"></div>
+  <div class="bg-orb orb-three"></div>
 
-    <div class="page-shell">
-      <header class="topbar">
-        <div class="brand-wrap">
-          <div class="brand-row">
-            <h1 class="brand" aria-label="NATFLIX">NATFLIX</h1>
-            <span class="brand-pill" aria-label="Movie night">movie night</span>
-          </div>
-          <p class="brand-copy">
-            A lovely little place to choose what we watch next.
-          </p>
-          <p id="brandTease" class="brand-tease"></p>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand-wrap">
+        <div class="brand-row">
+          <h1 class="brand" aria-label="NATFLIX">NATFLIX</h1>
+          <span class="brand-pill" aria-label="Movie night">movie night</span>
         </div>
+        <p class="brand-copy">A lovely little place to choose what we watch next.</p>
+        <p id="brandTease" class="brand-tease"></p>
+      </div>
 
-        <div class="topbar-actions">
-          <label class="search-shell" aria-label="Search films">
-            <svg viewBox="0 0 24 24" aria-hidden="true" class="search-icon">
-              <path
-                d="M21 21l-4.35-4.35m1.35-5.15a7 7 0 11-14 0 7 7 0 0114 0z"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-              />
-            </svg>
-            <input
-              id="searchInput"
-              type="search"
-              placeholder="Search films"
-              autocomplete="off"
-            />
-          </label>
+      <div class="topbar-actions">
+        <label class="search-shell" aria-label="Search films">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="search-icon">
+            <path d="M21 21l-4.35-4.35m1.35-5.15a7 7 0 11-14 0 7 7 0 0114 0z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <input id="searchInput" type="search" placeholder="Search films" autocomplete="off" />
+        </label>
 
-          <select
-            id="genreFilter"
-            class="genre-select"
-            aria-label="Filter by genre"
-          >
-            <option value="All">All genres</option>
-          </select>
+        <select id="genreFilter" class="genre-select" aria-label="Filter by genre">
+          <option value="All">All genres</option>
+        </select>
 
-          <select
-            id="runtimeFilter"
-            class="genre-select runtime-select"
-            aria-label="Filter by runtime"
-          >
-            <option value="All">All runtimes</option>
-            <option value="under60">Under 1 hour</option>
-            <option value="under90">Under 1 hour 30</option>
-            <option value="under120">Under 2 hours</option>
-            <option value="120plus">2 hours+</option>
-          </select>
-        </div>
-      </header>
+        <select id="runtimeFilter" class="genre-select runtime-select" aria-label="Filter by runtime">
+          <option value="All">All runtimes</option>
+          <option value="under60">Under 1 hour</option>
+          <option value="under90">Under 1 hour 30</option>
+          <option value="under120">Under 2 hours</option>
+          <option value="120plus">2 hours+</option>
+        </select>
+      </div>
+    </header>
 
-      <main>
-        <section class="hero" id="heroSection">
-          <div class="hero-copy">
-            <span class="eyebrow" id="heroEyebrow">Tonight's pick</span>
-            <h2 id="heroTitle">Looking for something good?</h2>
-            <p id="heroText">
-              Choose a film, open the card, and mark it watched when you're
-              done.
-            </p>
+    <main>
+      <section class="hero" id="heroSection">
+        <div class="hero-copy">
+          <span class="eyebrow" id="heroEyebrow">Tonight's pick</span>
+          <h2 id="heroTitle">Looking for something good?</h2>
+          <p id="heroText">Choose a film, open the card, and mark it watched when you're done.</p>
 
-            <div id="heroMeta" class="hero-meta"></div>
-            <p id="heroSubline" class="hero-subline"></p>
+          <div id="heroMeta" class="hero-meta"></div>
+          <p id="heroSubline" class="hero-subline"></p>
 
-            <div class="hero-actions">
-              <button id="heroDetailsBtn" class="primary-btn" type="button">
-                View film
-              </button>
-              <button id="heroRandomBtn" class="ghost-btn" type="button">
-                Pick for us
-              </button>
-              <div class="hero-nav" aria-label="Featured film controls">
-                <button
-                  class="hero-nav-btn"
-                  id="heroPrevBtn"
-                  type="button"
-                  aria-label="Previous featured film"
-                >
-                  ‹
-                </button>
-                <button
-                  class="hero-nav-btn"
-                  id="heroNextBtn"
-                  type="button"
-                  aria-label="Next featured film"
-                >
-                  ›
-                </button>
-              </div>
-            </div>
-
-            <div class="hero-mini">
-              <div class="hero-mini-head">
-                <span>Up next</span>
-                <small id="heroMiniLabel">Unwatched picks</small>
-              </div>
-              <div id="heroMiniList" class="hero-mini-list"></div>
+          <div class="hero-actions">
+            <button id="heroDetailsBtn" class="primary-btn" type="button">View film</button>
+            <button id="heroRandomBtn" class="ghost-btn" type="button">Pick for us</button>
+            <div class="hero-nav" aria-label="Featured film controls">
+              <button class="hero-nav-btn" id="heroPrevBtn" type="button" aria-label="Previous featured film">‹</button>
+              <button class="hero-nav-btn" id="heroNextBtn" type="button" aria-label="Next featured film">›</button>
             </div>
           </div>
 
-          <button
-            id="heroPosterBtn"
-            class="hero-poster-shell"
-            type="button"
-            aria-label="Open featured film"
-          >
-            <div class="hero-poster-card">
-              <img id="heroPoster" alt="" />
-              <div class="hero-poster-fade"></div>
-              <div id="heroPosterBadge" class="hero-poster-badge">
-                Unwatched
-              </div>
+          <div class="hero-mini">
+            <div class="hero-mini-head">
+              <span>Up next</span>
+              <small id="heroMiniLabel">Unwatched picks</small>
             </div>
-          </button>
-        </section>
-
-        <section
-          id="quickFilters"
-          class="quick-filters"
-          aria-label="Quick genres"
-        ></section>
-
-        <section id="searchMode" class="search-mode hidden" aria-live="polite">
-          <div class="search-mode-copy">
-            <p id="searchModeEyebrow" class="search-mode-eyebrow">Search</p>
-            <h2 id="searchModeMessage" class="search-mode-message">
-              What’s the next watch?
-            </h2>
-            <p id="searchModeSubtext" class="search-mode-subtext">
-              Start typing a film title.
-            </p>
-          </div>
-          <div id="searchModeResults" class="search-mode-results"></div>
-        </section>
-
-        <section class="toolbar">
-          <p id="resultsSummary" class="results-summary">Loading films...</p>
-          <button id="resetFiltersBtn" class="ghost-btn" type="button">
-            Clear
-          </button>
-        </section>
-
-        <section
-          id="rowsContainer"
-          class="rows-container"
-          aria-live="polite"
-        ></section>
-      </main>
-
-      <section
-        id="statsSection"
-        class="stats-section"
-        aria-label="Watched stats"
-      >
-        <div class="stats-header">
-          <p class="stats-kicker">Our little archive</p>
-          <h2>Watched stats</h2>
-          <p id="statsTease" class="stats-tease"></p>
-        </div>
-
-        <div class="stats-grid">
-          <article class="stats-card">
-            <span class="stats-label">Total watch time</span>
-            <strong id="statsWatchTime" class="stats-value">0h 0m</strong>
-            <span class="stats-meta" id="statsWatchTimeMeta"
-              >Built from everything you’ve marked watched.</span
-            >
-          </article>
-
-          <article class="stats-card">
-            <span class="stats-label">Films watched</span>
-            <strong id="statsWatchedCount" class="stats-value">0</strong>
-            <span class="stats-meta" id="statsWatchedMeta"
-              >A running total of your shared watch list.</span
-            >
-          </article>
-
-          <article class="stats-card">
-            <span class="stats-label">Average start time</span>
-            <strong id="statsAverageTime" class="stats-value">—</strong>
-            <span class="stats-meta" id="statsAverageMeta"
-              >Estimated from watch time minus runtime.</span
-            >
-          </article>
-
-          <article class="stats-card">
-            <span class="stats-label">Easter eggs found</span>
-            <strong id="statsEggsFound" class="stats-value">0 / 3</strong>
-            <span class="stats-meta" id="statsEggMeta"
-              >There are still a few little things hiding.</span
-            >
-          </article>
-        </div>
-
-        <div class="stats-progress-card">
-          <div class="stats-progress-copy">
-            <span class="stats-label">List progress</span>
-            <strong id="statsProgressValue" class="stats-progress-value"
-              >0%</strong
-            >
-          </div>
-          <div class="stats-progress-track">
-            <span id="statsProgressBar" class="stats-progress-bar"></span>
+            <div id="heroMiniList" class="hero-mini-list"></div>
           </div>
         </div>
 
-        <div class="stats-insights">
-          <article class="stats-mini-card">
-            <span class="stats-label">Most watched genre</span>
-            <strong id="statsTopGenre" class="stats-mini-value">—</strong>
-            <p id="statsTopGenreMeta" class="stats-mini-copy">
-              Once you start watching, this will figure itself out.
-            </p>
-          </article>
-
-          <article class="stats-mini-card">
-            <span class="stats-label">Average rating</span>
-            <strong id="statsAverageRating" class="stats-mini-value">—</strong>
-            <p id="statsAverageRatingMeta" class="stats-mini-copy">
-              A little score for how good the nights have been.
-            </p>
-          </article>
-        </div>
+        <button id="heroPosterBtn" class="hero-poster-shell" type="button" aria-label="Open featured film">
+          <div class="hero-poster-card">
+            <img id="heroPoster" alt="" />
+            <div class="hero-poster-fade"></div>
+            <div id="heroPosterBadge" class="hero-poster-badge">Unwatched</div>
+          </div>
+        </button>
       </section>
 
-      <footer class="site-footer">
-        <p id="footerMessage" tabindex="0">Made by Alex for Tasha</p>
-      </footer>
-    </div>
+      <section id="quickFilters" class="quick-filters" aria-label="Quick genres"></section>
 
-    <div
-      id="detailsModal"
-      class="modal hidden"
-      aria-hidden="true"
-      role="dialog"
-      aria-modal="true"
-    >
-      <div class="modal-backdrop" data-close-modal="true"></div>
-      <div class="modal-panel">
-        <button
-          class="modal-close"
-          id="closeDetailsBtn"
-          type="button"
-          aria-label="Close"
-        >
-          ×
-        </button>
-        <div id="modalContent" class="modal-content"></div>
+      <section id="searchMode" class="search-mode hidden" aria-live="polite">
+        <div class="search-mode-copy">
+          <p id="searchModeEyebrow" class="search-mode-eyebrow">Search</p>
+          <h2 id="searchModeMessage" class="search-mode-message">What’s the next watch?</h2>
+          <p id="searchModeSubtext" class="search-mode-subtext">Start typing a film title.</p>
+        </div>
+        <div id="searchModeResults" class="search-mode-results"></div>
+      </section>
+
+      <section class="toolbar">
+        <p id="resultsSummary" class="results-summary">Loading films...</p>
+        <button id="resetFiltersBtn" class="ghost-btn" type="button">Clear</button>
+      </section>
+
+      <section id="rowsContainer" class="rows-container" aria-live="polite"></section>
+    </main>
+
+
+    <section id="statsSection" class="stats-section" aria-label="Watched stats">
+      <div class="stats-header">
+        <p class="stats-kicker">Our little archive</p>
+        <h2>Watched stats</h2>
+        <p id="statsTease" class="stats-tease"></p>
       </div>
+
+      <div class="stats-grid">
+        <article class="stats-card">
+          <span class="stats-label">Total watch time</span>
+          <strong id="statsWatchTime" class="stats-value">0h 0m</strong>
+          <span class="stats-meta" id="statsWatchTimeMeta">Built from everything you’ve marked watched.</span>
+        </article>
+
+        <article class="stats-card">
+          <span class="stats-label">Films watched</span>
+          <strong id="statsWatchedCount" class="stats-value">0</strong>
+          <span class="stats-meta" id="statsWatchedMeta">A running total of your shared watch list.</span>
+        </article>
+
+        <article class="stats-card">
+          <span class="stats-label">Average start time</span>
+          <strong id="statsAverageTime" class="stats-value">—</strong>
+          <span class="stats-meta" id="statsAverageMeta">Estimated from watch time minus runtime.</span>
+        </article>
+
+        <article class="stats-card">
+          <span class="stats-label">Easter eggs found</span>
+          <strong id="statsEggsFound" class="stats-value">0 / 3</strong>
+          <span class="stats-meta" id="statsEggMeta">There are still a few little things hiding.</span>
+        </article>
+      </div>
+
+      <div class="stats-progress-card">
+        <div class="stats-progress-copy">
+          <span class="stats-label">List progress</span>
+          <strong id="statsProgressValue" class="stats-progress-value">0%</strong>
+        </div>
+        <div class="stats-progress-track">
+          <span id="statsProgressBar" class="stats-progress-bar"></span>
+        </div>
+      </div>
+
+      <div class="stats-insights">
+        <article class="stats-mini-card">
+          <span class="stats-label">Most watched genre</span>
+          <strong id="statsTopGenre" class="stats-mini-value">—</strong>
+          <p id="statsTopGenreMeta" class="stats-mini-copy">Once you start watching, this will figure itself out.</p>
+        </article>
+
+        <article class="stats-mini-card">
+          <span class="stats-label">Average rating</span>
+          <strong id="statsAverageRating" class="stats-mini-value">—</strong>
+          <p id="statsAverageRatingMeta" class="stats-mini-copy">A little score for how good the nights have been.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p id="footerMessage" tabindex="0">Made by Alex for Tasha… and a few secrets</p>
+    </footer>
+  </div>
+
+  <div id="detailsModal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close-modal="true"></div>
+    <div class="modal-panel">
+      <button class="modal-close" id="closeDetailsBtn" type="button" aria-label="Close">×</button>
+      <div id="modalContent" class="modal-content"></div>
     </div>
+  </div>
 
-    <div
-      id="passwordModal"
-      class="modal hidden"
-      aria-hidden="true"
-      role="dialog"
-      aria-modal="true"
-    >
-      <div class="modal-backdrop" data-close-password="true"></div>
-      <div class="password-panel">
-        <button
-          class="modal-close"
-          id="closePasswordBtn"
-          type="button"
-          aria-label="Close"
-        >
-          ×
-        </button>
-        <div class="heart-mark">♡</div>
-        <h3>Mark this as watched?</h3>
-        <p class="password-copy">Enter the password to confirm.</p>
-        <form id="watchForm" class="watch-form">
-          <div class="rating-input-card">
-            <div class="rating-input-head">
-              <label for="watchRating">Your rating</label>
-              <strong id="watchRatingValue">7/10</strong>
-            </div>
-
-            <input
-              type="range"
-              id="watchRating"
-              min="1"
-              max="10"
-              step="1"
-              value="7"
-            />
-            <div class="rating-input-scale">
-              <span>1</span>
-              <span>10</span>
-            </div>
+  <div id="passwordModal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close-password="true"></div>
+    <div class="password-panel">
+      <button class="modal-close" id="closePasswordBtn" type="button" aria-label="Close">×</button>
+      <div class="heart-mark">♡</div>
+      <h3>Mark this as watched?</h3>
+      <p class="password-copy">Enter the password to confirm.</p>
+      <form id="watchForm" class="watch-form">
+        <div class="rating-input-card">
+          <div class="rating-input-head">
+            <label for="watchRating">Your rating</label>
+            <strong id="watchRatingValue">7/10</strong>
           </div>
 
-          <input
-            type="password"
-            id="watchPassword"
-            placeholder="Password"
-            required
-          />
-          <button type="submit" class="primary-btn">
-            Save watched + rating
-          </button>
-        </form>
-      </div>
+          <input type="range" id="watchRating" min="1" max="10" step="1" value="7" />
+          <div class="rating-input-scale">
+            <span>1</span>
+            <span>10</span>
+          </div>
+        </div>
+
+        <input type="password" id="watchPassword" placeholder="Password" required />
+        <button type="submit" class="primary-btn">Save watched + rating</button>
+      </form>
     </div>
+  </div>
 
-    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
-    <div id="heartBurst" class="heart-burst" aria-hidden="true"></div>
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+  <div id="heartBurst" class="heart-burst" aria-hidden="true"></div>
 
-    <div
-      id="secretNoteModal"
-      class="modal hidden"
-      aria-hidden="true"
-      role="dialog"
-      aria-modal="true"
-    >
-      <div class="modal-backdrop" data-close-secret="true"></div>
-      <div class="secret-panel">
-        <button
-          class="modal-close"
-          id="closeSecretBtn"
-          type="button"
-          aria-label="Close"
-        >
-          ×
-        </button>
-        <div class="secret-emoji">♡</div>
-        <p class="secret-kicker">For Tasha</p>
-        <h3 id="secretNoteTitle">A tiny hidden note</h3>
-        <p id="secretNoteBody" class="secret-note-body"></p>
-      </div>
+  <div id="secretNoteModal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close-secret="true"></div>
+    <div class="secret-panel">
+      <button class="modal-close" id="closeSecretBtn" type="button" aria-label="Close">×</button>
+      <div class="secret-emoji">♡</div>
+      <p class="secret-kicker">For Tasha</p>
+      <h3 id="secretNoteTitle">A tiny hidden note</h3>
+      <p id="secretNoteBody" class="secret-note-body"></p>
+      
     </div>
+  </div>
 
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>

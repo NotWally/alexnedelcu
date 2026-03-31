@@ -2086,14 +2086,6 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  opacity: 0;
-  transition: opacity 280ms ease;
-}
-
-body.app-ready {
-  opacity: 1;
-}
 
 .search-shell,
 .genre-select,
@@ -2377,4 +2369,21 @@ body.app-ready {
   .stats-insights {
     grid-template-columns: 1fr;
   }
+}
+
+
+/* v38 splash fix */
+body:not(.app-ready) .page-shell,
+body:not(.app-ready) .bg-orb {
+  opacity: 0;
+}
+
+.page-shell,
+.bg-orb {
+  transition: opacity 260ms ease;
+}
+
+body.app-ready .page-shell,
+body.app-ready .bg-orb {
+  opacity: 1;
 }

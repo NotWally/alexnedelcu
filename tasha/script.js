@@ -210,10 +210,12 @@ async function init() {
     console.error("NATFLIX init failed:", error);
   } finally {
     await splashDelay;
-    hideSplash();
     document.body.classList.add("app-ready");
     setupRevealObserver();
     revealStaticSections();
+    requestAnimationFrame(() => {
+      hideSplash();
+    });
   }
 }
 
