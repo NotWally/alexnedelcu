@@ -8,6 +8,7 @@ const CONFIG = {
   HERO_RECENT_LIMIT: 8,
   HERO_HISTORY_LIMIT: 18,
   SPLASH_MIN_MS: 1350,
+  SECRET_CLICK_COUNT: 3,
   GENRE_ORDER: [
     "Action",
     "Adventure",
@@ -34,6 +35,7 @@ const appState = {
   heroActiveId: null,
   heroRecentIds: [],
   heroHistoryIds: [],
+  secretBrandClicks: 0,
   pendingWatchMovieId: null,
   watchedMap: loadWatchedMap()
 };
@@ -64,14 +66,64 @@ const els = {
   heroPosterBadge: document.getElementById("heroPosterBadge"),
   heroDetailsBtn: document.getElementById("heroDetailsBtn"),
   heroRandomBtn: document.getElementById("heroRandomBtn"),
+  heroTashaBtn: document.getElementById("heroTashaBtn"),
   heroPrevBtn: document.getElementById("heroPrevBtn"),
   heroNextBtn: document.getElementById("heroNextBtn"),
   heroMiniList: document.getElementById("heroMiniList"),
   heroMiniLabel: document.getElementById("heroMiniLabel"),
-  splashScreen: document.getElementById("splashScreen")
+  splashScreen: document.getElementById("splashScreen"),
+  brandLogo: document.getElementById("brandLogo"),
+  brandPill: document.getElementById("brandPill"),
+  footerMessage: document.getElementById("footerMessage"),
+  heartBurst: document.getElementById("heartBurst"),
+  secretNoteModal: document.getElementById("secretNoteModal"),
+  closeSecretBtn: document.getElementById("closeSecretBtn"),
+  secretNoteTitle: document.getElementById("secretNoteTitle"),
+  secretNoteBody: document.getElementById("secretNoteBody")
 };
 
 let heroRotationTimer = null;
+let brandClickTimer = null;
+
+const SECRET_NOTES = [
+  {
+    title: "For you",
+    body: "I made this for you because I wanted our movie nights to feel like their own little world."
+  },
+  {
+    title: "A small truth",
+    body: "No matter what we end up watching, you always make the night better."
+  },
+  {
+    title: "In case you found this",
+    body: "I hid little things in here for you because making you smile felt like a good enough reason."
+  },
+  {
+    title: "One more thing",
+    body: "If this feels cosy or a bit romantic, that is me trying to build something that feels like us."
+  },
+  {
+    title: "Just so you know",
+    body: "Even with all these films, you are still the reason this feels fun."
+  }
+];
+
+const SWEET_TOASTS = [
+  "I added that one to our story ♡",
+  "That one is ours now.",
+  "That was a good one for us.",
+  "I’m counting that as a very good choice by us."
+];
+
+const SEARCH_EGGS = {
+  tasha: {
+    title: "Hi Tasha",
+    body: "If you found this by typing your name, that makes me very happy. I put this here just for you."
+  }
+};
+
+// duplicate removed
+
 
 document.addEventListener("DOMContentLoaded", init);
 window.addEventListener("storage", handleStorageSync);
@@ -80,14 +132,18 @@ async function init() {
   const splashDelay = wait(CONFIG.SPLASH_MIN_MS);
   document.body.classList.add("splash-active");
 
-  bindUI();
-  await loadMovies();
-  populateGenreFilter();
-  renderQuickFilters();
-  render();
-
-  await splashDelay;
-  hideSplash();
+  try {
+    bindUI();
+    await loadMovies();
+    populateGenreFilter();
+    renderQuickFilters();
+    render();
+  } catch (error) {
+    console.error("NATFLIX init failed:", error);
+  } finally {
+    await splashDelay;
+    hideSplash();
+  }
 }
 
 function wait(ms) {
@@ -100,13 +156,82 @@ function hideSplash() {
   document.body.classList.remove("splash-active");
 }
 
+function getRandomItem(items) {
+  return items[Math.floor(Math.random() * items.length)];
+}
+
+function launchHeartBurst(count = 14) {
+  if (!els.heartBurst) return;
+
+  const hearts = ["♡", "♥", "✦"];
+  for (let index = 0; index < count; index += 1) {
+    const particle = document.createElement("span");
+    particle.className = "heart-particle";
+    particle.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+    particle.style.left = `${6 + Math.random() * 88}%`;
+    particle.style.animationDelay = `${Math.random() * 220}ms`;
+    particle.style.fontSize = `${12 + Math.random() * 12}px`;
+    particle.style.color = Math.random() > 0.25 ? "#ff7aa4" : "#ffd7e5";
+    els.heartBurst.appendChild(particle);
+    window.setTimeout(() => particle.remove(), 1600);
+  }
+}
+
+function openSecretNote(note = null) {
+  const chosenNote = note || getRandomItem(SECRET_NOTES);
+  els.secretNoteTitle.textContent = chosenNote.title;
+  els.secretNoteBody.textContent = chosenNote.body;
+  els.secretNoteModal.classList.remove("hidden");
+  els.secretNoteModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeSecretNote() {
+  els.secretNoteModal.classList.add("hidden");
+  els.secretNoteModal.setAttribute("aria-hidden", "true");
+  maybeUnlockBody();
+}
+
+function revealFooterMessage() {
+  if (!els.footerMessage) return;
+  const original = "Made by Alex for Tasha… and a few secrets";
+  els.footerMessage.textContent = "P.S. I still think you make this better.";
+  launchHeartBurst(10);
+  clearTimeout(revealFooterMessage._timer);
+  revealFooterMessage._timer = window.setTimeout(() => {
+    els.footerMessage.textContent = original;
+  }, 3600);
+}
+
+function maybeTriggerSearchEgg(query) {
+  const normalized = String(query || "").trim().toLowerCase();
+  if (!normalized) return false;
+
+  const egg = SEARCH_EGGS[normalized];
+  if (!egg) return false;
+
+  openSecretNote(egg);
+  launchHeartBurst(12);
+  showToast("I left that one there for you.");
+  return true;
+}
+
 function bindUI() {
   let searchDebounce;
 
   els.searchInput.addEventListener("input", () => {
     clearTimeout(searchDebounce);
     searchDebounce = setTimeout(() => {
-      appState.searchQuery = els.searchInput.value.trim();
+      const attemptedQuery = els.searchInput.value.trim();
+
+      if (maybeTriggerSearchEgg(attemptedQuery)) {
+        appState.searchQuery = "";
+        els.searchInput.value = "";
+        render();
+        return;
+      }
+
+      appState.searchQuery = attemptedQuery;
       render();
     }, 120);
   });
@@ -136,6 +261,61 @@ function bindUI() {
     render();
   });
 
+  els.brandLogo.addEventListener("click", () => {
+    appState.secretBrandClicks += 1;
+    clearTimeout(brandClickTimer);
+    brandClickTimer = window.setTimeout(() => {
+      appState.secretBrandClicks = 0;
+    }, 1500);
+
+    if (appState.secretBrandClicks >= CONFIG.SECRET_CLICK_COUNT) {
+      appState.secretBrandClicks = 0;
+      openSecretNote({
+        title: "You found one",
+        body: "I hid this in the logo because I liked the idea of you discovering it by accident."
+      });
+      launchHeartBurst(16);
+      showToast("I left a secret there for you.");
+    }
+  });
+
+  els.brandLogo.addEventListener("dblclick", () => {
+    openSecretNote({
+      title: "For Tasha",
+      body: "I made this site to feel like a little place that belongs to us."
+    });
+    launchHeartBurst(12);
+  });
+
+  els.brandPill.addEventListener("click", () => {
+    openSecretNote({
+      title: "Movie night",
+      body: "I wanted this to feel like our own tiny cinema, except softer and a bit more us."
+    });
+    launchHeartBurst(10);
+  });
+
+  if (els.heroTashaBtn) {
+    els.heroTashaBtn.addEventListener("click", () => {
+      openSecretNote({
+        title: "For Tasha",
+        body: "If I could add one thing to every film on here, it would be the fact that I get to watch them with you."
+      });
+      launchHeartBurst(14);
+    });
+  }
+
+  els.footerMessage.addEventListener("click", () => {
+    openSecretNote({
+      title: "One more thing",
+      body: "The footer says I made this for you, but the real part is that I wanted this to make you smile every time you opened it."
+    });
+  });
+
+  els.footerMessage.addEventListener("dblclick", revealFooterMessage);
+
+  if (els.closeSecretBtn) els.closeSecretBtn.addEventListener("click", closeSecretNote);
+
   els.heroDetailsBtn.addEventListener("click", () => {
     if (appState.heroActiveId) openDetailsModal(appState.heroActiveId);
   });
@@ -162,6 +342,7 @@ function bindUI() {
 
     if (target.matches("[data-close-modal='true']")) closeDetailsModal();
     if (target.matches("[data-close-password='true']")) closePasswordModal();
+    if (target.matches("[data-close-secret='true']")) closeSecretNote();
 
     const watchButton = target.closest("[data-action='mark-watched']");
     if (watchButton) {
@@ -208,13 +389,25 @@ function bindUI() {
     closePasswordModal();
     closeDetailsModal();
     render();
-    showToast("Marked as watched.");
+    showToast(getRandomItem(SWEET_TOASTS));
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
+      closeSecretNote();
       closePasswordModal();
       closeDetailsModal();
+    }
+
+    const activeTag = document.activeElement?.tagName || "";
+    const typingIntoField = ["INPUT", "TEXTAREA"].includes(activeTag);
+
+    if ((event.altKey && event.key.toLowerCase() === "t") || (!typingIntoField && event.key.toLowerCase() === "t")) {
+      openSecretNote({
+        title: "You pressed T",
+        body: "That one really is just for you."
+      });
+      launchHeartBurst(10);
     }
   });
 }
@@ -535,9 +728,15 @@ function renderHero(filtered, restartRotation = true) {
     getHeroAvailabilityLabel(featured.availability)
   ].map((value) => `<span class="hero-meta-chip">${escapeHtml(value)}</span>`).join("");
 
+  const hiddenHeroLine = getRandomItem([
+    "I made this little corner of the internet for you.",
+    "I’m quietly rooting for a very good movie night for us.",
+    "I wanted this to feel like our own small thing."
+  ]);
+
   els.heroSubline.textContent = scoped
-    ? `${unwatchedInView} unwatched in this view.`
-    : `${unwatchedOverall} still left to watch.`;
+    ? `${unwatchedInView} unwatched in this view. ${hiddenHeroLine}`
+    : `${unwatchedOverall} still left to watch. ${hiddenHeroLine}`;
 
   els.heroMiniLabel.textContent = rewatchMode ? "Everything here is watched" : "Tap a card to swap";
 

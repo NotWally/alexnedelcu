@@ -12,13 +12,7 @@
       "netflix": "Included in subscription",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Sky Go (included)",
-        "NOW Cinema (included)",
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -34,11 +28,7 @@
       "netflix": "Included in subscription",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -70,15 +60,7 @@
       "netflix": "Included in subscription",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Sky Go (included)",
-        "NOW Cinema (included)",
-        "ITVX Premium (included)",
-        "ITVX (free with ads)",
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -94,13 +76,7 @@
       "netflix": "Included in subscription",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Sky Go (included)",
-        "NOW Cinema (included)",
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -116,11 +92,7 @@
       "netflix": "Included in subscription",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -136,11 +108,7 @@
       "netflix": "Included in subscription",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -156,13 +124,7 @@
       "netflix": "Included in subscription",
       "amazon": "Not listed",
       "disney": "Not listed",
-      "other": [
-        "Sky Go (included)",
-        "NOW Cinema (included)",
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -194,11 +156,7 @@
       "netflix": "Not listed",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -214,11 +172,7 @@
       "netflix": "Not listed",
       "amazon": "Add-on channel and purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -234,11 +188,7 @@
       "netflix": "Not listed",
       "amazon": "Add-on channel and purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -334,7 +284,7 @@
       "netflix": "Included in subscription",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": ["Tubi TV (free with ads)"]
+      "other": ["Not listed"]
     }
   },
   {
@@ -366,13 +316,7 @@
       "netflix": "Not listed",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Sky Go (included)",
-        "NOW Cinema (included)",
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -388,11 +332,7 @@
       "netflix": "Included in subscription",
       "amazon": "Included in subscription and purchase",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -408,11 +348,7 @@
       "netflix": "Included in subscription",
       "amazon": "Included in subscription and purchase",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -460,7 +396,7 @@
       "netflix": "Not listed",
       "amazon": "Included in subscription and purchase",
       "disney": "Not listed",
-      "other": ["Apple TV Store (purchase)", "Rakuten TV (purchase)"]
+      "other": ["Not listed"]
     }
   },
   {
@@ -524,7 +460,7 @@
       "netflix": "Included in subscription",
       "amazon": "Not listed",
       "disney": "Not listed",
-      "other": ["Rakuten TV (purchase)"]
+      "other": ["Not listed"]
     }
   },
   {
@@ -556,11 +492,7 @@
       "netflix": "Not listed",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -576,10 +508,7 @@
       "netflix": "Not listed",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -595,7 +524,7 @@
       "netflix": "Not listed",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": ["Apple TV Store (purchase / rental)", "Sky Store (purchase)"]
+      "other": ["Not listed"]
     }
   },
   {
@@ -611,11 +540,7 @@
       "netflix": "Not listed",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -631,11 +556,7 @@
       "netflix": "Not listed",
       "amazon": "Purchase / rental",
       "disney": "Included in subscription",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -651,11 +572,7 @@
       "netflix": "Not listed",
       "amazon": "Purchase / rental",
       "disney": "Included in subscription",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -671,11 +588,7 @@
       "netflix": "Not listed",
       "amazon": "Purchase / rental",
       "disney": "Included in subscription",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -691,12 +604,7 @@
       "netflix": "Not listed",
       "amazon": "Included in subscription and purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "BBC iPlayer (free)",
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -712,12 +620,7 @@
       "netflix": "Not listed",
       "amazon": "Included in subscription and purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "BBC iPlayer (free)",
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -733,11 +636,7 @@
       "netflix": "Not listed",
       "amazon": "Included in subscription and purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -753,11 +652,7 @@
       "netflix": "Not listed",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -773,13 +668,7 @@
       "netflix": "Not listed",
       "amazon": "Add-on channel and purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Paramount Plus (included)",
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)",
-        "JustWatch TV (rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -811,7 +700,7 @@
       "netflix": "Included in subscription",
       "amazon": "Not listed",
       "disney": "Not listed",
-      "other": ["BBC iPlayer (free)"]
+      "other": ["Not listed"]
     }
   },
   {
@@ -891,11 +780,7 @@
       "netflix": "Not listed",
       "amazon": "Included in subscription and purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -911,11 +796,7 @@
       "netflix": "Included in subscription",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -963,7 +844,7 @@
       "netflix": "Not listed",
       "amazon": "Not listed",
       "disney": "Not listed",
-      "other": ["Sky Go (included)", "Channel 4 (free with ads)"]
+      "other": ["Channel 4 (free with ads)"]
     }
   },
   {
@@ -995,12 +876,7 @@
       "netflix": "Not listed",
       "amazon": "Add-on channel and purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)",
-        "BFI Player (rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -1016,12 +892,7 @@
       "netflix": "Not listed",
       "amazon": "Purchase / rental",
       "disney": "Not listed",
-      "other": [
-        "Apple TV Store (purchase / rental)",
-        "Sky Store (purchase / rental)",
-        "Rakuten TV (purchase / rental)",
-        "BFI Player (rental)"
-      ]
+      "other": ["Not listed"]
     }
   },
   {
@@ -1085,7 +956,7 @@
       "netflix": "Included in subscription",
       "amazon": "Not listed",
       "disney": "Not listed",
-      "other": ["Check local services"]
+      "other": ["Not listed"]
     }
   }
 ]

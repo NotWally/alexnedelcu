@@ -1197,3 +1197,157 @@ body.splash-active {
   border-color: rgba(255,255,255,0.14);
   transform: translateY(-1px);
 }
+
+
+.brand {
+  cursor: pointer;
+}
+
+.brand-pill-button {
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.brand-pill-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.site-footer p {
+  cursor: pointer;
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.site-footer p:hover {
+  color: var(--text);
+}
+
+.secret-panel {
+  position: relative;
+  z-index: 1;
+  margin: min(8vh, 72px) auto;
+  width: min(520px, calc(100vw - 28px));
+  padding: 34px 28px 28px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.09), rgba(255,255,255,0.04)),
+    rgba(35, 22, 34, 0.94);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 30px;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(20px);
+}
+
+.secret-emoji {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  font-size: 1.45rem;
+  margin-bottom: 14px;
+}
+
+.secret-kicker {
+  margin: 0 0 8px;
+  color: #ffd5e4;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.secret-panel h3 {
+  margin: 0 0 12px;
+  font-size: 1.8rem;
+  line-height: 1.04;
+}
+
+.secret-note-body {
+  margin: 0 0 18px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.heart-burst {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 240;
+  overflow: hidden;
+}
+
+.heart-particle {
+  position: absolute;
+  bottom: -24px;
+  font-size: 14px;
+  line-height: 1;
+  opacity: 0;
+  animation: heartFloat 1400ms ease-out forwards;
+  filter: drop-shadow(0 2px 8px rgba(255, 77, 121, 0.18));
+}
+
+@keyframes heartFloat {
+  0% {
+    transform: translateY(0) scale(0.7) rotate(0deg);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(-220px) scale(1.15) rotate(18deg);
+    opacity: 0;
+  }
+}
+
+
+.brand:active,
+.brand-pill-button:active,
+.site-footer p:active {
+  transform: scale(0.985);
+}
+
+.brand-pill-button,
+.site-footer p,
+.brand {
+  user-select: none;
+}
+
+
+.hero-secret-btn {
+  position: relative;
+}
+
+.hero-secret-btn::after {
+  content: "♡";
+  margin-left: 8px;
+  opacity: 0.8;
+}
+
+.site-footer p {
+  text-align: center;
+}
+
+.secret-panel {
+  max-width: 500px;
+}
+
+.secret-panel h3 {
+  max-width: 12ch;
+}
+
+.secret-note-body {
+  font-size: 1rem;
+}
+
+.brand-row::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255, 122, 164, 0.55);
+  box-shadow: 0 0 18px rgba(255, 122, 164, 0.22);
+}
+
+.brand-row {
+  align-items: center;
+}

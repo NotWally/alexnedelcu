@@ -1,29 +1,33 @@
 # NATFLIX
 
-This build gives the homepage a more compact, more natural featured hero.
 
-## Hero changes
-- Unwatched featured films rotate automatically
-- Smaller, cleaner layout with one clear reading flow
-- View film + Pick for us actions
-- Compact previous / next controls
-- Small Up next strip instead of a bulky side panel
-- Featured film updates automatically when things are marked watched
-
-## Existing behaviour kept
-- Manual films.json catalogue
-- Browser-local watched saving
-- First genre decides the shelf/category
-- Provider pills only show real listed services
-- No shine effect on cards
+## Personal touches for Tasha
+- Click NATFLIX five times quickly for a hidden note
+- Click the movie night pill for a secret message
+- Double-click the footer for a small surprise
+- Searching certain words reveals little easter eggs
+- Press T anywhere on the page for another hidden note
+- Watched confirmations now use sweeter custom messages
 
 
-## Extra touches
-- Opening splash screen with NATFLIX on every page load
-- Footer line: Made by Alex for Tasha
+## Easter eggs updated
+- Search easter eggs now open the hidden note instead of wiping the page
+- NATFLIX trigger is easier
+- Footer click now reveals a note directly
+- Brand double-click also opens a hidden note
 
 
-## Featured hero changes
-- Hero now avoids repeating recently featured films
-- Pick for us feels more shuffled
-- Up next cards now act as quick-swap buttons for the featured film
+## Tasha tweaks
+- Removed the extra modal button
+- Hidden notes are now written in first person from Alex to Tasha
+- Search trigger only works for the word: tasha
+- Added a visible For Tasha button in the hero
+- Footer now openly teases that there are secrets
+
+
+## v21 fix
+- Splash now always hides even if another script error happens
+- Removed the broken listener that referenced a deleted button
+- Added the visible For Tasha button handler
+- Notes are now first person from Alex to Tasha
+- Search trigger is only the word: tasha

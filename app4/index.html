@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NATFLIX</title>
   <meta name="theme-color" content="#170f16" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -26,8 +27,8 @@
     <header class="topbar">
       <div class="brand-wrap">
         <div class="brand-row">
-          <h1 class="brand">NATFLIX</h1>
-          <span class="brand-pill">movie night</span>
+          <h1 class="brand" id="brandLogo" tabindex="0" aria-label="NATFLIX">NATFLIX</h1>
+          <button class="brand-pill brand-pill-button" id="brandPill" type="button" aria-label="Movie night">movie night</button>
         </div>
         <p class="brand-copy">A lovely little place to choose what we watch next.</p>
       </div>
@@ -59,6 +60,7 @@
           <div class="hero-actions">
             <button id="heroDetailsBtn" class="primary-btn" type="button">View film</button>
             <button id="heroRandomBtn" class="ghost-btn" type="button">Pick for us</button>
+            <button id="heroTashaBtn" class="ghost-btn hero-secret-btn" type="button">For Tasha</button>
             <div class="hero-nav" aria-label="Featured film controls">
               <button class="hero-nav-btn" id="heroPrevBtn" type="button" aria-label="Previous featured film">‹</button>
               <button class="hero-nav-btn" id="heroNextBtn" type="button" aria-label="Next featured film">›</button>
@@ -94,7 +96,7 @@
     </main>
 
     <footer class="site-footer">
-      <p>Made by Alex for Tasha</p>
+      <p id="footerMessage" tabindex="0">Made by Alex for Tasha… and a few secrets</p>
     </footer>
   </div>
 
@@ -121,6 +123,19 @@
   </div>
 
   <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+  <div id="heartBurst" class="heart-burst" aria-hidden="true"></div>
+
+  <div id="secretNoteModal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close-secret="true"></div>
+    <div class="secret-panel">
+      <button class="modal-close" id="closeSecretBtn" type="button" aria-label="Close">×</button>
+      <div class="secret-emoji">♡</div>
+      <p class="secret-kicker">For Tasha</p>
+      <h3 id="secretNoteTitle">A tiny hidden note</h3>
+      <p id="secretNoteBody" class="secret-note-body"></p>
+      
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
