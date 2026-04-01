@@ -958,5 +958,216 @@
       "disney": "Not listed",
       "other": ["Not listed"]
     }
+  },
+  {
+    "title": "Mamma Mia!",
+    "year": "2008",
+    "genres": ["Comedy", "Music", "Romance"],
+    "description": "A young bride on a Greek island secretly invites three men from her mother’s past, hoping to discover which one is her father.",
+    "rtRating": "55%",
+    "poster": "https://pics.filmaffinity.com/mamma_mia-326443202-large.jpg",
+    "runtime": "1h 48m",
+    "certificate": "PG-13",
+    "tasha2w": true,
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
+    }
+  },
+  {
+    "title": "Smiling Friends",
+    "year": "2022",
+    "genres": ["Animation", "Comedy"],
+    "description": "Two employees at a tiny company try to cheer up troubled people, but every job turns stranger than expected.",
+    "rtRating": "95%",
+    "poster": "https://pics.filmaffinity.com/smiling_friends-709786585-large.jpg",
+    "runtime": "11m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Max"]
+    }
+  },
+  {
+    "title": "Friday Night Dinner",
+    "year": "2011",
+    "genres": ["Comedy"],
+    "description": "Two brothers head home each week for dinner with their eccentric family, where normal evenings never stay normal.",
+    "rtRating": "",
+    "poster": "https://pics.filmaffinity.com/friday_night_dinner-371699177-large.jpg",
+    "runtime": "20m",
+    "certificate": "TV-14",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
+    }
+  },
+  {
+    "title": "Rick and Morty",
+    "year": "2013",
+    "genres": ["Animation", "Sci-Fi", "Comedy", "Adventure"],
+    "description": "A reckless genius and his anxious grandson bounce across dimensions in a chaotic run of sci-fi disasters.",
+    "rtRating": "90%",
+    "poster": "https://pics.filmaffinity.com/rick_and_morty-157026175-large.jpg",
+    "runtime": "22m",
+    "certificate": "TV-14",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
+    }
+  },
+  {
+    "title": "Breaking Bad",
+    "year": "2008",
+    "genres": ["Crime", "Drama", "Thriller"],
+    "description": "A high-school chemistry teacher turns to making meth after a cancer diagnosis and spirals into a brutal criminal world.",
+    "rtRating": "96%",
+    "poster": "https://pics.filmaffinity.com/breaking_bad-504442815-large.jpg",
+    "runtime": "45m",
+    "certificate": "TV-14",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
+    }
+  },
+  {
+    "title": "Something Very Bad Is Going to Happen",
+    "year": "2026",
+    "genres": ["Drama", "Horror", "Thriller"],
+    "description": "As her wedding approaches, a bride is surrounded by an escalating sense of dread that something awful is about to happen.",
+    "rtRating": "87%",
+    "poster": "https://pics.filmaffinity.com/something_very_bad_is_going_to_happen-115407821-large.jpg",
+    "runtime": "1h 0m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
+    }
+  },
+  {
+    "title": "Baby Reindeer",
+    "year": "2024",
+    "genres": ["Drama", "Comedy", "Crime"],
+    "description": "A struggling comedian’s act of kindness to a vulnerable woman develops into a deeply unsettling obsession.",
+    "rtRating": "99%",
+    "poster": "https://pics.filmaffinity.com/baby_reindeer-582365873-large.jpg",
+    "runtime": "35m",
+    "certificate": "TV-MA",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
+    }
+  },
+  {
+    "title": "Smile",
+    "year": "2022",
+    "genres": ["Horror", "Mystery", "Thriller"],
+    "description": "After witnessing a traumatic incident, a doctor becomes convinced a terrifying presence is stalking her.",
+    "rtRating": "80%",
+    "poster": "https://pics.filmaffinity.com/smile-843278209-large.jpg",
+    "runtime": "1h 56m",
+    "certificate": "R",
+    "tasha2w": true,
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "Included in subscription",
+      "disney": "Not listed",
+      "other": ["Not listed"]
+    }
+  },
+  {
+    "title": "Smile 2",
+    "year": "2024",
+    "genres": ["Horror", "Mystery", "Thriller"],
+    "description": "A global pop star on the verge of a major tour finds herself drawn into a public nightmare of escalating horror.",
+    "rtRating": "86%",
+    "poster": "https://pics.filmaffinity.com/smile_2-891902080-large.jpg",
+    "runtime": "2h 7m",
+    "certificate": "R",
+    "tasha2w": true,
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
+    }
+  },
+  {
+    "title": "Speak No Evil",
+    "year": "2024",
+    "genres": ["Horror", "Thriller", "Drama"],
+    "description": "A family accepts a weekend invitation from a couple they met on holiday, only for the visit to become a psychological trap.",
+    "rtRating": "83%",
+    "poster": "https://pics.filmaffinity.com/speak_no_evil-102462605-large.jpg",
+    "runtime": "1h 50m",
+    "certificate": "R",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
+    }
+  },
+  {
+    "title": "Love on the Spectrum",
+    "year": "2019",
+    "genres": ["Documentary", "Romance"],
+    "description": "Young autistic adults navigate dating, relationships, and the emotional unpredictability of finding love.",
+    "rtRating": "100%",
+    "poster": "https://pics.filmaffinity.com/love_on_the_spectrum-293717169-large.jpg",
+    "runtime": "44m",
+    "certificate": "TV-14",
+    "availability": {
+      "netflix": "Included in subscription",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Not listed"]
+    }
+  },
+  {
+    "title": "Little Britain",
+    "year": "2003",
+    "genres": ["Comedy"],
+    "description": "Matt Lucas and David Walliams play a parade of exaggerated characters in a sketch series built around absurd British stereotypes.",
+    "rtRating": "100%",
+    "poster": "https://pics.filmaffinity.com/little_britain_tv_series-279535067-large.jpg",
+    "runtime": "30m",
+    "certificate": "TV-PG",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["BBC iPlayer"]
+    }
+  },
+  {
+    "title": "Come Fly With Me",
+    "year": "2010",
+    "genres": ["Comedy"],
+    "description": "A mockumentary set around an airport, with Matt Lucas and David Walliams playing dozens of chaotic staff and passengers.",
+    "rtRating": "60%",
+    "poster": "https://pics.filmaffinity.com/come_fly_with_me-207402302-large.jpg",
+    "runtime": "30m",
+    "certificate": "Certificate not added",
+    "availability": {
+      "netflix": "Not listed",
+      "amazon": "Not listed",
+      "disney": "Not listed",
+      "other": ["Apple TV Store"]
+    }
   }
 ]

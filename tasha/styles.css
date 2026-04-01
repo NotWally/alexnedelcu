@@ -227,6 +227,16 @@ select {
   cursor: pointer;
 }
 
+.request-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  text-decoration: none;
+  color: var(--text);
+  white-space: nowrap;
+}
+
 .ghost-btn {
   background: rgba(255, 255, 255, 0.08);
   color: var(--text);
@@ -559,6 +569,14 @@ select {
   margin: 0;
   color: var(--muted-2);
   font-size: 0.88rem;
+}
+
+.tasha-watchlist-row .row-heading h3 {
+  color: #fff5cb;
+}
+
+.tasha-watchlist-row .row-heading p {
+  color: #f4d269;
 }
 
 .card-rail {
@@ -1032,6 +1050,10 @@ select {
 @media (max-width: 640px) {
   .page-shell {
     padding: 16px 14px 42px;
+  }
+
+  .request-link {
+    width: 100%;
   }
 
   .hero {

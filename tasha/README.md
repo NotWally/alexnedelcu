@@ -105,3 +105,9 @@
 - Splash is now independent from app initialization, so it displays and fades reliably on live hosting too
 - Restored pitch/yaw hover by removing transform-based entrance animation from movie cards
 - Smoothed the splash fade and card tilt transitions
+
+
+## v40 requests + Tasha watchlist
+- Added a Request movie button in the header that opens the Google Form
+- Added a dedicated Tasha's Watchlist shelf that always renders above the genre rows
+- Films now support a `tasha2w: true` flag in `films.json` to appear in that shelf

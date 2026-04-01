@@ -687,6 +687,7 @@ function normalizeMovie(movie) {
     runtime: movie.runtime || "Runtime not added",
     runtimeMinutes: parseRuntimeToMinutes(movie.runtime || ""),
     certificate: movie.certificate || "Certificate not added",
+    tasha2w: Boolean(movie.tasha2w),
     availability: normalizeAvailability(movie.availability)
   };
 }
@@ -1083,6 +1084,7 @@ function renderHero(filtered, restartRotation = true, animate = false) {
 function renderRows(filtered) {
   const allGenres = getVisibleGenreList();
   const queryActive = Boolean(appState.searchQuery.trim());
+  const tashaMovies = filtered.filter((movie) => movie.tasha2w);
 
   const genresToRender = appState.selectedGenre !== "All"
     ? [appState.selectedGenre]
@@ -1090,34 +1092,50 @@ function renderRows(filtered) {
       ? allGenres.filter((genre) => filtered.some((movie) => movie.primaryGenre === genre))
       : allGenres;
 
-  if (!genresToRender.length) {
-    els.rowsContainer.innerHTML = `
+  const sections = [
+    renderRowSection("Tasha's Watchlist", tashaMovies, {
+      countLabel: tashaMovies.length
+        ? `${tashaMovies.length} title${tashaMovies.length === 1 ? "" : "s"}`
+        : "No tagged picks in this view yet!",
+      emptyLabel: 'Add "tasha2w": true in films.json to feature a film here.',
+      extraClassName: "tasha-watchlist-row"
+    })
+  ];
+
+  sections.push(...genresToRender.map((genre) => {
+    const genreMovies = filtered.filter((movie) => movie.primaryGenre === genre);
+    return renderRowSection(genre, genreMovies);
+  }));
+
+  if (sections.length === 1 && !genresToRender.length) {
+    sections.push(`
       <div class="empty-page">
         <h3>Nothing to see here yet!</h3>
         <p>Try a different search or clear the filter.</p>
       </div>
-    `;
-    return;
+    `);
   }
 
-  els.rowsContainer.innerHTML = genresToRender.map((genre) => {
-    const genreMovies = filtered.filter((movie) => movie.primaryGenre === genre);
+  els.rowsContainer.innerHTML = sections.join("");
+}
 
-    return `
-      <section class="genre-row">
-        <div class="row-heading">
-          <h3>${escapeHtml(genre)}</h3>
-          <p>${genreMovies.length ? `${genreMovies.length} title${genreMovies.length === 1 ? "" : "s"}` : "Nothing to see here yet!"}</p>
-        </div>
+function renderRowSection(title, movies, { countLabel = null, emptyLabel = "Nothing to see here yet.", extraClassName = "" } = {}) {
+  const countText = countLabel || (movies.length ? `${movies.length} title${movies.length === 1 ? "" : "s"}` : "Nothing to see here yet!");
 
-        ${
-          genreMovies.length
-            ? `<div class="card-rail">${genreMovies.map((movie, index) => renderMovieCard(movie, index)).join("")}</div>`
-            : `<div class="empty-slot">Nothing to see here yet.</div>`
-        }
-      </section>
-    `;
-  }).join("");
+  return `
+    <section class="genre-row ${escapeHtml(extraClassName)}">
+      <div class="row-heading">
+        <h3>${escapeHtml(title)}</h3>
+        <p>${escapeHtml(countText)}</p>
+      </div>
+
+      ${
+        movies.length
+          ? `<div class="card-rail">${movies.map((movie, index) => renderMovieCard(movie, index)).join("")}</div>`
+          : `<div class="empty-slot">${escapeHtml(emptyLabel)}</div>`
+      }
+    </section>
+  `;
 }
 
 function renderMovieCard(movie, index = 0) {
