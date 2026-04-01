@@ -4,6 +4,7 @@ const CONFIG = {
   EASTER_EGG_KEY: "natflix-easter-eggs-v1",
   TOAST_MS: 2200,
   TOTAL_EASTER_EGGS: 3,
+  ACTIVE_EASTER_EGG_IDS: ["footer", "press_t", "search_tasha"],
   DEFAULT_POSTER: "https://dummyimage.com/600x900/2b2027/fff4fb&text=Poster",
   HERO_ROTATE_MS: 5500,
   HERO_PREVIEW_COUNT: 3,
@@ -24,8 +25,8 @@ const CONFIG = {
     "Romance",
     "Romcom",
     "Sci-Fi",
-    "Thriller"
-  ]
+    "Thriller",
+  ],
 };
 
 const appState = {
@@ -43,7 +44,7 @@ const appState = {
   heroActiveIndex: 0,
   pendingWatchMovieId: null,
   watchedMap: loadWatchedMap(),
-  easterEggsFound: loadEasterEggMap()
+  easterEggsFound: loadEasterEggMap(),
 };
 
 const els = {
@@ -103,11 +104,13 @@ const els = {
   statsTopGenreMeta: document.getElementById("statsTopGenreMeta"),
   statsAverageRating: document.getElementById("statsAverageRating"),
   statsAverageRatingMeta: document.getElementById("statsAverageRatingMeta"),
+  statsAchievements: document.getElementById("statsAchievements"),
+  statsAchievementsSummary: document.getElementById("statsAchievementsSummary"),
   heartBurst: document.getElementById("heartBurst"),
   secretNoteModal: document.getElementById("secretNoteModal"),
   closeSecretBtn: document.getElementById("closeSecretBtn"),
   secretNoteTitle: document.getElementById("secretNoteTitle"),
-  secretNoteBody: document.getElementById("secretNoteBody")
+  secretNoteBody: document.getElementById("secretNoteBody"),
 };
 
 let heroRotationTimer = null;
@@ -115,27 +118,54 @@ let heroRefreshTimer = null;
 let revealObserver = null;
 
 const SECRET_NOTES = [
-  { title: "For you", body: "I made this for you because I wanted our movie nights to feel like their own little world." },
-  { title: "A small truth", body: "No matter what we end up watching, you always make the night better." },
-  { title: "In case you found this", body: "I hid little things in here for you because making you smile felt like a good enough reason." },
-  { title: "One more thing", body: "If this feels cosy or a bit romantic, that is me trying to build something that feels like us." },
-  { title: "Just so you know", body: "Even with all these films, you are still the reason this feels fun." },
-  { title: "A quiet admission", body: "I wanted this to feel thoughtful without making a big deal out of it." },
-  { title: "Tiny design note", body: "If anything here feels a bit too specific, that is because I absolutely did it on purpose." }
+  {
+    title: "For you",
+    body: "I made this for you because I wanted our movie nights to feel like their own little world.",
+  },
+  {
+    title: "A small truth",
+    body: "No matter what we end up watching, you always make the night better.",
+  },
+  {
+    title: "In case you found this",
+    body: "I hid little things in here for you because making you smile felt like a good enough reason.",
+  },
+  {
+    title: "One more thing",
+    body: "If this feels cosy or a bit romantic, that is me trying to build something that feels like us.",
+  },
+  {
+    title: "Just so you know",
+    body: "Even with all these films, you are still the reason this feels fun.",
+  },
+  {
+    title: "A quiet admission",
+    body: "I wanted this to feel thoughtful without making a big deal out of it.",
+  },
+  {
+    title: "Tiny design note",
+    body: "If anything here feels a bit too specific, that is because I absolutely did it on purpose.",
+  },
 ];
 
 const SWEET_TOASTS = [
   "I added that one to our story ♡",
   "That one is ours now.",
   "That was a good one for us.",
-  "I’m counting that as a very good choice by us."
+  "I’m counting that as a very good choice by us.",
 ];
 
 const SEARCH_EGGS = {
   tasha: {
-    title: "Hi Tasha",
-    body: "If you found this by typing your name, that makes me very happy. I put this here just for you."
-  }
+    id: "search_tasha",
+    note: () => getRandomItem(SEARCH_NOTE_VARIANTS),
+    toast: "I left that one there for you.",
+  },
+  tashas: {
+    id: "search_tasha",
+    note: () => getRandomItem(SEARCH_NOTE_VARIANTS),
+    toast: "I left that one there for you.",
+  },
 };
 
 const BRAND_TEASES = [
@@ -144,7 +174,7 @@ const BRAND_TEASES = [
   "I made this so our indecisive nights feel a bit more fun.",
   "If this feels a bit too tailored, that was absolutely the idea.",
   "I was aiming for somewhere between useful and suspiciously thoughtful.",
-  "I wanted this to feel like a little place with your name on it."
+  "I wanted this to feel like a little place with your name on it.",
 ];
 
 const STATS_TEASES = [
@@ -153,11 +183,12 @@ const STATS_TEASES = [
   "I liked the idea of this remembering the nights we actually watched something.",
   "This part is just me being sentimental with better styling.",
   "It felt right to let the site remember the good nights too.",
-  "I wanted the numbers to feel a little more like memories."
+  "I wanted the numbers to feel a little more like memories.",
 ];
 
 const SEARCH_TEASES = {
-  empty: "Start typing a film title and I’ll try not to make my favourites too obvious.",
+  empty:
+    "Start typing a film title and I’ll try not to make my favourites too obvious.",
   none: "I don’t think I’ve added that one yet.",
 };
 
@@ -166,31 +197,203 @@ const HERO_TEASES = [
   "I made this to feel like our own little cinema.",
   "This is nicer when you’re the one choosing.",
   "I like this most when it feels easy for you to use.",
-  "I wanted the front page to feel a bit cinematic, but still ours."
+  "I wanted the front page to feel a bit cinematic, but still ours.",
 ];
 
 const SEARCH_NOTE_VARIANTS = [
-  { title: "Hi Tasha", body: "If you found this by typing your name, that makes me very happy. I put this here just for you." },
-  { title: "That one was hidden", body: "I liked the idea of you finding at least one thing in here that was only ever meant for you." },
-  { title: "You found it", body: "I wasn’t going to make this obvious. It feels nicer when you stumble into it." }
+  {
+    title: "Hi Tasha",
+    body: "If you found this by typing your name, that makes me very happy. I put this here just for you.",
+  },
+  {
+    title: "That one was hidden",
+    body: "I liked the idea of you finding at least one thing in here that was only ever meant for you.",
+  },
+  {
+    title: "You found it",
+    body: "I wasn’t going to make this obvious. It feels nicer when you stumble into it.",
+  },
 ];
 
 const FOOTER_SECRET_NOTES = [
-  { title: "One more thing", body: "The footer says I made this for you, but the real part is that I wanted this to make you smile every time you opened it." },
-  { title: "A small extra", body: "I thought it would be nice if even the quietest part of the page still had something waiting for you." },
-  { title: "Down here too", body: "It felt wrong to leave the footer plain when I could hide something small for you in it." }
+  {
+    title: "One more thing",
+    body: "The footer says I made this for you, but the real part is that I wanted this to make you smile every time you opened it.",
+  },
+  {
+    title: "A small extra",
+    body: "I thought it would be nice if even the quietest part of the page still had something waiting for you.",
+  },
+  {
+    title: "Down here too",
+    body: "It felt wrong to leave the footer plain when I could hide something small for you in it.",
+  },
 ];
 
 const T_KEY_NOTES = [
   { title: "You pressed T", body: "That one really is just for you." },
-  { title: "A tiny shortcut", body: "I left this here because I liked the idea that some parts of the site only reveal themselves if you know where to look." },
-  { title: "That key works", body: "I know this is a bit ridiculous, but I still liked adding one secret little shortcut for you." }
+  {
+    title: "A tiny shortcut",
+    body: "I left this here because I liked the idea that some parts of the site only reveal themselves if you know where to look.",
+  },
+  {
+    title: "That key works",
+    body: "I know this is a bit ridiculous, but I still liked adding one secret little shortcut for you.",
+  },
 ];
 
+const ALEX_SEARCH_NOTES = [
+  {
+    title: "You searched Alex",
+    body: "That one felt only fair. If your name gets searched in here, it should still have something waiting behind it.",
+  },
+  {
+    title: "That one was yours too",
+    body: "I could not really hide things only for Tasha and not leave one with your name on it too.",
+  },
+  {
+    title: "A small extra",
+    body: "If she ever searched your name, I thought that should open something a little sweet as well.",
+  },
+];
 
+const BIRTHDAY_SEARCH_NOTES = [
+  {
+    title: "08.12.2004",
+    body: "You found the birthday code. I liked the idea that even the numbers could have something hidden behind them.",
+  },
+  {
+    title: "Birthday math",
+    body: "Turning 22 on 08/12/2026 means 08/12/2004, so yes, I absolutely turned that into an easter egg.",
+  },
+  {
+    title: "That date means something",
+    body: "I did the maths and hid the answer in here because that felt exactly like the kind of detail worth keeping.",
+  },
+];
 
-// duplicate removed
-
+const ACHIEVEMENTS = [
+  {
+    threshold: 5,
+    name: "Opening Credits",
+    icon: "fa-clapperboard",
+    copy: "Five watched already. This thing has officially started.",
+  },
+  {
+    threshold: 10,
+    name: "Ticket Stubs",
+    icon: "fa-ticket",
+    copy: "Ten down. Proper movie-night history now.",
+  },
+  {
+    threshold: 15,
+    name: "Double Feature",
+    icon: "fa-film",
+    copy: "Fifteen watched and the pile is starting to feel real.",
+  },
+  {
+    threshold: 20,
+    name: "Couch Critic",
+    icon: "fa-tv",
+    copy: "Twenty watched. The sofa has seen some things.",
+  },
+  {
+    threshold: 25,
+    name: "Star Billing",
+    icon: "fa-star",
+    copy: "Twenty-five watched. A proper headline run.",
+  },
+  {
+    threshold: 30,
+    name: "Soft Spot",
+    icon: "fa-heart",
+    copy: "Thirty watched. At this point it is absolutely a thing.",
+  },
+  {
+    threshold: 35,
+    name: "Burn Bright",
+    icon: "fa-fire",
+    copy: "Thirty-five watched. The streak is looking serious.",
+  },
+  {
+    threshold: 40,
+    name: "Scene Stealer",
+    icon: "fa-bolt",
+    copy: "Forty watched. Big main-character energy.",
+  },
+  {
+    threshold: 45,
+    name: "Launch Sequence",
+    icon: "fa-rocket",
+    copy: "Forty-five watched. This list is flying now.",
+  },
+  {
+    threshold: 50,
+    name: "Halfway Legend",
+    icon: "fa-crown",
+    copy: "Fifty watched. That deserves a little ceremony.",
+  },
+  {
+    threshold: 55,
+    name: "Gem Cut",
+    icon: "fa-gem",
+    copy: "Fifty-five watched. Hidden gems and bad picks included.",
+  },
+  {
+    threshold: 60,
+    name: "Trophy Shelf",
+    icon: "fa-trophy",
+    copy: "Sixty watched. Enough for bragging rights.",
+  },
+  {
+    threshold: 65,
+    name: "Golden Run",
+    icon: "fa-medal",
+    copy: "Sixty-five watched. Now it feels like a collection.",
+  },
+  {
+    threshold: 70,
+    name: "Magic Hour",
+    icon: "fa-wand-magic-sparkles",
+    copy: "Seventy watched. A very respectable level of obsession.",
+  },
+  {
+    threshold: 75,
+    name: "Toast Worthy",
+    icon: "fa-champagne-glasses",
+    copy: "Seventy-five watched. That earns a little celebration.",
+  },
+  {
+    threshold: 80,
+    name: "Curtain Call",
+    icon: "fa-masks-theater",
+    copy: "Eighty watched. The archive is getting dramatic.",
+  },
+  {
+    threshold: 85,
+    name: "Night Creature",
+    icon: "fa-ghost",
+    copy: "Eighty-five watched. Late-night pickers only.",
+  },
+  {
+    threshold: 90,
+    name: "Impact Frame",
+    icon: "fa-meteor",
+    copy: "Ninety watched. You are absolutely committed now.",
+  },
+  {
+    threshold: 95,
+    name: "Moonlit Marathon",
+    icon: "fa-moon",
+    copy: "Ninety-five watched. One last push.",
+  },
+  {
+    threshold: 100,
+    name: "Centurion of the Sofa",
+    icon: "fa-camera-retro",
+    copy: "One hundred watched. Proper legendary behaviour.",
+  },
+];
 
 document.addEventListener("DOMContentLoaded", init);
 window.addEventListener("storage", handleStorageSync);
@@ -259,20 +462,27 @@ function closeSecretNote() {
   maybeUnlockBody();
 }
 
-function maybeTriggerSearchEgg(query) {
-  const normalized = String(query || "").trim().toLowerCase();
-  if (!normalized) return false;
-
-  const egg = normalized === "tasha" ? getRandomItem(SEARCH_NOTE_VARIANTS) : SEARCH_EGGS[normalized];
-  if (!egg) return false;
-
-  unlockEasterEgg("search_tasha");
-  openSecretNote(egg);
-  launchHeartBurst(12);
-  showToast("I left that one there for you.");
-  return true;
+function normalizeSearchEggKey(query) {
+  return String(query || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[’']/g, "")
+    .replace(/[^a-z0-9]+/g, "");
 }
 
+function maybeTriggerSearchEgg(query) {
+  const normalized = normalizeSearchEggKey(query);
+  if (!normalized) return false;
+
+  const egg = SEARCH_EGGS[normalized];
+  if (!egg) return false;
+
+  unlockEasterEgg(egg.id);
+  openSecretNote(egg.note());
+  launchHeartBurst(12);
+  showToast(egg.toast || "I left that one there for you.");
+  return true;
+}
 
 function setTeasingCopy() {
   if (els.brandTease) {
@@ -287,7 +497,12 @@ function setTeasingCopy() {
 function loadEasterEggMap() {
   try {
     const raw = localStorage.getItem(CONFIG.EASTER_EGG_KEY);
-    return raw ? JSON.parse(raw) : {};
+    const parsed = raw ? JSON.parse(raw) : {};
+    return Object.fromEntries(
+      Object.entries(parsed).filter(([id]) =>
+        CONFIG.ACTIVE_EASTER_EGG_IDS.includes(id),
+      ),
+    );
   } catch (error) {
     console.error("Could not read easter eggs.", error);
     return {};
@@ -296,7 +511,12 @@ function loadEasterEggMap() {
 
 function saveEasterEggMap() {
   try {
-    localStorage.setItem(CONFIG.EASTER_EGG_KEY, JSON.stringify(appState.easterEggsFound));
+    const safeEggs = Object.fromEntries(
+      Object.entries(appState.easterEggsFound || {}).filter(([id]) =>
+        CONFIG.ACTIVE_EASTER_EGG_IDS.includes(id),
+      ),
+    );
+    localStorage.setItem(CONFIG.EASTER_EGG_KEY, JSON.stringify(safeEggs));
   } catch (error) {
     console.error("Could not save easter eggs.", error);
   }
@@ -316,7 +536,7 @@ function parseRuntimeToMinutes(runtimeText) {
   const minutesMatch = text.match(/(\d+)\s*m/);
   const hours = hoursMatch ? Number(hoursMatch[1]) : 0;
   const minutes = minutesMatch ? Number(minutesMatch[1]) : 0;
-  return (hours * 60) + minutes;
+  return hours * 60 + minutes;
 }
 
 function formatMinutes(totalMinutes) {
@@ -335,10 +555,12 @@ function formatAverageWatchTimeFromMovies(watchedMovies) {
 
       const watchedDate = new Date(watchedAt);
       const runtimeMinutes = parseRuntimeToMinutes(movie.runtime);
-      const estimatedStart = new Date(watchedDate.getTime() - (runtimeMinutes * 60 * 1000));
+      const estimatedStart = new Date(
+        watchedDate.getTime() - runtimeMinutes * 60 * 1000,
+      );
 
-      return sum + (estimatedStart.getHours() * 60) + estimatedStart.getMinutes();
-    }, 0) / watchedMovies.length
+      return sum + estimatedStart.getHours() * 60 + estimatedStart.getMinutes();
+    }, 0) / watchedMovies.length,
   );
 
   const hours24 = ((Math.floor(averageMinutes / 60) % 24) + 24) % 24;
@@ -351,17 +573,35 @@ function formatAverageWatchTimeFromMovies(watchedMovies) {
 function renderStats() {
   if (!els.statsWatchTime) return;
 
-  const watchedMovies = appState.movies.filter((movie) => appState.watchedMap[movie.id]);
+  const watchedMovies = appState.movies.filter(
+    (movie) => appState.watchedMap[movie.id],
+  );
   const watchedCount = watchedMovies.length;
-  const totalRuntimeMinutes = watchedMovies.reduce((sum, movie) => sum + parseRuntimeToMinutes(movie.runtime), 0);
-  const completionPercent = appState.movies.length ? Math.round((watchedCount / appState.movies.length) * 100) : 0;
+  const totalRuntimeMinutes = watchedMovies.reduce(
+    (sum, movie) => sum + parseRuntimeToMinutes(movie.runtime),
+    0,
+  );
+  const completionPercent = appState.movies.length
+    ? Math.round((watchedCount / appState.movies.length) * 100)
+    : 0;
   const topGenre = getTopWatchedGenre(watchedMovies);
   const averageRating = getAverageRating(watchedMovies);
+  const unlockedAchievements = Math.min(
+    Math.floor(watchedCount / 5),
+    ACHIEVEMENTS.length,
+  );
 
-  els.statsWatchTime.textContent = watchedCount ? formatMinutes(totalRuntimeMinutes) : "0h 0m";
+  els.statsWatchTime.textContent = watchedCount
+    ? formatMinutes(totalRuntimeMinutes)
+    : "0h 0m";
   els.statsWatchedCount.textContent = `${watchedCount} / ${appState.movies.length}`;
-  els.statsAverageTime.textContent = formatAverageWatchTimeFromMovies(watchedMovies);
-  els.statsEggsFound.textContent = `${Object.keys(appState.easterEggsFound || {}).length} / ${CONFIG.TOTAL_EASTER_EGGS}`;
+  els.statsAverageTime.textContent =
+    formatAverageWatchTimeFromMovies(watchedMovies);
+  const eggsFoundCount = Object.keys(appState.easterEggsFound || {}).filter((id) =>
+    CONFIG.ACTIVE_EASTER_EGG_IDS.includes(id),
+  ).length;
+
+  els.statsEggsFound.textContent = `${eggsFoundCount} / ${CONFIG.TOTAL_EASTER_EGGS}`;
 
   if (els.statsWatchTimeMeta) {
     els.statsWatchTimeMeta.textContent = watchedCount
@@ -382,9 +622,10 @@ function renderStats() {
   }
 
   if (els.statsEggMeta) {
-    els.statsEggMeta.textContent = Object.keys(appState.easterEggsFound || {}).length < CONFIG.TOTAL_EASTER_EGGS
-      ? "There are still a few little things hiding."
-      : "You found all the hidden bits.";
+    els.statsEggMeta.textContent =
+      eggsFoundCount < CONFIG.TOTAL_EASTER_EGGS
+        ? "There are still a few little things hiding."
+        : "You found all the hidden bits.";
   }
 
   if (els.statsProgressValue) {
@@ -406,7 +647,9 @@ function renderStats() {
   }
 
   if (els.statsAverageRating) {
-    els.statsAverageRating.textContent = averageRating ? `${averageRating.toFixed(1)} / 10` : "—";
+    els.statsAverageRating.textContent = averageRating
+      ? `${averageRating.toFixed(1)} / 10`
+      : "—";
   }
 
   if (els.statsAverageRatingMeta) {
@@ -414,28 +657,42 @@ function renderStats() {
       ? "A quiet little average of everything you’ve rated."
       : "Your ratings will start shaping this.";
   }
-}
 
+  if (els.statsAchievementsSummary) {
+    els.statsAchievementsSummary.textContent = `${unlockedAchievements} / ${ACHIEVEMENTS.length} unlocked`;
+  }
+
+  if (els.statsAchievements) {
+    els.statsAchievements.innerHTML = ACHIEVEMENTS.map((achievement) =>
+      renderAchievementCard(achievement, watchedCount),
+    ).join("");
+  }
+}
 
 function setupRevealObserver() {
   if (revealObserver) return;
 
-  revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("is-visible");
-      }
-    });
-  }, { threshold: 0.12 });
+  revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+        }
+      });
+    },
+    { threshold: 0.12 },
+  );
 
   revealStaticSections();
 }
 
 function revealStaticSections() {
   if (!revealObserver) return;
-  document.querySelectorAll(".hero, .genre-row, .stats-section").forEach((node) => {
-    revealObserver.observe(node);
-  });
+  document
+    .querySelectorAll(".hero, .genre-row, .stats-section")
+    .forEach((node) => {
+      revealObserver.observe(node);
+    });
 }
 
 function pulseStatsSection() {
@@ -465,6 +722,24 @@ function getAverageRating(watchedMovies) {
   return ratings.reduce((sum, value) => sum + value, 0) / ratings.length;
 }
 
+function renderAchievementCard(achievement, watchedCount) {
+  const unlocked = watchedCount >= achievement.threshold;
+
+  return `
+    <article class="achievement-card ${unlocked ? "is-unlocked" : "is-locked"}">
+      <div class="achievement-icon-wrap" aria-hidden="true">
+        <i class="fa-solid ${escapeHtml(achievement.icon)}"></i>
+      </div>
+      <div class="achievement-copy">
+        <div class="achievement-topline">
+          <strong class="achievement-title">${escapeHtml(unlocked ? achievement.name : "???????")}</strong>
+          <span class="achievement-threshold">${achievement.threshold}</span>
+        </div>
+        <p class="achievement-meta">${escapeHtml(unlocked ? achievement.copy : "Keep watching to reveal this one.")}</p>
+      </div>
+    </article>
+  `;
+}
 
 function updateRatingSliderVisual() {
   if (!els.watchRating) return;
@@ -550,7 +825,8 @@ function bindUI() {
     launchHeartBurst(10);
   });
 
-  if (els.closeSecretBtn) els.closeSecretBtn.addEventListener("click", closeSecretNote);
+  if (els.closeSecretBtn)
+    els.closeSecretBtn.addEventListener("click", closeSecretNote);
 
   els.heroDetailsBtn.addEventListener("click", () => {
     if (appState.heroActiveId) openDetailsModal(appState.heroActiveId);
@@ -621,7 +897,10 @@ function bindUI() {
       return;
     }
 
-    markMovieWatched(appState.pendingWatchMovieId, Number(els.watchRating.value));
+    markMovieWatched(
+      appState.pendingWatchMovieId,
+      Number(els.watchRating.value),
+    );
     closePasswordModal();
     closeDetailsModal();
     render();
@@ -650,11 +929,18 @@ function bindUI() {
 
 async function loadMovies() {
   try {
-    const response = await fetch("films.json", { cache: "no-store" });
-    if (!response.ok) throw new Error(`films.json could not be loaded (${response.status})`);
-    const raw = await response.json();
+    let raw = Array.isArray(window.NATFLIX_FILMS) ? window.NATFLIX_FILMS : null;
+
+    if (!raw) {
+      const response = await fetch("films.json", { cache: "no-store" });
+      if (!response.ok)
+        throw new Error(`films.json could not be loaded (${response.status})`);
+      raw = await response.json();
+    }
+
     const list = Array.isArray(raw) ? raw : raw.movies;
-    if (!Array.isArray(list)) throw new Error("films.json is not in the expected format.");
+    if (!Array.isArray(list))
+      throw new Error("films.json is not in the expected format.");
     appState.movies = list.map(normalizeMovie).filter(Boolean);
   } catch (error) {
     console.error(error);
@@ -663,7 +949,7 @@ async function loadMovies() {
     els.rowsContainer.innerHTML = `
       <div class="empty-page">
         <h3>Couldn’t load the film list</h3>
-        <p>Make sure <strong>films.json</strong> is in the same folder as the website and open the site through a simple local server.</p>
+        <p>Make sure <strong>films.json</strong> is in the same folder as the website. This fixed build should also work when opened directly from the extracted zip.</p>
       </div>
     `;
   }
@@ -687,13 +973,15 @@ function normalizeMovie(movie) {
     runtime: movie.runtime || "Runtime not added",
     runtimeMinutes: parseRuntimeToMinutes(movie.runtime || ""),
     certificate: movie.certificate || "Certificate not added",
+    availability: normalizeAvailability(movie.availability),
     tasha2w: Boolean(movie.tasha2w),
-    availability: normalizeAvailability(movie.availability)
   };
 }
 
 function normalizeGenres(genres) {
-  const list = Array.isArray(genres) ? genres.map((item) => String(item).trim()).filter(Boolean) : [];
+  const list = Array.isArray(genres)
+    ? genres.map((item) => String(item).trim()).filter(Boolean)
+    : [];
   const hasRomance = list.includes("Romance");
   const hasComedy = list.includes("Comedy");
   if (hasRomance && hasComedy && !list.includes("Romcom")) list.push("Romcom");
@@ -705,12 +993,19 @@ function normalizeAvailability(availability = {}) {
     netflix: availability.netflix || "Not listed",
     amazon: availability.amazon || "Not listed",
     disney: availability.disney || "Not listed",
-    other: Array.isArray(availability.other) && availability.other.length ? availability.other : ["Not listed"]
+    other:
+      Array.isArray(availability.other) && availability.other.length
+        ? availability.other
+        : ["Not listed"],
   };
 }
 
 function buildMovieId(title, year) {
-  return `${title}-${year}`.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-+/g, "-").replace(/(^-|-$)/g, "");
+  return `${title}-${year}`
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/(^-|-$)/g, "");
 }
 
 function populateGenreFilter() {
@@ -723,15 +1018,26 @@ function populateGenreFilter() {
 }
 
 function getVisibleGenreList() {
-  const primaryGenres = appState.movies.map((movie) => movie.primaryGenre).filter(Boolean);
+  const primaryGenres = appState.movies
+    .map((movie) => movie.primaryGenre)
+    .filter(Boolean);
   const merged = [...CONFIG.GENRE_ORDER, ...primaryGenres];
   return [...new Set(merged)].filter(Boolean);
 }
 
 function renderQuickFilters() {
-  const chips = ["All", ...getVisibleGenreList().filter((genre) => ["Romcom", "Comedy", "Drama", "Horror", "Action", "Thriller"].includes(genre))];
+  const chips = [
+    "All",
+    ...getVisibleGenreList().filter((genre) =>
+      ["Romcom", "Comedy", "Drama", "Horror", "Action", "Thriller"].includes(
+        genre,
+      ),
+    ),
+  ];
 
-  els.quickFilters.innerHTML = chips.map((genre) => `
+  els.quickFilters.innerHTML = chips
+    .map(
+      (genre) => `
     <button
       type="button"
       class="quick-chip ${appState.selectedGenre === genre ? "is-active" : ""}"
@@ -739,7 +1045,9 @@ function renderQuickFilters() {
     >
       ${escapeHtml(genre)}
     </button>
-  `).join("");
+  `,
+    )
+    .join("");
 }
 
 function matchesRuntimeFilter(movie) {
@@ -763,7 +1071,9 @@ function getFilteredMovies() {
   const query = appState.searchQuery.toLowerCase().trim();
 
   return appState.movies.filter((movie) => {
-    const matchesGenre = appState.selectedGenre === "All" || movie.primaryGenre === appState.selectedGenre;
+    const matchesGenre =
+      appState.selectedGenre === "All" ||
+      movie.primaryGenre === appState.selectedGenre;
     const matchesRuntime = matchesRuntimeFilter(movie);
     const matchesQuery = !query || movie.title.toLowerCase().includes(query);
 
@@ -815,7 +1125,9 @@ function renderSearchMode(filtered) {
   els.searchModeEyebrow.textContent = "";
   els.searchModeMessage.textContent = "";
   els.searchModeSubtext.textContent = "";
-  els.searchModeResults.innerHTML = filtered.map((movie, index) => renderMovieCard(movie, index)).join("");
+  els.searchModeResults.innerHTML = filtered
+    .map((movie, index) => renderMovieCard(movie, index))
+    .join("");
 }
 
 function render() {
@@ -835,7 +1147,8 @@ function render() {
 }
 
 function renderSummary(filtered) {
-  const genreText = appState.selectedGenre === "All" ? "all genres" : appState.selectedGenre;
+  const genreText =
+    appState.selectedGenre === "All" ? "all genres" : appState.selectedGenre;
 
   if (appState.searchQuery) {
     els.resultsSummary.textContent = `${filtered.length} film${filtered.length === 1 ? "" : "s"} matching “${appState.searchQuery}”.`;
@@ -844,10 +1157,14 @@ function renderSummary(filtered) {
   }
 }
 
-
 function getHeroCandidates(filtered) {
-  const hasScopedView = Boolean(appState.searchQuery.trim()) || appState.selectedGenre !== "All";
-  const pool = filtered.length ? filtered : hasScopedView ? [] : appState.movies;
+  const hasScopedView =
+    Boolean(appState.searchQuery.trim()) || appState.selectedGenre !== "All";
+  const pool = filtered.length
+    ? filtered
+    : hasScopedView
+      ? []
+      : appState.movies;
   const unwatched = pool.filter((movie) => !appState.watchedMap[movie.id]);
   return unwatched.length ? unwatched : pool;
 }
@@ -865,9 +1182,12 @@ function buildHeroQueue(candidates) {
   const candidateIds = candidates.map((movie) => movie.id);
   const queueKey = candidateIds.join("|");
   const existing = appState.heroQueue.filter((id) => candidateIds.includes(id));
-  const missing = shuffleArray(candidateIds.filter((id) => !existing.includes(id)));
+  const missing = shuffleArray(
+    candidateIds.filter((id) => !existing.includes(id)),
+  );
   const queue = [...existing, ...missing];
-  const currentId = appState.heroQueue[appState.heroActiveIndex] || appState.heroActiveId;
+  const currentId =
+    appState.heroQueue[appState.heroActiveIndex] || appState.heroActiveId;
   const nextActiveIndex = Math.max(queue.indexOf(currentId), 0);
 
   appState.heroQueue = queue;
@@ -891,14 +1211,16 @@ function ensureHeroQueue(candidates) {
   } else if (!appState.heroQueue.length) {
     buildHeroQueue(candidates);
   } else {
-    appState.heroActiveId = appState.heroQueue[appState.heroActiveIndex] || candidates[0].id;
+    appState.heroActiveId =
+      appState.heroQueue[appState.heroActiveIndex] || candidates[0].id;
   }
 }
 
 function getActiveHeroMovie(candidates) {
   ensureHeroQueue(candidates);
   if (!candidates.length) return null;
-  const activeId = appState.heroQueue[appState.heroActiveIndex] || candidates[0].id;
+  const activeId =
+    appState.heroQueue[appState.heroActiveIndex] || candidates[0].id;
   appState.heroActiveId = activeId;
   return candidates.find((movie) => movie.id === activeId) || candidates[0];
 }
@@ -932,7 +1254,8 @@ function shiftHero(direction, restart = true) {
   if (!candidates.length) return;
 
   const queueLength = appState.heroQueue.length;
-  appState.heroActiveIndex = (appState.heroActiveIndex + direction + queueLength) % queueLength;
+  appState.heroActiveIndex =
+    (appState.heroActiveIndex + direction + queueLength) % queueLength;
   appState.heroActiveId = appState.heroQueue[appState.heroActiveIndex];
   renderHero(getFilteredMovies(), restart, true);
 }
@@ -944,7 +1267,9 @@ function pickRandomHero() {
 
   const currentId = appState.heroQueue[appState.heroActiveIndex];
   const alternatives = appState.heroQueue.filter((id) => id !== currentId);
-  const nextId = shuffleArray(alternatives.length ? alternatives : appState.heroQueue)[0];
+  const nextId = shuffleArray(
+    alternatives.length ? alternatives : appState.heroQueue,
+  )[0];
   setHeroById(nextId, { announce: true });
 }
 
@@ -1008,7 +1333,7 @@ function renderHero(filtered, restartRotation = true, animate = false) {
       metaHtml: "",
       subline: "",
       miniLabel: "",
-      miniHtml: `<div class="hero-empty-note">Nothing to choose from yet.</div>`
+      miniHtml: `<div class="hero-empty-note">Nothing to choose from yet.</div>`,
     };
 
     if (animate) {
@@ -1019,14 +1344,27 @@ function renderHero(filtered, restartRotation = true, animate = false) {
     return;
   }
 
-  const scoped = Boolean(appState.searchQuery.trim()) || appState.selectedGenre !== "All";
-  const unwatchedInView = filtered.filter((movie) => !appState.watchedMap[movie.id]).length;
-  const unwatchedOverall = appState.movies.filter((movie) => !appState.watchedMap[movie.id]).length;
-  const rewatchMode = candidates.every((movie) => appState.watchedMap[movie.id]);
-  const queue = appState.heroQueue.length ? appState.heroQueue : candidates.map((movie) => movie.id);
+  const scoped =
+    Boolean(appState.searchQuery.trim()) || appState.selectedGenre !== "All";
+  const unwatchedInView = filtered.filter(
+    (movie) => !appState.watchedMap[movie.id],
+  ).length;
+  const unwatchedOverall = appState.movies.filter(
+    (movie) => !appState.watchedMap[movie.id],
+  ).length;
+  const rewatchMode = candidates.every(
+    (movie) => appState.watchedMap[movie.id],
+  );
+  const queue = appState.heroQueue.length
+    ? appState.heroQueue
+    : candidates.map((movie) => movie.id);
 
   const previewIds = [];
-  for (let step = 1; step < queue.length && previewIds.length < CONFIG.HERO_PREVIEW_COUNT; step += 1) {
+  for (
+    let step = 1;
+    step < queue.length && previewIds.length < CONFIG.HERO_PREVIEW_COUNT;
+    step += 1
+  ) {
     const index = (appState.heroActiveIndex + step) % queue.length;
     previewIds.push(queue[index]);
   }
@@ -1047,14 +1385,20 @@ function renderHero(filtered, restartRotation = true, animate = false) {
       featured.primaryGenre,
       featured.runtime,
       `🍅 ${featured.rtRating}`,
-      getHeroAvailabilityLabel(featured.availability)
-    ].map((value) => `<span class="hero-meta-chip">${escapeHtml(value)}</span>`).join(""),
+      getHeroAvailabilityLabel(featured.availability),
+    ]
+      .map(
+        (value) => `<span class="hero-meta-chip">${escapeHtml(value)}</span>`,
+      )
+      .join(""),
     subline: scoped
       ? `${unwatchedInView} unwatched in this view. ${getRandomItem(HERO_TEASES)}`
       : `${unwatchedOverall} still left to watch. ${getRandomItem(HERO_TEASES)}`,
     miniLabel: "",
     miniHtml: preview.length
-      ? preview.map((movie) => `
+      ? preview
+          .map(
+            (movie) => `
       <button
         type="button"
         class="hero-mini-card"
@@ -1067,8 +1411,10 @@ function renderHero(filtered, restartRotation = true, animate = false) {
           <span>${escapeHtml(movie.primaryGenre)} · ${escapeHtml(movie.year)}</span>
         </div>
       </button>
-    `).join("")
-      : `<div class="hero-empty-note">This is the only pick in view right now.</div>`
+    `,
+          )
+          .join("")
+      : `<div class="hero-empty-note">This is the only pick in view right now.</div>`,
   };
 
   if (animate) {
@@ -1081,61 +1427,79 @@ function renderHero(filtered, restartRotation = true, animate = false) {
     restartHeroRotation(candidates);
   }
 }
+
+function renderShelfSection(title, subtitle, movies, extraClass = "") {
+  return `
+    <section class="genre-row ${extraClass}">
+      <div class="row-heading">
+        <h3>${escapeHtml(title)}</h3>
+        <p>${escapeHtml(subtitle)}</p>
+      </div>
+      ${
+        movies.length
+          ? `<div class="card-rail">${movies.map((movie, index) => renderMovieCard(movie, index)).join("")}</div>`
+          : `<div class="empty-slot">Nothing to see here yet.</div>`
+      }
+    </section>
+  `;
+}
+
 function renderRows(filtered) {
   const allGenres = getVisibleGenreList();
   const queryActive = Boolean(appState.searchQuery.trim());
-  const tashaMovies = filtered.filter((movie) => movie.tasha2w);
 
-  const genresToRender = appState.selectedGenre !== "All"
-    ? [appState.selectedGenre]
-    : queryActive
-      ? allGenres.filter((genre) => filtered.some((movie) => movie.primaryGenre === genre))
-      : allGenres;
+  const genresToRender =
+    appState.selectedGenre !== "All"
+      ? [appState.selectedGenre]
+      : queryActive
+        ? allGenres.filter((genre) =>
+            filtered.some((movie) => movie.primaryGenre === genre),
+          )
+        : allGenres;
 
-  const sections = [
-    renderRowSection("Tasha's Watchlist", tashaMovies, {
-      countLabel: tashaMovies.length
-        ? `${tashaMovies.length} title${tashaMovies.length === 1 ? "" : "s"}`
-        : "No tagged picks in this view yet!",
-      emptyLabel: 'Add "tasha2w": true in films.json to feature a film here.',
-      extraClassName: "tasha-watchlist-row"
-    })
-  ];
+  const sections = [];
 
-  sections.push(...genresToRender.map((genre) => {
-    const genreMovies = filtered.filter((movie) => movie.primaryGenre === genre);
-    return renderRowSection(genre, genreMovies);
-  }));
+  if (appState.selectedGenre === "All" && !queryActive) {
+    const tashaWatchlist = filtered.filter((movie) => movie.tasha2w);
+    if (tashaWatchlist.length) {
+      sections.push(
+        renderShelfSection(
+          "Tasha's watchlist",
+          `${tashaWatchlist.length} title${tashaWatchlist.length === 1 ? "" : "s"} picked out specially`,
+          tashaWatchlist,
+          "watchlist-row",
+        ),
+      );
+    }
+  }
 
-  if (sections.length === 1 && !genresToRender.length) {
-    sections.push(`
+  sections.push(
+    ...genresToRender.map((genre) => {
+      const genreMovies = filtered.filter(
+        (movie) => movie.primaryGenre === genre,
+      );
+
+      return renderShelfSection(
+        genre,
+        genreMovies.length
+          ? `${genreMovies.length} title${genreMovies.length === 1 ? "" : "s"}`
+          : "Nothing to see here yet!",
+        genreMovies,
+      );
+    }),
+  );
+
+  if (!sections.length) {
+    els.rowsContainer.innerHTML = `
       <div class="empty-page">
         <h3>Nothing to see here yet!</h3>
         <p>Try a different search or clear the filter.</p>
       </div>
-    `);
+    `;
+    return;
   }
 
   els.rowsContainer.innerHTML = sections.join("");
-}
-
-function renderRowSection(title, movies, { countLabel = null, emptyLabel = "Nothing to see here yet.", extraClassName = "" } = {}) {
-  const countText = countLabel || (movies.length ? `${movies.length} title${movies.length === 1 ? "" : "s"}` : "Nothing to see here yet!");
-
-  return `
-    <section class="genre-row ${escapeHtml(extraClassName)}">
-      <div class="row-heading">
-        <h3>${escapeHtml(title)}</h3>
-        <p>${escapeHtml(countText)}</p>
-      </div>
-
-      ${
-        movies.length
-          ? `<div class="card-rail">${movies.map((movie, index) => renderMovieCard(movie, index)).join("")}</div>`
-          : `<div class="empty-slot">${escapeHtml(emptyLabel)}</div>`
-      }
-    </section>
-  `;
 }
 
 function renderMovieCard(movie, index = 0) {
@@ -1172,10 +1536,14 @@ function renderMovieCard(movie, index = 0) {
 }
 
 function shortAvailability(availability) {
-  if (String(availability.netflix).toLowerCase().includes("included")) return "Netflix";
-  if (String(availability.disney).toLowerCase().includes("included")) return "Disney+";
-  if (String(availability.amazon).toLowerCase().includes("included")) return "Prime";
-  if (String(availability.amazon).toLowerCase().includes("purchase")) return "Amazon";
+  if (String(availability.netflix).toLowerCase().includes("included"))
+    return "Netflix";
+  if (String(availability.disney).toLowerCase().includes("included"))
+    return "Disney+";
+  if (String(availability.amazon).toLowerCase().includes("included"))
+    return "Prime";
+  if (String(availability.amazon).toLowerCase().includes("purchase"))
+    return "Amazon";
   return "Streaming varies";
 }
 
@@ -1267,7 +1635,7 @@ function renderAvailabilitySection(movie) {
   const addProvider = (label, value) => {
     if (!isActuallyListed(value)) return;
     listedProviders.push(
-      `<span class="provider-pill ${providerClass(value)}">${escapeHtml(label)}: ${escapeHtml(value)}</span>`
+      `<span class="provider-pill ${providerClass(value)}">${escapeHtml(label)}: ${escapeHtml(value)}</span>`,
     );
   };
 
@@ -1289,7 +1657,9 @@ function renderAvailabilitySection(movie) {
 }
 
 function isActuallyListed(value) {
-  const lower = String(value || "").trim().toLowerCase();
+  const lower = String(value || "")
+    .trim()
+    .toLowerCase();
   if (!lower) return false;
 
   const hiddenValues = new Set([
@@ -1297,7 +1667,7 @@ function isActuallyListed(value) {
     "not currently listed",
     "check local services",
     "availability unknown",
-    "streaming varies"
+    "streaming varies",
   ]);
 
   return !hiddenValues.has(lower);
@@ -1318,7 +1688,8 @@ function closeDetailsModal() {
 }
 
 function openPasswordModal() {
-  const existingRating = appState.watchedMap[appState.pendingWatchMovieId]?.rating;
+  const existingRating =
+    appState.watchedMap[appState.pendingWatchMovieId]?.rating;
   els.watchPassword.value = "";
   els.watchRating.value = String(existingRating || 7);
   updateRatingSliderVisual();
@@ -1338,7 +1709,8 @@ function closePasswordModal() {
 function maybeUnlockBody() {
   const detailsOpen = !els.detailsModal.classList.contains("hidden");
   const passwordOpen = !els.passwordModal.classList.contains("hidden");
-  if (!detailsOpen && !passwordOpen) {
+  const secretOpen = !els.secretNoteModal.classList.contains("hidden");
+  if (!detailsOpen && !passwordOpen && !secretOpen) {
     document.body.style.overflow = "";
   }
 }
@@ -1346,7 +1718,7 @@ function maybeUnlockBody() {
 function markMovieWatched(movieId, rating = 7) {
   appState.watchedMap[movieId] = {
     watchedAt: new Date().toISOString(),
-    rating: Number(rating)
+    rating: Number(rating),
   };
   saveWatchedMap();
 }
@@ -1368,7 +1740,10 @@ function loadWatchedMap() {
 
 function saveWatchedMap() {
   try {
-    localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(appState.watchedMap));
+    localStorage.setItem(
+      CONFIG.STORAGE_KEY,
+      JSON.stringify(appState.watchedMap),
+    );
   } catch (error) {
     console.error("Could not save watched list.", error);
   }
@@ -1417,7 +1792,7 @@ function formatWatchedDate(isoDate) {
   try {
     return new Intl.DateTimeFormat("en-GB", {
       dateStyle: "medium",
-      timeStyle: "short"
+      timeStyle: "short",
     }).format(new Date(isoDate));
   } catch {
     return isoDate;

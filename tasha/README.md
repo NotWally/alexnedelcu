@@ -107,7 +107,17 @@
 - Smoothed the splash fade and card tilt transitions
 
 
-## v40 requests + Tasha watchlist
-- Added a Request movie button in the header that opens the Google Form
-- Added a dedicated Tasha's Watchlist shelf that always renders above the genre rows
-- Films now support a `tasha2w: true` flag in `films.json` to appear in that shelf
+## v40 search codes + achievements
+- Added birthday search triggers for `081204` and `08122004`
+- Added a hidden search note for `alex` too
+- Increased the easter egg count to include the new search triggers
+- Added a watch achievements panel under the stats section
+- Achievements unlock every 5 watched titles up to 100
+- Locked achievements stay greyed out and hide their names until unlocked
+- Added Font Awesome icons for each achievement badge
+
+## v41 fixes
+- Restored Tasha's watchlist shelf using the `tasha2w` flags from `films.json`
+- Added a direct-open fallback so the site works from the extracted zip as well as a local server
+- Broadened the name easter-egg matching so `tasha's` and `alex's` still trigger correctly
+- Fixed body scroll unlocking when closing the secret-note modal

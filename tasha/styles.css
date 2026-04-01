@@ -227,16 +227,6 @@ select {
   cursor: pointer;
 }
 
-.request-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  text-decoration: none;
-  color: var(--text);
-  white-space: nowrap;
-}
-
 .ghost-btn {
   background: rgba(255, 255, 255, 0.08);
   color: var(--text);
@@ -569,14 +559,6 @@ select {
   margin: 0;
   color: var(--muted-2);
   font-size: 0.88rem;
-}
-
-.tasha-watchlist-row .row-heading h3 {
-  color: #fff5cb;
-}
-
-.tasha-watchlist-row .row-heading p {
-  color: #f4d269;
 }
 
 .card-rail {
@@ -1050,10 +1032,6 @@ select {
 @media (max-width: 640px) {
   .page-shell {
     padding: 16px 14px 42px;
-  }
-
-  .request-link {
-    width: 100%;
   }
 
   .hero {
@@ -2399,4 +2377,165 @@ html {
 .page-shell,
 .bg-orb {
   opacity: 1;
+}
+
+
+.stats-achievements-card {
+  position: relative;
+  z-index: 1;
+  margin-top: 14px;
+  padding: 20px 18px 18px;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.12);
+}
+
+.stats-achievements-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stats-achievements-head h3 {
+  margin: 4px 0 0;
+  font-size: 1.15rem;
+}
+
+.stats-achievements-summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.achievement-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.achievement-card {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.05);
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, opacity 160ms ease;
+}
+
+.achievement-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.14);
+}
+
+.achievement-card.is-locked {
+  background: rgba(255,255,255,0.035);
+  border-color: rgba(255,255,255,0.06);
+  opacity: 0.74;
+}
+
+.achievement-card.is-locked:hover {
+  transform: none;
+  border-color: rgba(255,255,255,0.06);
+}
+
+.achievement-icon-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(255,92,117,0.18), rgba(244,210,105,0.14));
+  border: 1px solid rgba(255,255,255,0.08);
+  font-size: 1.2rem;
+  color: #fff8fd;
+}
+
+.achievement-card.is-locked .achievement-icon-wrap {
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,248,253,0.5);
+}
+
+.achievement-copy {
+  min-width: 0;
+}
+
+.achievement-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.achievement-title {
+  font-size: 0.98rem;
+  line-height: 1.25;
+}
+
+.achievement-threshold {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.achievement-meta {
+  margin: 8px 0 0;
+  color: var(--muted-2);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.achievement-card.is-locked .achievement-title,
+.achievement-card.is-locked .achievement-threshold,
+.achievement-card.is-locked .achievement-meta {
+  color: rgba(231,216,229,0.58);
+}
+
+@media (max-width: 640px) {
+  .stats-achievements-head {
+    flex-direction: column;
+  }
+
+  .achievement-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.watchlist-row .row-heading h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.watchlist-row .row-heading h3::before {
+  content: "♡";
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: rgba(255, 122, 164, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffd7e5;
+  font-size: 0.95rem;
 }
