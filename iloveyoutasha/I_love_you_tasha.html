@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countdowns for Tasha</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #fff4b8, #fff9dc, #ffe9a8);
+        color: #3b3218;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px;
+        overflow-x: hidden;
+      }
+
+      .page {
+        width: 100%;
+        max-width: 950px;
+        text-align: center;
+      }
+
+      .hero {
+        margin-bottom: 35px;
+        animation: fadeIn 1s ease;
+      }
+
+      .hero p {
+        color: #b48a00;
+        font-size: 14px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom: 12px;
+      }
+
+      .hero h1 {
+        font-size: clamp(38px, 7vw, 78px);
+        line-height: 1;
+        color: #3b3218;
+      }
+
+      .hero span {
+        color: #d49b00;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+
+      .card {
+        background: rgba(255, 252, 225, 0.82);
+        border: 2px solid rgba(255, 255, 255, 0.95);
+        border-radius: 28px;
+        padding: 28px;
+        box-shadow: 0 20px 50px rgba(180, 138, 0, 0.18);
+        backdrop-filter: blur(12px);
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 25px 60px rgba(180, 138, 0, 0.28);
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        background: #ffe17a;
+        top: -75px;
+        right: -75px;
+        z-index: 0;
+      }
+
+      .card.birthday::before {
+        background: #ffd86b;
+      }
+
+      .card-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .icon {
+        font-size: 42px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        transition: transform 0.25s ease;
+      }
+
+      .icon:hover {
+        transform: rotate(-8deg) scale(1.15);
+      }
+
+      .card h2 {
+        font-size: 26px;
+        margin-bottom: 8px;
+        color: #3b3218;
+      }
+
+      .date {
+        color: #7d681d;
+        margin-bottom: 24px;
+      }
+
+      .timer {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+
+      .box {
+        background: #3b3218;
+        color: white;
+        border-radius: 18px;
+        padding: 18px 8px;
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease;
+      }
+
+      .box:hover {
+        transform: scale(1.07);
+        background: #5d4a13;
+      }
+
+      .box .number {
+        font-size: 30px;
+        font-weight: bold;
+        font-family: "Courier New", monospace;
+      }
+
+      .box .label {
+        margin-top: 5px;
+        font-size: 11px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #fff0a3;
+      }
+
+      .message {
+        margin-top: 25px;
+        font-size: 18px;
+        color: #b48a00;
+        font-weight: bold;
+      }
+
+      .love-button {
+        margin: 35px auto 0;
+        display: inline-block;
+        border: none;
+        background: #3b3218;
+        color: #fff7c2;
+        padding: 14px 24px;
+        border-radius: 999px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 12px 25px rgba(59, 50, 24, 0.22);
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease;
+      }
+
+      .love-button:hover {
+        transform: translateY(-3px);
+        background: #5d4a13;
+      }
+
+      .secret-note {
+        margin: 22px auto 0;
+        max-width: 560px;
+        background: rgba(255, 255, 255, 0.65);
+        border: 2px dashed #e0b21b;
+        border-radius: 24px;
+        padding: 20px;
+        color: #3b3218;
+        font-size: 22px;
+        font-weight: bold;
+        opacity: 0;
+        transform: translateY(15px);
+        pointer-events: none;
+        transition:
+          opacity 0.35s ease,
+          transform 0.35s ease;
+      }
+
+      .secret-note.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      footer {
+        margin-top: 42px;
+        color: #7d681d;
+        font-size: 17px;
+        font-weight: bold;
+      }
+
+      .floating-heart {
+        position: fixed;
+        font-size: 24px;
+        pointer-events: none;
+        animation: floatUp 1.5s ease forwards;
+        z-index: 10;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes floatUp {
+        0% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-90px) scale(1.6);
+        }
+      }
+
+      @media (max-width: 750px) {
+        .cards {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 430px) {
+        body {
+          padding: 18px;
+        }
+
+        .card {
+          padding: 22px;
+        }
+
+        .timer {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <p>Two special countdowns</p>
+        <h1>Almost time for <span>Tasha</span></h1>
+      </section>
+
+      <section class="cards">
+        <div class="card">
+          <div class="card-content">
+            <div class="icon">💛</div>
+            <h2>Time till I see Tasha</h2>
+            <p class="date">6th May</p>
+
+            <div class="timer" id="tashaTimer">
+              <div class="box">
+                <div class="number days">00</div>
+                <div class="label">Days</div>
+              </div>
+              <div class="box">
+                <div class="number hours">00</div>
+                <div class="label">Hours</div>
+              </div>
+              <div class="box">
+                <div class="number minutes">00</div>
+                <div class="label">Minutes</div>
+              </div>
+              <div class="box">
+                <div class="number seconds">00</div>
+                <div class="label">Seconds</div>
+              </div>
+            </div>
+
+            <p class="message">Not long now ✨</p>
+          </div>
+        </div>
+
+        <div class="card birthday">
+          <div class="card-content">
+            <div class="icon">🎂</div>
+            <h2>Time till my birthday</h2>
+            <p class="date">8th May</p>
+
+            <div class="timer" id="birthdayTimer">
+              <div class="box">
+                <div class="number days">00</div>
+                <div class="label">Days</div>
+              </div>
+              <div class="box">
+                <div class="number hours">00</div>
+                <div class="label">Hours</div>
+              </div>
+              <div class="box">
+                <div class="number minutes">00</div>
+                <div class="label">Minutes</div>
+              </div>
+              <div class="box">
+                <div class="number seconds">00</div>
+                <div class="label">Seconds</div>
+              </div>
+            </div>
+
+            <p class="message">Birthday loading... 🎉</p>
+          </div>
+        </div>
+      </section>
+
+      <button class="love-button" onclick="showLoveNote()">
+        Click for a little message
+      </button>
+
+      <div class="secret-note" id="secretNote">
+        I love you Tasha, from Alex 💛
+      </div>
+
+      <footer>Made with love for Tasha <span>♥</span></footer>
+    </main>
+
+    <script>
+      function getNextDate(month, day) {
+        const now = new Date();
+        let target = new Date(now.getFullYear(), month - 1, day, 0, 0, 0);
+
+        if (target <= now) {
+          target = new Date(now.getFullYear() + 1, month - 1, day, 0, 0, 0);
+        }
+
+        return target;
+      }
+
+      const tashaDate = getNextDate(5, 6);
+      const birthdayDate = getNextDate(5, 8);
+
+      function updateTimer(timerId, targetDate) {
+        const timer = document.getElementById(timerId);
+        const now = new Date();
+        const difference = targetDate - now;
+
+        if (difference <= 0) {
+          timer.querySelector(".days").textContent = "00";
+          timer.querySelector(".hours").textContent = "00";
+          timer.querySelector(".minutes").textContent = "00";
+          timer.querySelector(".seconds").textContent = "00";
+          return;
+        }
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((difference / (1000 * 60)) % 60);
+        const seconds = Math.floor((difference / 1000) % 60);
+
+        timer.querySelector(".days").textContent = String(days).padStart(
+          2,
+          "0",
+        );
+        timer.querySelector(".hours").textContent = String(hours).padStart(
+          2,
+          "0",
+        );
+        timer.querySelector(".minutes").textContent = String(minutes).padStart(
+          2,
+          "0",
+        );
+        timer.querySelector(".seconds").textContent = String(seconds).padStart(
+          2,
+          "0",
+        );
+      }
+
+      function startCountdowns() {
+        updateTimer("tashaTimer", tashaDate);
+        updateTimer("birthdayTimer", birthdayDate);
+
+        setInterval(function () {
+          updateTimer("tashaTimer", tashaDate);
+          updateTimer("birthdayTimer", birthdayDate);
+        }, 1000);
+      }
+
+      function showLoveNote() {
+        const note = document.getElementById("secretNote");
+        note.classList.toggle("show");
+        createHeart(window.innerWidth / 2, window.innerHeight - 120);
+      }
+
+      function createHeart(x, y) {
+        const heart = document.createElement("div");
+        heart.className = "floating-heart";
+        heart.textContent = "💛";
+        heart.style.left = x + "px";
+        heart.style.top = y + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(function () {
+          heart.remove();
+        }, 1500);
+      }
+
+      document.addEventListener("click", function (event) {
+        if (event.target.tagName !== "BUTTON") {
+          createHeart(event.clientX, event.clientY);
+        }
+      });
+
+      startCountdowns();
+    </script>
+  </body>
+</html>
